@@ -31,9 +31,7 @@ return new class extends Migration
             $table->unsignedBigInteger('institution_diniyah_id')->nullable(true)->default(0);
             $table->string('grade_of_formal', 50)->nullable(false);
             $table->unsignedBigInteger('institution_formal_id')->nullable(true)->default(0);
-            $table->string('father_nik', 16)->nullable(false)->default(0);
             $table->string('father')->nullable(false);
-            $table->string('mother_nik', 16)->nullable(false)->default(0);
             $table->string('mother')->nullable(false);
             $table->string('guardian_id', 10)->nullable(false);
             $table->string('guardian_relationship', 100)->nullable(false);
