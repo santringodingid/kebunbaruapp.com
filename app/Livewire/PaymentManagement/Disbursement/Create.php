@@ -15,10 +15,10 @@ class Create extends Component
     public $institutions;
     public $accounts;
 
+    #[Rule('required')]
     public $accountId;
-    #[Rule(['required'])]
-    public $gender;
-    public $institutionId;
+    public $institutionMale;
+    public $institutionFemale;
 
     #[On('success')]
     public function mount()
@@ -36,26 +36,29 @@ class Create extends Component
             return;
         }
 
-        $disbursement = AccountDisbursement::query()->where([
-            ['account_id', '=', $this->accountId],
-            ['gender', '=', $this->gender]
-        ])->first();
+        AccountDisbursement::where([
+            ['account_id', $this->accountId],
+            ['gender', 0],
+        ])->delete();
 
-        if ($disbursement) {
-            $disbursement->account_id = $this->accountId;
-            $disbursement->institution_id = $this->institutionId;
-            $disbursement->gender = $this->gender;
+        AccountDisbursement::where([
+            ['account_id', $this->accountId],
+            ['gender', 1],
+        ])->delete();
 
-            $disbursement->save();
-            $this->dispatch('success', 'Akun baru berhasil diupdate');
-        }else{
-            AccountDisbursement::query()->create([
-                'account_id' => $this->accountId,
-                'institution_id' => $this->institutionId,
-                'gender' => $this->gender
-            ]);
-            $this->dispatch('success', 'Akun baru berhasil ditambahkan');
-        }
+        AccountDisbursement::query()->create([
+            'account_id' => $this->accountId,
+            'institution_id' => $this->institutionMale,
+            'gender' => 0
+        ]);
+
+        AccountDisbursement::query()->create([
+            'account_id' => $this->accountId,
+            'institution_id' => $this->institutionFemale,
+            'gender' => 1
+        ]);
+
+        $this->dispatch('success', 'Akun baru berhasil ditambahkan');
 
         $this->reset();
     }

@@ -26,33 +26,22 @@
                         </div>
                     </div>
                     <div class="mb-5 row">
-                        <label for="gender" class="col-sm-4 col-form-label">Jenis Kelamin</label>
+                        <label for="institutionMale" class="col-sm-4 col-form-label">Instansi Putra</label>
                         <div class="col-sm-8">
-                            <div class="d-flex gap-8 mt-3">
-                                <div class="form-check form-check-custom form-check-solid">
-                                    <input class="form-check-input" type="radio" wire:model="gender" value="0" id="male" name="gender"/>
-                                    <label class="form-check-label" for="male">
-                                        Putra
-                                    </label>
-                                </div>
-                                <div class="form-check form-check-custom form-check-solid">
-                                    <input class="form-check-input" type="radio" wire:model="gender" value="1" id="female" name="gender"/>
-                                    <label class="form-check-label" for="female">
-                                        Putri
-                                    </label>
-                                </div>
-                            </div>
-                            @error('gender')
-                            <small class="text-danger mt-2 d-block">
-                                {{ $message }}
-                            </small>
-                            @enderror
+                            <select wire:model="institutionMale" class="form-select" data-dropdown-parent="#modal-add-disbursement" data-placeholder="Masukkan akun" id="institutionMale">
+                                <option value="0">.:Madrasah:.</option>
+                                @if($institutions)
+                                    @foreach($institutions as $institution)
+                                        <option value="{{ $institution->id }}">{{ $institution->name }}
+                                    @endforeach
+                                @endif
+                            </select>
                         </div>
                     </div>
                     <div class="mb-5 row">
-                        <label for="institutionId" class="col-sm-4 col-form-label">Akun</label>
+                        <label for="institutionFemale" class="col-sm-4 col-form-label">Instansi Putri</label>
                         <div class="col-sm-8">
-                            <select wire:model="institutionId" class="form-select" data-dropdown-parent="#modal-add-disbursement" data-placeholder="Masukkan akun" id="institutionId">
+                            <select wire:model="institutionFemale" class="form-select" data-dropdown-parent="#modal-add-disbursement" data-placeholder="Masukkan akun" id="institutionFemale">
                                 <option value="0">.:Madrasah:.</option>
                                 @if($institutions)
                                     @foreach($institutions as $institution)
