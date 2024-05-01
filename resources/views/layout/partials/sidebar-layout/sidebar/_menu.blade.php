@@ -175,6 +175,7 @@
                         <!--end:Menu link-->
                     </div>
                     <!--end:Menu item-->
+                    @endcan
                     <!--begin:Menu item-->
                     <div class="menu-item">
                         <!--begin:Menu link-->
@@ -211,6 +212,7 @@
                         <!--end:Menu link-->
                     </div>
                     <!--end:Menu item-->
+                    @can('read register management')
                     <!--begin:Menu item-->
                     <div class="menu-item">
                         <!--begin:Menu link-->
@@ -224,7 +226,6 @@
                     </div>
                     <!--end:Menu item-->
                     @endcan
-                    @can('read register management')
                     <!--begin:Menu item-->
                     <div class="menu-item">
                         <!--begin:Menu link-->
@@ -237,7 +238,6 @@
                         <!--end:Menu link-->
                     </div>
                     <!--end:Menu item-->
-                    @endcan
                 </div>
                 <!--end:Menu sub-->
             </div>
@@ -354,7 +354,7 @@
                     @endcan
                     <!--end:Menu item-->
                     <!--begin:Menu item-->
-                    @can('read payment management')
+                    @can('read payment management|create payment management')
                     <div class="menu-item">
                         <!--begin:Menu link-->
                         <a class="menu-link {{ request()->routeIs(['payment-management.fare', 'payment-management.fare.*']) ? 'active' : '' }}" href="{{ route('payment-management.fare') }}">
