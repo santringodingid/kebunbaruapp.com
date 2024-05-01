@@ -354,7 +354,7 @@
                     @endcan
                     <!--end:Menu item-->
                     <!--begin:Menu item-->
-                    @can('read payment management|create payment management')
+                    @can('read payment management')
                     <div class="menu-item">
                         <!--begin:Menu link-->
                         <a class="menu-link {{ request()->routeIs(['payment-management.fare', 'payment-management.fare.*']) ? 'active' : '' }}" href="{{ route('payment-management.fare') }}">
