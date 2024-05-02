@@ -212,7 +212,7 @@ class Create extends Component
             $prefix = Str::substr($explode[0], 2, 2).$explode[1].$explode[2];
             $id = IdGenerator::generate(['table' => 'students', 'length' => 8, 'prefix' => $prefix, 'reset_on_prefix_change' => true]);
 
-            if ($this->domicileStatus) {
+            if (!$this->domicileStatus) {
                 $this->domicileNumber = 1;
                 $this->domicile = 'Rumah Orang Tua';
             }
