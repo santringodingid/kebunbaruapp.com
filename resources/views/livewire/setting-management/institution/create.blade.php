@@ -67,13 +67,13 @@
                                     </label>
                                 </div>
                                 <div class="form-check form-check-custom form-check-solid">
-                                    <input class="form-check-input" type="radio" wire:model="gender_access" value="0" id="male" name="gender_access"/>
+                                    <input class="form-check-input" type="radio" wire:model="gender_access" value="1" id="male" name="gender_access"/>
                                     <label class="form-check-label" for="male">
                                         Putra
                                     </label>
                                 </div>
                                 <div class="form-check form-check-custom form-check-solid">
-                                    <input class="form-check-input" type="radio" wire:model="gender_access" value="1" id="female" name="gender_access"/>
+                                    <input class="form-check-input" type="radio" wire:model="gender_access" value="0" id="female" name="gender_access"/>
                                     <label class="form-check-label" for="female">
                                         Putri
                                     </label>

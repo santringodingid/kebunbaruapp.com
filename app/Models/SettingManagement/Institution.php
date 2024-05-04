@@ -21,7 +21,7 @@ class Institution extends Model
         return Attribute::make(
             get: function (string $value) {
                 if ($value == 0) {
-                    return 'Umum';
+                    return 'Putri';
                 }
 
                 if ($value == 1) {
@@ -29,7 +29,7 @@ class Institution extends Model
                 }
 
                 if ($value == 2) {
-                    return 'Putri';
+                    return 'Umum';
                 }
 
                 return '';

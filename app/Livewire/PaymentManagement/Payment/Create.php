@@ -90,7 +90,7 @@ class Create extends Component
             return;
         }
 
-        if ($registration->student->gender != session('gender_access')) {
+        if ($registration->student->gender != session()->get('gender_access')) {
             $this->dispatch('error', 'Aksesmu dicegah...');
             return;
         }
