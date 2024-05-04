@@ -3,6 +3,7 @@
 namespace App\Models\RegisterManagement;
 
 use App\Models\Region;
+use App\Models\Scopes\GenderScope;
 use App\Models\SettingManagement\Institution;
 use App\Models\SettingManagement\Period;
 use Illuminate\Database\Eloquent\Casts\Attribute;
@@ -25,6 +26,12 @@ class Student extends Model
         'mother', 'guardian_id', 'guardian_relationship', 'committee', 'image_of_profile', 'image_of_signature', 'status',
         'created_at_hijri'
     ];
+
+    protected static function booted(): void
+    {
+        parent::booted();
+        self::addGlobalScope(new GenderScope());
+    }
 
     public function region(): HasOne
     {

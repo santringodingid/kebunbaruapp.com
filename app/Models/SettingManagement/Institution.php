@@ -21,11 +21,11 @@ class Institution extends Model
         return Attribute::make(
             get: function (string $value) {
                 if ($value == 0) {
-                    return 'Putri';
+                    return 'Putra';
                 }
 
                 if ($value == 1) {
-                    return 'Putra';
+                    return 'Putri';
                 }
 
                 if ($value == 2) {

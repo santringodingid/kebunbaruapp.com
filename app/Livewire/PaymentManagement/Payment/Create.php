@@ -85,13 +85,13 @@ class Create extends Component
             return;
         }
 
-        if ($registration->student->getRawOriginal('status') != 1) {
-            $this->dispatch('error', 'Status santri tidak aktif');
+        if (!$registration->student) {
+            $this->dispatch('error', 'Hak akses dicegah');
             return;
         }
 
-        if ($registration->student->gender != session()->get('gender_access')) {
-            $this->dispatch('error', 'Aksesmu dicegah...');
+        if ($registration->student->getRawOriginal('status') != 1) {
+            $this->dispatch('error', 'Status santri tidak aktif');
             return;
         }
 

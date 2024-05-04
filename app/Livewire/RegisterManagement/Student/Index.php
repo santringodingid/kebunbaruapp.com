@@ -29,9 +29,7 @@ class Index extends Component
     {
         $students = Student::query()->when($this->search, function ($query, $search){
             $query->where('name', 'like', '%'.$search.'%');
-        })->where('gender', session()->get('gender_access'))
-            ->with(['guardian', 'diniyah', 'formal', 'region'])
-            ->paginate(12);
+        })->with(['guardian', 'diniyah', 'formal', 'region'])->paginate(12);
 
         return view('livewire.register-management.student.index', [
             'students' => $students
