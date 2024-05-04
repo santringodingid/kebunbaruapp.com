@@ -48,6 +48,11 @@ class Payment extends Model
         return $this->hasOne(Registration::class, 'id', 'registration_id');
     }
 
+    public function student(): HasOne
+    {
+        return $this->hasOne(Student::class, 'id', 'registration_id');
+    }
+
     public function paymentDetails(): HasMany
     {
         return $this->hasMany(PaymentDetail::class, 'payment_id', 'id');

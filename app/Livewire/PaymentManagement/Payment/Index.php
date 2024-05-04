@@ -27,7 +27,9 @@ class Index extends Component
     #[On('success-created')]
     public function render(): View
     {
-        $payments = Payment::with('registrationHasOne')->latest()->paginate(12);
+        $payments = Payment::with(['registrationHasOne', 'student' => function ($query) {
+            $query->where('gender', '=', session('gender_access'));
+        }])->latest()->paginate(12);
 
         return view('livewire.payment-management.payment.index', compact('payments'));
     }

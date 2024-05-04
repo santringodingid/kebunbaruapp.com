@@ -90,6 +90,11 @@ class Create extends Component
             return;
         }
 
+        if ($registration->student->gender != session('gender_access')) {
+            $this->dispatch('error', 'Aksesmu dicegah...');
+            return;
+        }
+
         $payment = Payment::where('registration_id', $this->studentId)->latest()->first();
         if ($payment?->is_paid) {
             $this->dispatch('error', 'Pembayaran sudah lunas sebelumnya');
@@ -263,7 +268,7 @@ class Create extends Component
         $this->dispatch('success', 'Data berhasil ditemukan');
     }
 
-    public function store()
+    public function store(): void
     {
         DB::transaction(function (){
             $id = IdGenerator::generate([

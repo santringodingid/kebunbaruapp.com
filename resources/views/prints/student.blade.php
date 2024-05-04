@@ -170,24 +170,10 @@
                 </td>
             </tr>
             <tr>
-                <td>NIK Ayah</td>
-                <td style="text-align:center">:</td>
-                <td>
-                    {{ $student->father_nik }}
-                </td>
-            </tr>
-            <tr>
                 <td>Nama Ayah</td>
                 <td style="text-align:center">:</td>
                 <td>
                     {{ $student->father }}
-                </td>
-            </tr>
-            <tr>
-                <td>NIK Ibu</td>
-                <td style="text-align:center">:</td>
-                <td>
-                    {{ $student->mother_nik }}
                 </td>
             </tr>
             <tr>

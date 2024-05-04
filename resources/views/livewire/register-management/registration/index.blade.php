@@ -9,7 +9,7 @@
                     <button class="btn btn-light-primary btn-sm w-100">Import PDF</button>
                 </div>
                 <div class="col-sm-4 col-6 mb-5">
-                    <button class="btn btn-light-primary btn-sm w-100">Import Excel</button>
+                    <a target="_blank" href="{{ route('register-management.registration-export') }}" class="btn btn-light-primary btn-sm w-100">Export Excel</a>
                 </div>
             </div>
         </div>
