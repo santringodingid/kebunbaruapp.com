@@ -10,6 +10,7 @@ use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Database\Eloquent\Relations\HasOneThrough;
 use Illuminate\Support\Number;
 
 class Payment extends Model
@@ -48,9 +49,15 @@ class Payment extends Model
         return $this->hasOne(Registration::class, 'id', 'registration_id');
     }
 
-    public function student(): HasOne
+    public function student(): HasOneThrough
     {
-        return $this->hasOne(Student::class, 'id', 'registration_id');
+        return $this->hasOneThrough(
+            Student::class,
+            Registration::class,
+            'id',
+            'id',
+            'registration_id'
+        );
     }
 
     public function paymentDetails(): HasMany

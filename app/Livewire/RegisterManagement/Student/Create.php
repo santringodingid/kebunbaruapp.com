@@ -14,6 +14,7 @@ use App\Models\RegisterManagement\Guardian;
 use App\Models\RegisterManagement\Registration;
 use App\Models\RegisterManagement\Status;
 use App\Models\RegisterManagement\Student;
+use App\Models\Scopes\GenderScope;
 use App\Models\SettingManagement\Institution;
 use App\Models\Village;
 use Haruncpi\LaravelIdGenerator\IdGenerator;
@@ -217,7 +218,7 @@ class Create extends Component
                 $this->domicile = 'Rumah Orang Tua';
             }
 
-            $lastStudent = Student::query()->latest()->first();
+            $lastStudent = Student::query()->withoutGlobalScope(GenderScope::class)->latest()->first();
             if ($lastStudent) {
                 $reg = $lastStudent->registration_number + 1;
             }else{

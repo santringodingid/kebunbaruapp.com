@@ -13,4 +13,9 @@ class RegistrationController extends Controller
     {
         return view('pages.register-management.registration');
     }
+
+    public function export()
+    {
+        return (new RegistrationExport)->download('registration.xlsx');
+    }
 }

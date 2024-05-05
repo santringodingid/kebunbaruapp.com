@@ -44,6 +44,7 @@ Route::middleware('auth')->group(function (){
             Route::get('/register-management/formal', [\App\Http\Controllers\RegisterManagement\FormalController::class, 'index'])->name('formal');
             Route::get('/register-management/status', [\App\Http\Controllers\RegisterManagement\StatusController::class, 'index'])->name('status');
             Route::get('/register-management/registration', [\App\Http\Controllers\RegisterManagement\RegistrationController::class, 'index'])->name('registration');
+            Route::get('/register-management/registration-export', [\App\Http\Controllers\RegisterManagement\RegistrationController::class, 'export'])->name('registration-export');
         });
     });
 
