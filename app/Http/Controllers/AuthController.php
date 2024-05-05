@@ -38,7 +38,7 @@ class AuthController extends Controller
             'institution_name' => $institution->name,
             'status_access' => $institution->getRawOriginal('status_access'),
             'gender_access' => $institution->getRawOriginal('gender_access'),
-            'masehi' => hijri()
+            'hijri' => hijri()
         ]);
 
         $request->user()->update([

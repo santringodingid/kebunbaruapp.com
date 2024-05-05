@@ -3,16 +3,16 @@
         <div class="col-sm-5 mb-5">
             <input type="text" wire:model.live.debounce="search" placeholder="Masukkan nama..." class="form-control form-control-sm">
         </div>
-        <div class="col-sm-6 mb-5">
-            <div class="row justify-content-end">
-                <div class="col-sm-4 col-6 mb-5">
-                    <button class="btn btn-light-primary btn-sm w-100">Import PDF</button>
-                </div>
-                <div class="col-sm-4 col-6 mb-5">
-                    <button class="btn btn-light-primary btn-sm w-100">Import Excel</button>
-                </div>
-            </div>
-        </div>
+{{--        <div class="col-sm-6 mb-5">--}}
+{{--            <div class="row justify-content-end">--}}
+{{--                <div class="col-sm-4 col-6 mb-5">--}}
+{{--                    <button class="btn btn-light-primary btn-sm w-100">Import PDF</button>--}}
+{{--                </div>--}}
+{{--                <div class="col-sm-4 col-6 mb-5">--}}
+{{--                    <button class="btn btn-light-primary btn-sm w-100">Import Excel</button>--}}
+{{--                </div>--}}
+{{--            </div>--}}
+{{--        </div>--}}
     </div>
     <div class="col-12 mb-5 mb-xl-10">
         <div class="table-responsive">

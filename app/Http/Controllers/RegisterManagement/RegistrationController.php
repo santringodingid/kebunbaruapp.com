@@ -5,7 +5,6 @@ namespace App\Http\Controllers\RegisterManagement;
 use App\Exports\RegistrationExport;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use Maatwebsite\Excel\Facades\Excel;
 
 class RegistrationController extends Controller
 {
@@ -16,6 +15,6 @@ class RegistrationController extends Controller
 
     public function export()
     {
-        return (new RegistrationExport)->download('registration.xlsx');
+        return (new RegistrationExport)->download('data-registrasi-'.session()->get('hijri').'.xlsx');
     }
 }
