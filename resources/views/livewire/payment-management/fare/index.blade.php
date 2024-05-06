@@ -55,7 +55,7 @@
                         <tr wire:key="{{ $fare->id }}">
                             <td>{{ $loop->index + 1 }}</td>
                             <td>{{ $fare->grade }}</td>
-                            <td>{{ $fare->institution->name }}</td>
+                            <td>{{ $fare?->institution?->name }}</td>
                             <td>
                         <span @class([
                             'badge',
