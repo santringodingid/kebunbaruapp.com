@@ -37,7 +37,9 @@ class Index extends Component
     #[On('success')]
     public function render(): View
     {
-        $fares = Fare::with('institution')->when($this->grade, function ($query){
+        $fares = Fare::with(['institution' => function ($query){
+            $query->whereIn('gender_access', [session()->get('gender_access'), 2]);
+        }])->when($this->grade, function ($query){
             $query->where('grade', $this->grade);
         })->when($this->institution, function ($query){
             $query->where('institution_id', $this->institution);

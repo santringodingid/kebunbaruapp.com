@@ -60,6 +60,7 @@ Route::middleware('auth')->group(function (){
             Route::get('/payment-management/tahfidz', [\App\Http\Controllers\PaymentManagement\TahfidzController::class, 'index'])->name('tahfidz')->middleware(['permission:create payment management']);;
             Route::get('/payment-management/school', [\App\Http\Controllers\PaymentManagement\SchoolController::class, 'index'])->name('school')->middleware(['permission:create payment management']);;
             Route::get('/payment-management/fare', [\App\Http\Controllers\PaymentManagement\FareController::class, 'index'])->name('fare')->middleware(['permission:read payment management']);;
+            Route::get('/payment-management/fare-export', [\App\Http\Controllers\PaymentManagement\FareController::class, 'export'])->name('fare-export')->middleware(['permission:read payment management']);;
             Route::get('/payment-management/fare/create', [\App\Http\Controllers\PaymentManagement\FareController::class, 'create'])->name('fare.create')->middleware(['permission:create payment management']);;
             Route::post('/payment-management/fare/store', [\App\Http\Controllers\PaymentManagement\FareController::class, 'store'])->name('fare.store')->middleware(['permission:create payment management']);;
             Route::get('/payment-management/payment', [\App\Http\Controllers\PaymentManagement\PaymentController::class, 'index'])->name('payment')->middleware(['permission:read payment management']);;

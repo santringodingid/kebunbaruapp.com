@@ -20,7 +20,7 @@ class RegistrationExport implements FromQuery, WithHeadings, WithMapping, Should
     {
         return Registration::query()->withWhereHas('student', function ($query) {
             $query->where('status', '>', 0)->with(['region', 'diniyah', 'formal']);
-        })->orderBy('domicile_status', 'desc');
+        })->orderBy('is_new_domicile', 'desc');
     }
 
     public function map($row): array
@@ -30,12 +30,15 @@ class RegistrationExport implements FromQuery, WithHeadings, WithMapping, Should
             $row->student->name,
             $row->student->status,
             $row->domicile_status ? 'P2K' : 'LP2K',
+            $row->is_new_domicile ? 'Baru' : 'Lama',
             $row->domicile,
             $row->domicile_number,
             $row->grade_of_diniyah,
             $row->diniyah->name,
+            $row->is_new_diniyah ? 'Baru' : 'Lama',
             $row->grade_of_formal,
             $row->formal->name,
+            $row->is_new_formal ? 'Baru' : 'Lama',
             $row->student->address,
             $row->student->region->village,
             $row->student->region->district,
@@ -50,12 +53,15 @@ class RegistrationExport implements FromQuery, WithHeadings, WithMapping, Should
             'NAMA',
             'STATUS',
             'STATUS DOMISILI',
+            'STATUS MASUK DOMISILI',
             'DOMISILI',
             'NOMOR',
             'KELAS DINIYAH',
             'TINGKAT DINIYAH',
+            'STATUS MASUK DINIYAH',
             'KELAS FORMAL',
             'TINGKAT FORMAL',
+            'STATUS MASUK FORMAL',
             'ALAMAT',
             'DESA',
             'KECAMATAN',

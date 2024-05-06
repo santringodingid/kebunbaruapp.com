@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\PaymentManagement;
 
+use App\Exports\FareExport;
 use App\Http\Controllers\Controller;
 use App\Models\PaymentManagement\Account;
 use App\Models\PaymentManagement\Fare;
@@ -147,5 +148,10 @@ class FareController extends Controller
         Fare::where('id', $fareId)->update(['amount' => $sumFare]);
 
         return redirect()->back(201)->with(['success' => 'Tarif berhasil ditambahkan']);
+    }
+
+    public function export()
+    {
+        return (new FareExport())->download('list-tarif.xlsx');
     }
 }
