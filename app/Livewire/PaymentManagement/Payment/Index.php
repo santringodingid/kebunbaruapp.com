@@ -27,7 +27,11 @@ class Index extends Component
     #[On('success-created')]
     public function render(): View
     {
-        $payments = Payment::withWhereHas('registrationHasOne')->withWhereHas('student')->latest()->paginate(12);
+        $payments = Payment::withWhereHas('registrationHasOne')->withWhereHas('student', function ($query){
+            $query->when($this->search, function ($query, $search){
+                $query->whereAny(['students.id', 'students.name'], 'like', '%' . $search . '%');
+            });
+        })->latest()->paginate(12);
 
         return view('livewire.payment-management.payment.index', compact('payments'));
     }

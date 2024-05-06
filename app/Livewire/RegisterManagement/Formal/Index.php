@@ -28,11 +28,9 @@ class Index extends Component
     public function render(): View
     {
         $formals = Registration::query()->withWhereHas('student', function ($query) {
-            $query->where([
-                ['status', '!=', 0],
-                ['gender', session()->get('gender_access')],
-                ['name', 'like', '%'.$this->search.'%']
-            ]);
+            $query->where('status', '!=', 0)->when($this->search, function ($query, $search) {
+                $query->whereAny(['id', 'nik', 'name'], 'like', '%' . $search . '%');
+            });
         })->orderBy('updated_at', 'desc')->paginate(12);
 
         return view('livewire.register-management.formal.index', [

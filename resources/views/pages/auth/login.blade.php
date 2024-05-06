@@ -60,7 +60,7 @@
         </div>
 
         <!--end::Input group--->
-        <div class="fv-row mb-3">
+        <div class="fv-row mb-8">
             <!--begin::Password-->
             <input type="password" placeholder="Password" name="password" autocomplete="off" class="form-control bg-transparent" />
             <!--end::Password-->

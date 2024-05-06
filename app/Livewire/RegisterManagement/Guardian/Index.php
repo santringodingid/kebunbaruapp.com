@@ -28,7 +28,9 @@ class Index extends Component
     public function render(): View
     {
         $guardians = Guardian::query()->when($this->search, function ($query, $search){
-            $query->where('name', 'like', '%'.$search.'%');
+            $query->whereAny([
+                'id', 'nik', 'name'
+            ], 'like', '%'.$search.'%');
         })->with('region')->latest()->paginate(12);
         return view('livewire.register-management.guardian.index', [
             'guardians' => $guardians
