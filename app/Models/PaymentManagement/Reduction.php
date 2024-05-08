@@ -4,6 +4,7 @@ namespace App\Models\PaymentManagement;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Reduction extends Model
 {
@@ -14,4 +15,9 @@ class Reduction extends Model
     public $timestamps = true;
 
     protected $fillable = ['name', 'amount'];
+
+    public function details(): HasMany
+    {
+        return $this->hasMany(ReductionDetail::class, 'reduction_id', 'id');
+    }
 }

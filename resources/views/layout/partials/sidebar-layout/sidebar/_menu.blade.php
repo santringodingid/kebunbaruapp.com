@@ -28,7 +28,7 @@
                 <!--begin:Menu link-->
                 <span class="menu-link">
 					<span class="menu-icon">{!! getIcon('setting-2', 'fs-2') !!}</span>
-					<span class="fw-semibold">Setting Management</span>
+					<span class="fw-semibold menu-title">Setting</span>
 					<span class="menu-arrow"></span>
 				</span>
                 <!--end:Menu link-->
@@ -91,7 +91,7 @@
 				<!--begin:Menu link-->
 				<span class="menu-link">
 					<span class="menu-icon">{!! getIcon('user-edit', 'fs-2') !!}</span>
-					<span class="fw-semibold">User Management</span>
+					<span class="fw-semibold menu-title">User</span>
 					<span class="menu-arrow"></span>
 				</span>
 				<!--end:Menu link-->
@@ -144,7 +144,7 @@
                 <!--begin:Menu link-->
                 <span class="menu-link">
 					<span class="menu-icon">{!! getIcon('book-open', 'fs-2') !!}</span>
-					<span class="fw-semibold">Manajemen Registrasi</span>
+					<span class="fw-semibold menu-title">Registrasi</span>
 					<span class="menu-arrow"></span>
 				</span>
                 <!--end:Menu link-->
@@ -249,7 +249,7 @@
                 <!--begin:Menu link-->
                 <span class="menu-link">
 					<span class="menu-icon">{!! getIcon('finance-calculator', 'fs-2') !!}</span>
-					<span class="fw-semibold">Manajemen Pembayaran</span>
+					<span class="fw-semibold menu-title">Pembayaran</span>
 					<span class="menu-arrow"></span>
 				</span>
                 <!--end:Menu link-->
@@ -365,10 +365,32 @@
                         </a>
                         <!--end:Menu link-->
                     </div>
-                    @endcan
                     <!--end:Menu item-->
                     <!--begin:Menu item-->
-                    @can('read payment management')
+                    <div class="menu-item">
+                        <!--begin:Menu link-->
+                        <a class="menu-link {{ request()->routeIs(['payment-management.reduction', 'payment-management.reduction.*']) ? 'active' : '' }}" href="{{ route('payment-management.reduction') }}">
+                        <span class="menu-bullet">
+                            <span class="bullet bullet-dot"></span>
+                        </span>
+                            <span class="menu-title">Pengurangan</span>
+                        </a>
+                        <!--end:Menu link-->
+                    </div>
+                    <!--end:Menu item-->
+                        <!--begin:Menu item-->
+                        <div class="menu-item">
+                            <!--begin:Menu link-->
+                            <a class="menu-link {{ request()->routeIs(['payment-management.distribution', 'payment-management.distribution.*']) ? 'active' : '' }}" href="{{ route('payment-management.distribution') }}">
+                        <span class="menu-bullet">
+                            <span class="bullet bullet-dot"></span>
+                        </span>
+                                <span class="menu-title">Distribusi</span>
+                            </a>
+                            <!--end:Menu link-->
+                        </div>
+                        <!--end:Menu item-->
+                    <!--begin:Menu item-->
                     <div class="menu-item">
                         <!--begin:Menu link-->
                         <a class="menu-link {{ request()->routeIs(['payment-management.payment', 'payment-management.payment.*']) ? 'active' : '' }}" href="{{ route('payment-management.payment') }}">

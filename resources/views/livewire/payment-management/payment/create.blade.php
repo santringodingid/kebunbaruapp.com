@@ -90,9 +90,20 @@
                                     <span class="form-check form-check-custom form-check-solid form-check-sm align-items-start mt-1">
                                         <input wire:model.live="selectedOption" class="form-check-input" type="radio" name="discount_option" value="1">
                                     </span>
-                                    <span class="ms-5">
+                                    <span class="ms-5 w-100">
                                         <span class="fs-4 fw-bold text-gray-800 d-block">Rp. {{ Number::format($optionOne['amount'], 0, 0, 'id') }}</span>
-                                        <span class="text-muted">{{ $optionOne['text'] }}</span>
+                                        <table style="width: 100%">
+                                            <tr class="text-muted">
+                                                <td>{{ $optionOne['payment_text'] }}</td>
+                                                <td class="text-end">{{ Number::format($optionOne['payment_amount'], 0, 0, 'id') }}</td>
+                                            </tr>
+                                            @if($optionOne['distribution_amount'] > 0)
+                                                <tr class="text-muted">
+                                                    <td>{{ $optionOne['distribution_name'] }}</td>
+                                                    <td class="text-end">{{ Number::format($optionOne['distribution_amount'], 0, 0, 'id') }}</td>
+                                                </tr>
+                                            @endif
+                                        </table>
                                     </span>
                                 </label>
                             @endif
@@ -102,9 +113,20 @@
                                     <span class="form-check form-check-custom form-check-solid form-check-sm align-items-start mt-1">
                                         <input wire:model.live="selectedOption" class="form-check-input" type="radio" name="discount_option" value="2">
                                     </span>
-                                            <span class="ms-5">
+                                    <span class="ms-5 w-100">
                                         <span class="fs-4 fw-bold text-gray-800 d-block">Rp. {{ Number::format($optionTwo['amount'], 0, 0, 'id') }}</span>
-                                        <span class="text-muted">{{ $optionTwo['text'] }}</span>
+                                        <table style="width: 100%">
+                                            <tr class="text-muted">
+                                                <td>{{ $optionTwo['payment_text'] }}</td>
+                                                <td class="text-end">{{ Number::format($optionTwo['payment_amount'], 0, 0, 'id') }}</td>
+                                            </tr>
+                                            @if($optionTwo['distribution_amount'] > 0)
+                                                <tr class="text-muted">
+                                                    <td>{{ $optionTwo['distribution_name'] }}</td>
+                                                    <td class="text-end">{{ Number::format($optionTwo['distribution_amount'], 0, 0, 'id') }}</td>
+                                                </tr>
+                                            @endif
+                                        </table>
                                     </span>
                                 </label>
                             @endif
@@ -114,9 +136,20 @@
                                     <span class="form-check form-check-custom form-check-solid form-check-sm align-items-start mt-1">
                                         <input wire:model.live="selectedOption" class="form-check-input" type="radio" name="discount_option" value="3">
                                     </span>
-                                                <span class="ms-5">
+                                    <span class="ms-5 w-100">
                                         <span class="fs-4 fw-bold text-gray-800 d-block">Rp. {{ Number::format($optionThree['amount'], 0, 0, 'id') }}</span>
-                                        <span class="text-muted">{{ $optionThree['text'] }}</span>
+                                        <table style="width: 100%">
+                                            <tr class="text-muted">
+                                                <td>{{ $optionThree['payment_text'] }}</td>
+                                                <td class="text-end">{{ Number::format($optionThree['payment_amount'], 0, 0, 'id') }}</td>
+                                            </tr>
+                                            @if($optionThree['distribution_amount'] > 0)
+                                                <tr class="text-muted">
+                                                    <td>{{ $optionThree['distribution_name'] }}</td>
+                                                    <td class="text-end">{{ Number::format($optionThree['distribution_amount'], 0, 0, 'id') }}</td>
+                                                </tr>
+                                            @endif
+                                        </table>
                                     </span>
                                 </label>
                             @endif

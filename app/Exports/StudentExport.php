@@ -31,6 +31,7 @@ class StudentExport implements FromQuery, WithHeadings, WithMapping, ShouldAutoS
         return [
             $row->id,
             $row->registration_number,
+            $row?->period->diniyah,
             "'".$row->nik,
             "'".$row->kk,
             $row->name,
@@ -69,6 +70,7 @@ class StudentExport implements FromQuery, WithHeadings, WithMapping, ShouldAutoS
         return [
             'ID',
             'REG',
+            'TAHUN PERIODE',
             'NIK',
             'KK',
             'NAMA',

@@ -63,6 +63,8 @@ Route::middleware('auth')->group(function (){
             Route::get('/payment-management/fare-export', [\App\Http\Controllers\PaymentManagement\FareController::class, 'export'])->name('fare-export')->middleware(['permission:read payment management']);;
             Route::get('/payment-management/fare/create', [\App\Http\Controllers\PaymentManagement\FareController::class, 'create'])->name('fare.create')->middleware(['permission:create payment management']);;
             Route::post('/payment-management/fare/store', [\App\Http\Controllers\PaymentManagement\FareController::class, 'store'])->name('fare.store')->middleware(['permission:create payment management']);;
+            Route::get('/payment-management/reduction', [\App\Http\Controllers\PaymentManagement\ReductionController::class, 'index'])->name('reduction')->middleware(['permission:read payment management']);;
+            Route::get('/payment-management/distribution', [\App\Http\Controllers\PaymentManagement\DistributionController::class, 'index'])->name('distribution')->middleware(['permission:read payment management']);;
             Route::get('/payment-management/payment', [\App\Http\Controllers\PaymentManagement\PaymentController::class, 'index'])->name('payment')->middleware(['permission:read payment management']);;
         });
     });

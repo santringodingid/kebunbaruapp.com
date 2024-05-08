@@ -2,6 +2,8 @@
 
 namespace App\Livewire\PaymentManagement\Payment;
 
+use App\Models\PaymentManagement\Distribution;
+use App\Models\PaymentManagement\DistributionDetail;
 use App\Models\PaymentManagement\Fare;
 use App\Models\PaymentManagement\FareDetail;
 use App\Models\PaymentManagement\FareOfRegistration;
@@ -50,6 +52,10 @@ class Create extends Component
     public $textRegistration;
 
     public $amountFare = 0;
+
+    public $distributionId;
+    public $distributionName;
+    public $distributionAmount = 0;
 
     public $optionOne;
     public $optionTwo;
@@ -135,6 +141,14 @@ class Create extends Component
             $this->amountFare = $fare->getRawOriginal('amount') + $fareTahfidz->getRawOriginal('nominal');
         }
 
+        //CHECK DISTRIBUTION
+        $distribution = Distribution::query()->where('registration_id', $this->studentId)->first();
+        if ($distribution) {
+            $this->distributionId = $distribution->id;
+            $this->distributionName = $distribution?->reduction?->name;
+            $this->distributionAmount = $distribution?->getRawOriginal('amount');
+        }
+
         if (!$payment) {
             $fareRegistrationP2k = FareOfRegistration::where('domicile_status', '=', 1)->first() ?? 0;
             $fareRegistrationLp2k = FareOfRegistration::where('domicile_status', '=', 0)->first() ?? 0;
@@ -163,48 +177,72 @@ class Create extends Component
             if ($this->registration <= 0) {
                 $this->optionOne = [
                     'status' => true,
-                    'amount' => $fare->getRawOriginal('amount') + $this->tahfidz,
-                    'text' => 'Biaya Tahunan'.$this->textTahfidz.' 100%',
+                    'payment_amount' => $fare->getRawOriginal('amount') + $this->tahfidz,
+                    'payment_text' => 'Biaya Tahunan'.$this->textTahfidz.' 100%',
+                    'distribution_amount' => $this->distributionAmount,
+                    'distribution_name' => $this->distributionName,
+                    'distribution' => $this->distributionId,
+                    'amount' => ($fare->getRawOriginal('amount') + $this->tahfidz) - $this->distributionAmount,
                     'payment' => 0,
                     'paid' => 1
                 ];
 
                 $this->optionTwo = [
                     'status' => true,
-                    'amount' => ($fare->getRawOriginal('amount') + $this->tahfidz) / 2,
-                    'text' => 'Biaya Tahunan'.$this->textTahfidz.' 50% (Tahap 1)',
+                    'payment_amount' => ($fare->getRawOriginal('amount') + $this->tahfidz) / 2,
+                    'payment_text' => 'Biaya Tahunan'.$this->textTahfidz.' 50% (Tahap 1)',
+                    'distribution_amount' => $this->distributionAmount / 2,
+                    'distribution_name' => $this->distributionName,
+                    'distribution' => $this->distributionId,
+                    'amount' => (($fare->getRawOriginal('amount') + $this->tahfidz) / 2) - ($this->distributionAmount / 2),
                     'payment' => 0,
                     'paid' => 0
                 ];
 
                 $this->optionThree = [
                     'status' => false,
+                    'payment_amount' => 0,
+                    'payment_text' => '',
+                    'distribution_amount' => 0,
+                    'distribution_name' => '',
+                    'distribution' => 0,
                     'amount' => 0,
-                    'text' => '',
                     'payment' => 0,
                     'paid' => 0
                 ];
             }else {
                 $this->optionOne = [
                     'status' => true,
-                    'amount' => ($fare->getRawOriginal('amount') + $this->tahfidz) + $this->registration,
-                    'text' => $this->textRegistration.' + Biaya Tahunan'.$this->textTahfidz.' 100%',
+                    'payment_amount' => ($fare->getRawOriginal('amount') + $this->tahfidz) + $this->registration,
+                    'payment_text' => $this->textRegistration.' + Biaya Tahunan'.$this->textTahfidz.' 100%',
+                    'distribution_amount' => $this->distributionAmount,
+                    'distribution_name' => $this->distributionName,
+                    'distribution' => $this->distributionId,
+                    'amount' => (($fare->getRawOriginal('amount') + $this->tahfidz) + $this->registration) - $this->distributionAmount,
                     'payment' => 0,
                     'paid' => 1
                 ];
 
                 $this->optionTwo = [
                     'status' => true,
-                    'amount' => (($fare->getRawOriginal('amount') + $this->tahfidz) / 2) + $this->registration,
-                    'text' => $this->textRegistration.' + Biaya Tahunan'.$this->textTahfidz.' 50% (Tahap 1)',
+                    'payment_amount' => (($fare->getRawOriginal('amount') + $this->tahfidz) / 2) + $this->registration,
+                    'payment_text' => $this->textRegistration.' + Biaya Tahunan'.$this->textTahfidz.' 50% (Tahap 1)',
+                    'distribution_amount' => $this->distributionAmount / 2,
+                    'distribution_name' => $this->distributionName,
+                    'distribution' => $this->distributionId,
+                    'amount' => ((($fare->getRawOriginal('amount') + $this->tahfidz) / 2) + $this->registration) - ($this->distributionAmount / 2),
                     'payment' => 0,
                     'paid' => 0
                 ];
 
                 $this->optionThree = [
                     'status' => true,
+                    'payment_amount' => $this->registration,
+                    'payment_text' => $this->textRegistration,
+                    'distribution_amount' => 0,
+                    'distribution_name' => '',
+                    'distribution' => 0,
                     'amount' => $this->registration,
-                    'text' => $this->textRegistration,
                     'payment' => 0,
                     'paid' => 0
                 ];
@@ -215,16 +253,24 @@ class Create extends Component
             if ($payment->fare <= 0) {
                 $this->optionOne = [
                     'status' => true,
-                    'amount' => $fare->getRawOriginal('amount') + $this->tahfidz,
-                    'text' => 'Biaya Tahunan'.$this->textTahfidz.' 100%',
+                    'payment_amount' => $fare->getRawOriginal('amount') + $this->tahfidz,
+                    'payment_text' => 'Biaya Tahunan'.$this->textTahfidz.' 100%',
+                    'distribution_amount' => $this->distributionAmount,
+                    'distribution_name' => $this->distributionName,
+                    'distribution' => $this->distributionId,
+                    'amount' => ($fare->getRawOriginal('amount') + $this->tahfidz) - $this->distributionAmount,
                     'payment' => 0,
                     'paid' => 1
                 ];
 
                 $this->optionTwo = [
                     'status' => true,
-                    'amount' => ($fare->getRawOriginal('amount') + $this->tahfidz) / 2,
-                    'text' => 'Biaya Tahunan'.$this->textTahfidz.' 50% (Tahap 1)',
+                    'payment_amount' => ($fare->getRawOriginal('amount') + $this->tahfidz) / 2,
+                    'payment_text' => 'Biaya Tahunan'.$this->textTahfidz.' 50% (Tahap 1)',
+                    'distribution_amount' => $this->distributionAmount / 2,
+                    'distribution_name' => $this->distributionName,
+                    'distribution' => $this->distributionId,
+                    'amount' => (($fare->getRawOriginal('amount') + $this->tahfidz) / 2) - ($this->distributionAmount / 2),
                     'payment' => 0,
                     'paid' => 0
                 ];
@@ -232,16 +278,24 @@ class Create extends Component
             }else{
                 $this->optionOne = [
                     'status' => false,
+                    'payment_amount' => 0,
+                    'payment_text' => '',
+                    'distribution_amount' => 0,
+                    'distribution_name' => '',
+                    'distribution' => 0,
                     'amount' => 0,
-                    'text' => '',
                     'payment' => 0,
                     'paid' => 0
                 ];
 
                 $this->optionTwo = [
                     'status' => true,
-                    'amount' => ($fare->getRawOriginal('amount') + $this->tahfidz) - $payment->getRawOriginal('amount'),
-                    'text' => 'Biaya Tahunan'.$this->textTahfidz.' 50% (Tahap 2)',
+                    'payment_amount' => ($fare->getRawOriginal('amount') + $this->tahfidz) - $payment->getRawOriginal('amount'),
+                    'payment_text' => 'Biaya Tahunan'.$this->textTahfidz.' 50% (Tahap 2)',
+                    'distribution_amount' => $this->distributionAmount / 2,
+                    'distribution_name' => $this->distributionName,
+                    'distribution' => $this->distributionId,
+                    'amount' => (($fare->getRawOriginal('amount') + $this->tahfidz) - $payment->getRawOriginal('amount')) - ($this->distributionAmount / 2),
                     'payment' => $payment->id,
                     'paid' => 1
                 ];
@@ -249,8 +303,12 @@ class Create extends Component
             }
             $this->optionThree = [
                 'status' => false,
+                'payment_amount' => 0,
+                'payment_text' => '',
+                'distribution_amount' => 0,
+                'distribution_name' => '',
+                'distribution' => 0,
                 'amount' => 0,
-                'text' => '',
                 'payment' => 0,
                 'paid' => 0
             ];
@@ -293,6 +351,7 @@ class Create extends Component
                     'account_id' => $this->accountRegistrationP2k,
                     'is_divisible' => 0,
                     'nominal' => $this->nominalRegistrationP2k,
+                    'is_reducible' => 0,
                 ]);
             }
 
@@ -302,6 +361,7 @@ class Create extends Component
                     'account_id' => $this->accountRegistrationLp2k,
                     'is_divisible' => 0,
                     'nominal' => $this->nominalRegistrationLp2k,
+                    'is_reducible' => 0
                 ]);
             }
 
@@ -309,10 +369,13 @@ class Create extends Component
             if ($this->selectedOption == 3) {
                 Payment::where('id', $id)->update([
                     'fare' => 0,
-                    'registration' => $this->optionThree['amount'],
+                    'registration' => $this->optionThree['payment_amount'],
+                    'payment_amount' => $this->optionThree['payment_amount'],
+                    'payment_notes' => $this->optionThree['payment_text'],
+                    'reduction_notes' => $this->optionThree['distribution_name'],
+                    'reduction_amount' => $this->optionThree['distribution_amount'],
                     'amount' => $this->optionThree['amount'],
                     'is_paid' => $this->optionThree['paid'],
-                    'notes' => $this->optionThree['text']
                 ]);
             } elseif ($this->selectedOption == 2) {
                 if ($this->nominalTahfidz > 0) {
@@ -320,7 +383,8 @@ class Create extends Component
                         'payment_id' => $id,
                         'account_id' => $this->accountTahfidz,
                         'is_divisible' => 1,
-                        'nominal' => $this->nominalTahfidz / 2
+                        'nominal' => $this->nominalTahfidz / 2,
+                        'is_reducible' => 0
                     ]);
                 }
                 $details = FareDetail::where('fare_id', $this->fareId)->get();
@@ -330,16 +394,20 @@ class Create extends Component
                         'payment_id' => $id,
                         'account_id' => $detail->account_id,
                         'is_divisible' => 1,
-                        'nominal' => $detail->getRawOriginal('nominal') / 2
+                        'nominal' => $detail->getRawOriginal('nominal') / 2,
+                        'is_reducible' => 0
                     ];
                 }
                 PaymentDetail::insert($detailData);
                 Payment::where('id', $id)->update([
                     'fare' => $this->amountFare,
                     'registration' => $this->nominalRegistrationP2k + $this->nominalRegistrationLp2k,
+                    'payment_amount' => $this->optionTwo['payment_amount'],
+                    'payment_notes' => $this->optionTwo['payment_text'],
+                    'reduction_notes' => $this->optionTwo['distribution_name'],
+                    'reduction_amount' => $this->optionTwo['distribution_amount'],
                     'amount' => $this->optionTwo['amount'],
                     'is_paid' => $this->optionTwo['paid'],
-                    'notes' => $this->optionTwo['text']
                 ]);
             } elseif ($this->selectedOption == 1) {
                 if ($this->nominalTahfidz > 0) {
@@ -357,24 +425,41 @@ class Create extends Component
                         'payment_id' => $id,
                         'account_id' => $detail->account_id,
                         'is_divisible' => 1,
-                        'nominal' => $detail->getRawOriginal('nominal')
+                        'nominal' => $detail->getRawOriginal('nominal'),
+                        'is_reducible' => 0
                     ];
                 }
                 PaymentDetail::insert($detailData);
                 Payment::where('id', $id)->update([
                     'fare' => $this->amountFare,
                     'registration' => $this->nominalRegistrationP2k + $this->nominalRegistrationLp2k,
+                    'payment_amount' => $this->optionOne['payment_amount'],
+                    'payment_notes' => $this->optionOne['payment_text'],
+                    'reduction_notes' => $this->optionOne['distribution_name'],
+                    'reduction_amount' => $this->optionOne['distribution_amount'],
                     'amount' => $this->optionOne['amount'],
-                    'is_paid' => $this->optionOne['paid'],
-                    'notes' => $this->optionOne['text']
+                    'is_paid' => $this->optionOne['paid']
                 ]);
             }else{
                 $this->dispatch('error', 'Pembayaran gagal dibuat');
                 return;
             }
 
+            //GET REDUCTION
+            $distributions = DistributionDetail::query()->where('distribution_id', $this->distributionId)->get();
+            if ($distributions) {
+                foreach ($distributions as $distribution) {
+                    PaymentDetail::where([
+                        ['payment_id', '=', $id],
+                        ['account_id', '=', $distribution->account_id],
+                    ])->update([
+                        'is_reducible' => 1,
+                    ]);
+                }
+            }
+
             $this->resetElement();
-            $this->dispatch('success-created', $id);
+            $this->dispatch('success-created', 'Satu pembayaran berhasil dibuat');
         });
 
     }
