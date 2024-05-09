@@ -1,9 +1,5 @@
 <div>
     <div class="row justify-content-between">
-        <div class="col-sm-8"></div>
-        <div class="col-sm-4">
-
-        </div>
         <div class="col-sm-8 mb-1">
             <div class="row justify-content-start">
                 <div class="col-sm-2">
@@ -37,7 +33,20 @@
             </div>
         </div>
     </div>
-    <div class="card">
+    <div class="col-12 mb-5 mb-xl-10" wire:loading.delay>
+        <div class="card">
+            <div class="card-body">
+                <div>
+                    <div class="d-flex align-items-center text-muted">
+                        <span>Data sedang dimuat...</span>
+                        <div class="spinner-border ms-auto" role="status" aria-hidden="true"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-12 mb-5 mb-xl-10" wire:loading.remove>
+        <div class="card">
         <div class="card-body p-0">
             <div class="table-responsive">
                 <table class="table table-rounded table-row-bordered gy-5 gs-7 mb-0">
@@ -79,6 +88,7 @@
         <div class="card-footer">
             {{ $fares->links() }}
         </div>
+    </div>
     </div>
 </div>
 
