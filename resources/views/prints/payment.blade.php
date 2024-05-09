@@ -236,7 +236,19 @@
                 <tbody>
                 <tr>
                     <td class="text-center">1</td>
-                    <td>{{ \Illuminate\Support\Str::upper($payment->notes) }}</td>
+                    <td>{{ \Illuminate\Support\Str::upper($payment->payment_notes) }}</td>
+                    <td class="text-center text-bold">Rp. {{ $payment->payment_amount }}</td>
+                </tr>
+                @if($payment->reduction_amount > 0)
+                <tr>
+                    <td class="text-center">2</td>
+                    <td>{{ \Illuminate\Support\Str::upper($payment->reduction_notes) }}</td>
+                    <td class="text-center text-bold">Rp. {{ $payment->reduction_amount }}</td>
+                </tr>
+                @endif
+                <tr class="fw-bold">
+                    <td class="text-center">3</td>
+                    <td>TOTAL</td>
                     <td class="text-center text-bold">Rp. {{ $payment->amount }}</td>
                 </tr>
                 <tr>
@@ -345,7 +357,19 @@
                 <tbody>
                 <tr>
                     <td class="text-center">1</td>
-                    <td>{{ \Illuminate\Support\Str::upper($payment->notes) }}</td>
+                    <td>{{ \Illuminate\Support\Str::upper($payment->payment_notes) }}</td>
+                    <td class="text-center text-bold">Rp. {{ $payment->payment_amount }}</td>
+                </tr>
+                @if($payment->reduction_amount > 0)
+                    <tr>
+                        <td class="text-center">2</td>
+                        <td>{{ \Illuminate\Support\Str::upper($payment->reduction_notes) }}</td>
+                        <td class="text-center text-bold">Rp. {{ $payment->reduction_amount }}</td>
+                    </tr>
+                @endif
+                <tr class="fw-bold">
+                    <td class="text-center">3</td>
+                    <td>TOTAL</td>
                     <td class="text-center text-bold">Rp. {{ $payment->amount }}</td>
                 </tr>
                 <tr>
