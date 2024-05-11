@@ -18,7 +18,7 @@ class Recapitulation extends Model
     public $timestamps = true;
 
     protected $fillable = [
-        'period_id', 'institution_id', 'period', 'amount'
+        'period_id', 'institution_id', 'period', 'gender', 'amount'
     ];
 
     public function details(): HasMany
