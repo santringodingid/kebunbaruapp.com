@@ -4,8 +4,8 @@
     @endsection
     @section('button')
         <div class="p-10">
-            <a class="btn btn-primary" href="{{ route('payment-management.recapitulation-config', '10') }}">Syawal</a>
-            <a class="btn btn-primary" href="{{ route('payment-management.recapitulation-config', '11') }}">Dzul Qo'dah</a>
+{{--            <a class="btn btn-primary" href="{{ route('payment-management.recapitulation-config', '10') }}">Syawal</a>--}}
+{{--            <a class="btn btn-primary" href="{{ route('payment-management.recapitulation-config', '11') }}">Dzul Qo'dah</a>--}}
         </div>
     @endsection
     <!--begin::Row-->

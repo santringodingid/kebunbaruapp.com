@@ -59,7 +59,9 @@ class Index extends Component
         $results = [];
         $recapitulations = Recapitulation::with('institution:id,name', 'details')->when($this->gender != 2, function ($query){
             $query->where('gender', $this->gender);
-        })->where('period', $this->hijri)->orderBy('institution_id', 'asc')->get();
+        })->when($this->hijri, function ($query){
+            $query->where('period', $this->hijri);
+        })->orderBy('institution_id', 'asc')->get();
         if ($recapitulations) {
             foreach ($recapitulations as $recapitulation) {
                 $details = RecapitulationDetail::query()->where('recapitulation_id', $recapitulation->id)
