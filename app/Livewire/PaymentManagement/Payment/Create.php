@@ -488,7 +488,7 @@ class Create extends Component
                     ])->first();
                     if ($disbursement) {
                         $disbursementOfInstitution = $disbursement?->institution_id;
-                        if ($disbursementOfInstitution == '' || $disbursementOfInstitution == NULL) {
+                        if ($disbursementOfInstitution == '' || $disbursementOfInstitution == null) {
                             $institutionId = $payment->institution_id;
                         }else{
                             $institutionId = $disbursementOfInstitution;
