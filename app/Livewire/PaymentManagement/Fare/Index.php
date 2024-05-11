@@ -3,7 +3,6 @@
 namespace App\Livewire\PaymentManagement\Fare;
 
 use App\Models\PaymentManagement\Fare;
-use App\Models\PaymentManagement\FareOfTahfidz;
 use App\Models\SettingManagement\Institution;
 use Illuminate\Contracts\View\View;
 use Livewire\Attributes\On;

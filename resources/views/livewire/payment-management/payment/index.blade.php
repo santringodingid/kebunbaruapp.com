@@ -1,6 +1,6 @@
 <div>
     <div class="row justify-content-between">
-        <div class="col-sm-5 mb-5">
+        <div class="col-sm-4 mb-5">
             <input type="text" wire:model.live.debounce="search" placeholder="Masukkan nama/ID..." class="form-control form-control-sm">
         </div>
     </div>

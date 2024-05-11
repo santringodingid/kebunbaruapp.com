@@ -22,10 +22,6 @@ Route::middleware('auth')->group(function (){
             Route::post('/setting-management/hijri', [\App\Http\Controllers\SettingManagement\HijriController::class, 'store'])->name('hijri');
             Route::get('/setting-management/asset', [\App\Http\Controllers\SettingManagement\AssetController::class, 'index'])->name('asset');
             Route::post('/setting-management/asset', [\App\Http\Controllers\SettingManagement\AssetController::class, 'store'])->name('asset');
-            Route::get('/setting-management/config-domicile', [\App\Http\Controllers\SettingManagement\HijriController::class, 'configDomicile'])->name('config-domicile');
-            Route::get('/setting-management/config-diniyah', [\App\Http\Controllers\SettingManagement\HijriController::class, 'configDiniyah'])->name('config-diniyah');
-            Route::get('/setting-management/config-formal', [\App\Http\Controllers\SettingManagement\HijriController::class, 'configFormal'])->name('config-formal');
-            Route::get('/setting-management/config-registration', [\App\Http\Controllers\SettingManagement\HijriController::class, 'configRegistration'])->name('config-registration');
         });
 
         Route::name('user-management.')->group(function () {
@@ -66,6 +62,9 @@ Route::middleware('auth')->group(function (){
             Route::get('/payment-management/reduction', [\App\Http\Controllers\PaymentManagement\ReductionController::class, 'index'])->name('reduction')->middleware(['permission:read payment management']);;
             Route::get('/payment-management/distribution', [\App\Http\Controllers\PaymentManagement\DistributionController::class, 'index'])->name('distribution')->middleware(['permission:read payment management']);;
             Route::get('/payment-management/payment', [\App\Http\Controllers\PaymentManagement\PaymentController::class, 'index'])->name('payment')->middleware(['permission:read payment management']);;
+            Route::get('/payment-management/recapitulation', [\App\Http\Controllers\PaymentManagement\RecapitulationController::class, 'index'])->name('recapitulation')->middleware(['permission:read payment management']);
+            Route::get('/payment-management/config/{hijri}', [\App\Http\Controllers\PaymentManagement\RecapitulationController::class, 'config'])->name('recapitulation-config')->middleware(['permission:read payment management']);;
+            Route::post('/payment-management/export', [\App\Http\Controllers\PaymentManagement\RecapitulationController::class, 'export'])->name('recapitulation-export')->middleware(['permission:read payment management']);;
         });
     });
 

@@ -2,6 +2,7 @@
 
 namespace App\Livewire\PaymentManagement\Payment;
 
+use App\Models\PaymentManagement\AccountDisbursement;
 use App\Models\PaymentManagement\Distribution;
 use App\Models\PaymentManagement\DistributionDetail;
 use App\Models\PaymentManagement\Fare;
@@ -10,6 +11,8 @@ use App\Models\PaymentManagement\FareOfRegistration;
 use App\Models\PaymentManagement\FareOfTahfidz;
 use App\Models\PaymentManagement\Payment;
 use App\Models\PaymentManagement\PaymentDetail;
+use App\Models\PaymentManagement\Recapitulation;
+use App\Models\PaymentManagement\RecapitulationDetail;
 use App\Models\RegisterManagement\Registration;
 use Haruncpi\LaravelIdGenerator\IdGenerator;
 use Illuminate\Support\Facades\Auth;
@@ -458,10 +461,65 @@ class Create extends Component
                 }
             }
 
+            $this->setRecapitulation($id);
+
             $this->resetElement();
             $this->dispatch('success-created', 'Satu pembayaran berhasil dibuat');
         });
+    }
 
+    public function setRecapitulation($id): void
+    {
+        DB::transaction(function () use ($id) {
+            $hijri = session('hijri');
+            $explode = explode('-', $hijri);
+            $period = Auth::user()->current_period;
+            $gender = session('gender_access');
+            //GET PAYMENT
+            $payment = Payment::with(['paymentDetails' => function ($query) {
+                $query->where('is_reducible', 0);
+            }])->where('id', $id)->first();
+            if ($payment) {
+                foreach ($payment?->paymentDetails as $paymentDetail) {
+                    $account = $paymentDetail?->account_id;
+                    $disbursement = AccountDisbursement::where([
+                        ['account_id', '=', $account],
+                        ['gender', '=', $gender]
+                    ])->first();
+                    if ($disbursement) {
+                        $disbursementOfInstitution = $disbursement?->institution_id;
+                        if ($disbursementOfInstitution == '' || $disbursementOfInstitution == NULL) {
+                            $institutionId = $payment->institution_id;
+                        }else{
+                            $institutionId = $disbursementOfInstitution;
+                        }
+
+                        //CHECK INSTITUTION IN RECAPITULATION
+                        $recapitulation = Recapitulation::query()->where([
+                            ['period_id', '=', $period],
+                            ['institution_id', '=', $institutionId],
+                            ['period', '=', $explode[1]],
+                            ['gender', '=', $gender]
+                        ])->first();
+                        if (!$recapitulation) {
+                            $recapitulation = Recapitulation::query()->create([
+                                'period_id' => $period,
+                                'institution_id' => $institutionId,
+                                'period' => $explode[1],
+                                ['gender', '=', $gender]
+                            ]);
+                        }
+
+                        RecapitulationDetail::query()->create([
+                            'recapitulation_id' => $recapitulation->id,
+                            'payment_id' => $id,
+                            'account_id' => $account,
+                            'nominal' => $paymentDetail?->getRawOriginal('nominal')
+                        ]);
+                    }
+                }
+            }
+        });
     }
 
     public function render()

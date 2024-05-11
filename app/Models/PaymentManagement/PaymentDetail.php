@@ -24,4 +24,9 @@ class PaymentDetail extends Model
             get: fn (string $value) => Number::format($value, 0, 0, 'id'),
         );
     }
+
+    protected function account(): HasOne
+    {
+        return $this->hasOne(Account::class, 'id', 'account_id');
+    }
 }

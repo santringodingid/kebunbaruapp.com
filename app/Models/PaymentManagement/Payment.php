@@ -37,6 +37,20 @@ class Payment extends Model
         );
     }
 
+    protected function paymentAmount(): Attribute
+    {
+        return Attribute::make(
+            get: fn (string $value) => Number::format($value, 0, 0, 'id'),
+        );
+    }
+
+    protected function reductionAmount(): Attribute
+    {
+        return Attribute::make(
+            get: fn (string $value) => Number::format($value, 0, 0, 'id'),
+        );
+    }
+
     protected function registration(): Attribute
     {
         return Attribute::make(

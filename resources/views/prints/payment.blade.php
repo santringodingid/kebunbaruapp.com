@@ -80,7 +80,7 @@
         }
 
         .invoice-title {
-            font-size: 3.5rem;
+            font-size: 2.5rem;
         }
 
         .text-right {
@@ -157,6 +157,10 @@
             text-align: center;
         }
 
+        .text-end {
+            text-align: end;
+        }
+
         .text-bold {
             font-weight: bold;
         }
@@ -175,12 +179,13 @@
             <img class="logo" src="{{ asset('storage/assets/payment-header.png') }}" alt="">
         </div>
         <div class="col-7 text-right">
-            <h1 class="invoice-title">KUITANSI</h1>
+            <span class="invoice-title text-bold" style="display: block">KUITANSI</span>
+            <span style="font-style: italic; font-size: 1.0rem">NO.: {{ $payment->id }}</span>
         </div>
     </div>
     <hr>
     <div class="row">
-        <div class="col-7">
+        <div class="col-6">
             <table class="table">
                 <tr>
                     <td>ID P2K</td>
@@ -196,10 +201,14 @@
                         {{ $payment->registrationHasOne->domicile_status ? 'P2K' : 'LP2K' }}, {{ $payment->registrationHasOne->domicile }} - {{ $payment->registrationHasOne->domicile_number }}
                     </td>
                 </tr>
+            </table>
+        </div>
+        <div class="col-6">
+            <table class="table">
                 <tr>
                     <td>Kelas</td>
                     <td>
-                            {{ $payment->registrationHasOne->grade_of_diniyah }} - {{ $payment->institution->name }}
+                        {{ $payment->registrationHasOne->grade_of_diniyah }} - {{ $payment->institution->name }}
                     </td>
                 </tr>
                 <tr>
@@ -210,52 +219,43 @@
                 </tr>
             </table>
         </div>
-        <div class="col-5">
-            <table class="table">
-                <tr>
-                    <td>Nomor</td>
-                    <td>{{ $payment->id }}</td>
-                </tr>
-                <tr>
-                    <td>Tanggal</td>
-                    <td>{{ hijriToString($payment->created_at_hijri) }}</td>
-                </tr>
-            </table>
-        </div>
     </div>
     <div class="row">
         <div class="col-12">
-            <table class="tablestripped table-xl">
+            <table class="tablebottom table-xl">
                 <thead>
                 <tr>
                     <th style="font-weight: normal">NO</th>
                     <th style="font-weight: normal">KETERANGAN</th>
-                    <th style="font-weight: normal">JUMLAH</th>
+                    <th style="font-weight: normal">NOMINAL</th>
                 </tr>
                 </thead>
                 <tbody>
                 <tr>
                     <td class="text-center">1</td>
-                    <td>{{ \Illuminate\Support\Str::upper($payment->payment_notes) }}</td>
-                    <td class="text-center text-bold">Rp. {{ $payment->payment_amount }}</td>
+                    <td>{{ \Illuminate\Support\Str::title($payment->payment_notes) }}</td>
+                    <td class="text-end">{{ $payment->payment_amount }}</td>
                 </tr>
-                @if($payment->reduction_amount > 0)
                 <tr>
                     <td class="text-center">2</td>
-                    <td>{{ \Illuminate\Support\Str::upper($payment->reduction_notes) }}</td>
-                    <td class="text-center text-bold">Rp. {{ $payment->reduction_amount }}</td>
+                    <td>
+                        @if($payment->reduction_amount > 0)
+                        {{ \Illuminate\Support\Str::title($payment->reduction_notes) }}
+                        @else
+                            Pengurangan
+                        @endif
+                    </td>
+                    <td class="text-end">{{ $payment->reduction_amount }}</td>
                 </tr>
-                @endif
-                <tr class="fw-bold">
+                <tr class="text-bold">
                     <td class="text-center">3</td>
-                    <td>TOTAL</td>
-                    <td class="text-center text-bold">Rp. {{ $payment->amount }}</td>
+                    <td>JUMLAH</td>
+                    <td class="text-end">{{ $payment->amount }}</td>
                 </tr>
                 <tr>
                     <td colspan="3">
-                        <b>Terbilang :</b>
                         <i>
-                            {{ \Illuminate\Support\Str::title(\Illuminate\Support\Number::spell($payment->getRawOriginal('amount'), 'id')) }} Rupiah
+                            Terbilang : {{ \Illuminate\Support\Str::title(\Illuminate\Support\Number::spell($payment->getRawOriginal('amount'), 'id')) }} Rupiah
                         </i>
                     </td>
                 </tr>
@@ -274,7 +274,8 @@
 
         <div class="col-5">
             <div class="text-center">
-                Kebun Baru, {{ hijriToString($payment->created_at_hijri) }} H <br>
+                Pamekasan, {{ hijriToString($payment->created_at_hijri) }} H
+                <br>
                 Kasir <br>
                 <p style="margin-top: 60px;">
                     <u><b>{{ $payment->user->name }}</b></u>
@@ -296,12 +297,13 @@
             <img class="logo" src="{{ asset('storage/assets/payment-header.png') }}" alt="">
         </div>
         <div class="col-7 text-right">
-            <h1 class="invoice-title">KUITANSI</h1>
+            <span class="invoice-title text-bold" style="display: block">KUITANSI</span>
+            <span style="font-style: italic; font-size: 1.0rem">NO.: {{ $payment->id }}</span>
         </div>
     </div>
     <hr>
     <div class="row">
-        <div class="col-7">
+        <div class="col-6">
             <table class="table">
                 <tr>
                     <td>ID P2K</td>
@@ -317,6 +319,10 @@
                         {{ $payment->registrationHasOne->domicile_status ? 'P2K' : 'LP2K' }}, {{ $payment->registrationHasOne->domicile }} - {{ $payment->registrationHasOne->domicile_number }}
                     </td>
                 </tr>
+            </table>
+        </div>
+        <div class="col-6">
+            <table class="table">
                 <tr>
                     <td>Kelas</td>
                     <td>
@@ -331,52 +337,43 @@
                 </tr>
             </table>
         </div>
-        <div class="col-5">
-            <table class="table">
-                <tr>
-                    <td>Nomor</td>
-                    <td>{{ $payment->id }}</td>
-                </tr>
-                <tr>
-                    <td>Tanggal</td>
-                    <td>{{ hijriToString($payment->created_at_hijri) }}</td>
-                </tr>
-            </table>
-        </div>
     </div>
     <div class="row">
         <div class="col-12">
-            <table class="tablestripped table-xl">
+            <table class="tablebottom table-xl">
                 <thead>
                 <tr>
                     <th style="font-weight: normal">NO</th>
                     <th style="font-weight: normal">KETERANGAN</th>
-                    <th style="font-weight: normal">JUMLAH</th>
+                    <th style="font-weight: normal">NOMINAL</th>
                 </tr>
                 </thead>
                 <tbody>
                 <tr>
                     <td class="text-center">1</td>
-                    <td>{{ \Illuminate\Support\Str::upper($payment->payment_notes) }}</td>
-                    <td class="text-center text-bold">Rp. {{ $payment->payment_amount }}</td>
+                    <td>{{ \Illuminate\Support\Str::title($payment->payment_notes) }}</td>
+                    <td class="text-end">{{ $payment->payment_amount }}</td>
                 </tr>
-                @if($payment->reduction_amount > 0)
-                    <tr>
-                        <td class="text-center">2</td>
-                        <td>{{ \Illuminate\Support\Str::upper($payment->reduction_notes) }}</td>
-                        <td class="text-center text-bold">Rp. {{ $payment->reduction_amount }}</td>
-                    </tr>
-                @endif
-                <tr class="fw-bold">
+                <tr>
+                    <td class="text-center">2</td>
+                    <td>
+                        @if($payment->reduction_amount > 0)
+                            {{ \Illuminate\Support\Str::title($payment->reduction_notes) }}
+                        @else
+                            Pengurangan
+                        @endif
+                    </td>
+                    <td class="text-end">{{ $payment->reduction_amount }}</td>
+                </tr>
+                <tr class="text-bold">
                     <td class="text-center">3</td>
-                    <td>TOTAL</td>
-                    <td class="text-center text-bold">Rp. {{ $payment->amount }}</td>
+                    <td>JUMLAH</td>
+                    <td class="text-end">{{ $payment->amount }}</td>
                 </tr>
                 <tr>
                     <td colspan="3">
-                        <b>Terbilang :</b>
                         <i>
-                            {{ \Illuminate\Support\Str::title(\Illuminate\Support\Number::spell($payment->getRawOriginal('amount'), 'id')) }} Rupiah
+                            Terbilang : {{ \Illuminate\Support\Str::title(\Illuminate\Support\Number::spell($payment->getRawOriginal('amount'), 'id')) }} Rupiah
                         </i>
                     </td>
                 </tr>
@@ -395,7 +392,8 @@
 
         <div class="col-5">
             <div class="text-center">
-                Kebun Baru, {{ hijriToString($payment->created_at_hijri) }} H <br>
+                Pamekasan, {{ hijriToString($payment->created_at_hijri) }} H
+                <br>
                 Kasir <br>
                 <p style="margin-top: 60px;">
                     <u><b>{{ $payment->user->name }}</b></u>

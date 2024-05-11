@@ -401,6 +401,16 @@
                         </a>
                         <!--end:Menu link-->
                     </div>
+                    <div class="menu-item">
+                        <!--begin:Menu link-->
+                        <a class="menu-link {{ request()->routeIs(['payment-management.recapitulation', 'payment-management.recapitulation.*']) ? 'active' : '' }}" href="{{ route('payment-management.recapitulation') }}">
+                        <span class="menu-bullet">
+                            <span class="bullet bullet-dot"></span>
+                        </span>
+                            <span class="menu-title">Rekapitulasi</span>
+                        </a>
+                        <!--end:Menu link-->
+                    </div>
                     @endcan
                     <!--end:Menu item-->
                 </div>

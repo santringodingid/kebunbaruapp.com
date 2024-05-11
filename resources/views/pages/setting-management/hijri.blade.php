@@ -139,12 +139,6 @@
                         <button type="submit" class="btn btn-primary">Import Data</button>
                     </div>
                 </form>
-                <div class="p-10">
-                    <a class="btn btn-primary" href="{{ route('setting-management.config-domicile') }}">Domisili</a>
-                    <a class="btn btn-primary" href="{{ route('setting-management.config-diniyah') }}">Diniyah</a>
-                    <a class="btn btn-primary" href="{{ route('setting-management.config-formal') }}">Formal</a>
-                    <a class="btn btn-primary" href="{{ route('setting-management.config-registration') }}">Registrasi</a>
-                </div>
                 <!--end::Body-->
             </div>
             <!--end::Card widget 1-->

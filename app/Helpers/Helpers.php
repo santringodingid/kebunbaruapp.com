@@ -542,3 +542,26 @@ if (!function_exists('checkRegion')) {
         ];
     }
 }
+
+
+if (!function_exists('hijriMonth')){
+    function hijriMonth($month): string
+    {
+        $months = [
+            1 => 'Muharram',
+            'Shafar',
+            'Rabiul Awal',
+            'Rabiul Tsani',
+            'Jumadal Ula',
+            'Jumadal Akhirah',
+            'Rajab',
+            'Sya\'ban',
+            'Ramadhan',
+            'Syawal',
+            'Dzul Qo\'dah',
+            'Dzul Hijjah'
+        ];
+
+        return $months[(int)$month];
+    }
+};
