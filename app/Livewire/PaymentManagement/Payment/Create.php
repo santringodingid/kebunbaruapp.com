@@ -506,7 +506,7 @@ class Create extends Component
                                 'period_id' => $period,
                                 'institution_id' => $institutionId,
                                 'period' => $explode[1],
-                                ['gender', '=', $gender]
+                                'gender' => $gender
                             ]);
                         }
 
