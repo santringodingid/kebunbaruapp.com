@@ -31,7 +31,7 @@ class Index extends Component
             $query->whereAny([
                 'id', 'name', 'nik'
             ], 'like', '%'.$this->search.'%');
-        })->orderBy('updated_at', 'desc')->paginate(12);
+        })->with(['diniyah', 'formal'])->orderBy('updated_at', 'desc')->paginate(12);
 
         return view('livewire.register-management.registration.index', [
             'statuses' => $statuses

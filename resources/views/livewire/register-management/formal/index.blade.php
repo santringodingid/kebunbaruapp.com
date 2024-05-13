@@ -36,7 +36,7 @@
                         @forelse($formals as $formal)
                             <tr wire:key="{{ $formal->id }}">
                                 <td>{{ $formal->id }}</td>
-                                <td>{{ $formal->student?->nik }}</td>
+                                <td>{{ \Illuminate\Support\Str::mask($formal->student?->nik, '*', -12, 10) }}</td>
                                 <td>{{ $formal->student?->name }}</td>
                                 <td>{{ $formal->grade_of_formal }}</td>
                                 <td>{{ $formal->formal->name }}</td>

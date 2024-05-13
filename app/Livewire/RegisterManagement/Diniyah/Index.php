@@ -31,7 +31,7 @@ class Index extends Component
             $query->where('status', '!=', 0)->when($this->search, function ($query, $search) {
                 $query->whereAny(['id', 'nik', 'name'], 'like', '%' . $search . '%');
             });
-        })->orderBy('updated_at', 'desc')->paginate(12);
+        })->with('diniyah')->orderBy('updated_at', 'desc')->paginate(12);
 
         return view('livewire.register-management.diniyah.index', [
             'diniyahs' => $diniyahs

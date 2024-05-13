@@ -46,7 +46,7 @@
                         @forelse($statuses as $status)
                             <tr wire:key="{{ $status->id }}">
                                 <td>{{ $status->id }}</td>
-                                <td>{{ $status->student?->nik }}</td>
+                                <td>{{ \Illuminate\Support\Str::mask($status->student?->nik, '*', -12, 10) }}</td>
                                 <td>{{ $status->student?->name }}</td>
                                 <td>
                             <span @class([

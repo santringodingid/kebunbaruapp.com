@@ -36,7 +36,7 @@
                         @forelse($diniyahs as $diniyah)
                             <tr wire:key="{{ $diniyah->id }}">
                                 <td>{{ $diniyah->id }}</td>
-                                <td>{{ $diniyah->student?->nik }}</td>
+                                <td>{{ \Illuminate\Support\Str::mask($diniyah->student?->nik, '*', -12, 10) }}</td>
                                 <td>{{ $diniyah->student?->name }}</td>
                                 <td>{{ $diniyah->grade_of_diniyah }}</td>
                                 <td>{{ $diniyah->diniyah->name }}</td>

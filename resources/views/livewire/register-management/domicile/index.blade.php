@@ -36,7 +36,7 @@
                         @forelse($domiciles as $domicile)
                             <tr wire:key="{{ $domicile->id }}">
                                 <td>{{ $domicile->id }}</td>
-                                <td>{{ $domicile->student?->nik }}</td>
+                                <td>{{ \Illuminate\Support\Str::mask($domicile->student?->nik, '*', -12, 10) }}</td>
                                 <td>{{ $domicile->student?->name }}</td>
                                 <td>{{ $domicile->domicile_status ? 'P2K' : 'LP2K' }}</td>
                                 <td>{{ $domicile->domicile }} - {{ $domicile->domicile_number }}</td>
