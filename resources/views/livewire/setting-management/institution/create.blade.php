@@ -1,4 +1,4 @@
-<div class="modal fade" tabindex="-1" id="kt_modal_3" wire:ignore.self>
+<div class="modal fade" tabindex="-1" id="modal-add-institution" wire:ignore.self>
     <div class="modal-dialog modal-lg">
         <div class="modal-content position-absolute">
             <div class="modal-header">

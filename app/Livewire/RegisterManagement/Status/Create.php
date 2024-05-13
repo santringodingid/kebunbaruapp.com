@@ -120,4 +120,11 @@ class Create extends Component
         $this->reset();
         $this->mode = true;
     }
+
+    #[On('add')]
+    public function add($id): void
+    {
+        $this->studentId = $id;
+        $this->check();
+    }
 }

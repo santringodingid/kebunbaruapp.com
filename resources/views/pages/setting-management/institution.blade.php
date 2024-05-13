@@ -7,7 +7,7 @@
     @section('button')
         <div class="d-flex align-items-center gap-2 gap-lg-3">
             <div class="d-flex justify-content-end" data-kt-user-table-toolbar="base">
-                <button type="button" class="btn btn-light-primary btn-sm" data-bs-toggle="modal" data-bs-target="#kt_modal_3">
+                <button type="button" class="btn btn-light-primary btn-sm" data-bs-toggle="modal" data-bs-target="#modal-add-institution">
                     <i class="ki-outline ki-plus-square fs-3"></i>
                     Tambah Instansi
                 </button>
@@ -32,4 +32,13 @@
     <!--end::Row-->
 
     <livewire:setting-management.institution.create />
+
+    @push('scripts')
+        <script >
+            const edit = (id) => {
+                Livewire.dispatch('edit_institution', [id]);
+                $('#modal-add-institution').modal('show');
+            }
+        </script>
+    @endpush
 </x-default-layout>

@@ -16,11 +16,15 @@
             <tr wire:key="{{ $institution->id }}">
                 <td>{{ $loop->index + 1 }}</td>
                 <td>{{ $institution->code }}</td>
-                <td>{{ $institution->name }}</td>
+                <td>{{ $institution->shortname }}</td>
                 <td>{{ $institution->commission }}</td>
                 <td>{{ $institution->gender_access }}</td>
                 <td>{{ $institution->status_access }}</td>
-                <td>Edit</td>
+                <td>
+                    <button title="Detail data" class="btn btn-icon btn-active-light-primary w-30px h-30px" onclick="edit('{{ $institution->id }}')">
+                        {!! getIcon('setting-3','fs-3') !!}
+                    </button>
+                </td>
             </tr>
         @endforeach
         </tbody>

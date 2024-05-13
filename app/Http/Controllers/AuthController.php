@@ -10,7 +10,6 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\ValidationException;
-use phpDocumentor\Reflection\Types\False_;
 
 class AuthController extends Controller
 {
@@ -35,7 +34,7 @@ class AuthController extends Controller
 
         $request->session()->put([
             'institution_code' => $institution->code,
-            'institution_name' => $institution->name,
+            'institution_name' => $institution->shortname,
             'status_access' => $institution->getRawOriginal('status_access'),
             'gender_access' => $institution->getRawOriginal('gender_access'),
             'hijri' => hijri()

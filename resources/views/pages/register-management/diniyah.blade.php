@@ -46,26 +46,16 @@
 
 
             const reset = () => {
-                Swal.fire({
-                    title: "Yakin, nih?",
-                    text: "Semua bidang inputan akan direset, lho..",
-                    icon: "warning",
-                    showCancelButton: true,
-                    customClass: {
-                        confirmButton: "btn btn-primary",
-                        cancelButton: "btn btn-danger"
-                    },
-                    confirmButtonText: "Yakin, dong",
-                    cancelButtonText: "Nggak jadi"
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        $('#modal-add-diniyah').modal('hide');
-                        Livewire.dispatch('reset');
-                    }
-                });
+                $('#modal-add-diniyah').modal('hide');
+                Livewire.dispatch('reset');
             }
 
-            const submit = () => {
+            const submit = (status) => {
+                if(status) {
+                    Livewire.dispatch('submit');
+                    return false
+                }
+
                 Swal.fire({
                     title: "Yakin, nih?",
                     text: "Pastikan semua bidang inputan sudah diisi valid",
@@ -83,11 +73,26 @@
                     }
                 });
             }
-            //
-            // const showStudent = id => {
-            //     Livewire.dispatch('show_student', [id]);
-            //     $('#modal-show-student').modal('show');
-            // }
+
+            const addRegistration = id => {
+                Swal.fire({
+                    title: "Yakin, nih?",
+                    text: "Pastikan kamu telah memvalidasi",
+                    icon: "warning",
+                    showCancelButton: true,
+                    customClass: {
+                        confirmButton: "btn btn-primary",
+                        cancelButton: "btn btn-danger"
+                    },
+                    confirmButtonText: "Yakin, dong",
+                    cancelButtonText: "Nggak jadi"
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        Livewire.dispatch('add', [id]);
+                        $('#modal-add-diniyah').modal('show');
+                    }
+                });
+            }
         </script>
     @endpush
 </x-default-layout>

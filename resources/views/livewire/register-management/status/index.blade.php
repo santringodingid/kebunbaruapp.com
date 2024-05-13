@@ -55,6 +55,9 @@
                                     <button title="Detail data" class="btn btn-icon btn-active-light-primary w-30px h-30px" onclick="showDomicile('{{ $status->id }}')">
                                         {!! getIcon('tablet-text-up','fs-3') !!}
                                     </button>
+                                    <button title="Detail data" class="btn btn-icon btn-active-light-primary w-30px h-30px" onclick="addRegistration('{{ $status->student->id }}')">
+                                        {!! getIcon('plus-square','fs-3') !!}
+                                    </button>
                                 </td>
                             </tr>
                         @empty

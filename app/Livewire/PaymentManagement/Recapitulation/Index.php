@@ -71,7 +71,7 @@ class Index extends Component
 
                 $results[] = [
                     'id' => $recapitulation->id,
-                    'institution' => $recapitulation?->institution?->name,
+                    'institution' => $recapitulation?->institution?->shortname,
                     'total' => $recapitulation?->details->sum('nominal'),
                     'details' => $details
                 ];

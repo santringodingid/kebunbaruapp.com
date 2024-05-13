@@ -184,21 +184,27 @@
                 <button type="reset" class="btn btn-light me-3" onclick="reset()" wire:loading.attr="disabled">
                     Batal
                 </button>
-                <button type="submit" class="btn btn-primary" onclick="submit()">
-                    @if($mode)
+                @if($mode)
+                    <button type="submit" class="btn btn-primary" onclick="submit(true)">
                         <span class="indicator-label" wire:loading.remove>
                             Lakukan Pengecekan
                         </span>
-                    @else
+                        <span class="indicator-progress" wire:loading>
+                            Sedang dikirim...
+                        <span class="spinner-border spinner-border-sm align-middle ms-2"></span>
+                    </span>
+                    </button>
+                @else
+                    <button type="submit" class="btn btn-primary" onclick="submit(false)">
                         <span class="indicator-label" wire:loading.remove>
                             Simpan
                         </span>
-                    @endif
-                    <span class="indicator-progress" wire:loading>
-                        Sedang dikirim...
+                        <span class="indicator-progress" wire:loading>
+                            Sedang dikirim...
                         <span class="spinner-border spinner-border-sm align-middle ms-2"></span>
                     </span>
-                </button>
+                    </button>
+                @endif
             </div>
         </div>
     </div>
