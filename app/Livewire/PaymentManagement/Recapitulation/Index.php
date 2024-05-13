@@ -57,7 +57,7 @@ class Index extends Component
         config()->set('database.connections.mysql.strict', false);
         DB::reconnect();
         $results = [];
-        $recapitulations = Recapitulation::with('institution:id,name', 'details')->when($this->gender != 2, function ($query){
+        $recapitulations = Recapitulation::with('institution:id,name,shortname', 'details')->when($this->gender != 2, function ($query){
             $query->where('gender', $this->gender);
         })->when($this->hijri, function ($query){
             $query->where('period', $this->hijri);
