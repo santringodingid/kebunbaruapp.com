@@ -35,6 +35,17 @@
                         </div>
                     </div>
                     <div class="mb-5 row">
+                        <label for="shortName" class="col-sm-4 col-form-label">Shortname</label>
+                        <div class="col-sm-8">
+                            <input type="text" wire:model="shortName" class="form-control text-capitalize @error('shortName') is-invalid @enderror" id="shortName">
+                            @error('shortName')
+                            <div class="invalid-feedback">
+                                {{ $message }}
+                            </div>
+                            @enderror
+                        </div>
+                    </div>
+                    <div class="mb-5 row">
                         <label for="commission" class="col-sm-4 col-form-label">Komisi</label>
                         <div class="col-sm-8">
                             <select class="form-select @error('name') is-invalid @enderror" wire:model="commission" id="commission">

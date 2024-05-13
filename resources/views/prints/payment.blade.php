@@ -274,7 +274,7 @@
 
         <div class="col-5">
             <div class="text-center">
-                Pamekasan, {{ hijriToString($payment->created_at_hijri) }} H
+                {{ hijriToString($payment->created_at_hijri) }} H
                 <br>
                 Kasir <br>
                 <p style="margin-top: 60px;">
@@ -392,7 +392,7 @@
 
         <div class="col-5">
             <div class="text-center">
-                Pamekasan, {{ hijriToString($payment->created_at_hijri) }} H
+                {{ hijriToString($payment->created_at_hijri) }} H
                 <br>
                 Kasir <br>
                 <p style="margin-top: 60px;">

@@ -2,9 +2,6 @@
     <div class="row justify-content-between">
         <div class="col-sm-6 mb-5">
             <div class="row">
-                <div class="col-8">
-                    <input type="text" wire:model.live.debounce="search" placeholder="Masukkan nama/ID..." class="form-control form-control-sm">
-                </div>
                 <div class="col-4">
                     <select wire:model.live="hijri" class="form-control form-control-sm">
                         <option value="">.:Bulan:.</option>

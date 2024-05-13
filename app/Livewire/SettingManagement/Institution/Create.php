@@ -15,6 +15,8 @@ class Create extends Component
     #[Rule(['required'])]
     public string $name = '';
     #[Rule(['required'])]
+    public string $shortName = '';
+    #[Rule(['required'])]
     public string $commission = '';
     #[Rule(['required'])]
     public string $gender_access = '';
@@ -30,6 +32,7 @@ class Create extends Component
         Institution::query()->create([
             'code' => $this->code,
             'name' => Str::title($this->name),
+            'shortname' => Str::title($this->shortName),
             'commission' => $this->commission,
             'gender_access' => $this->gender_access,
             'status_access' => $this->status_access,

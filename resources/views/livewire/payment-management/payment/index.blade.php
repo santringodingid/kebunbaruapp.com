@@ -27,6 +27,7 @@
                             <th>ID</th>
                             <th>NAMA</th>
                             <th>DOMISILI</th>
+                            <th>DINIYAH</th>
                             <th>NOMINAL</th>
                             <th class="text-center">OPSI</th>
                         </tr>
@@ -38,15 +39,16 @@
                                 <td>{{ $payment->registration_id }}</td>
                                 <td>{{ $payment->registrationHasOne?->student->name }}</td>
                                 <td>
-                            <span @class([
-                                'badge',
-                                'badge-light-danger' => $payment->registrationHasOne->domicile_status == 0,
-                                'badge-light-primary' => $payment->registrationHasOne->domicile_status == 1,
-                            ])>
-                                {{ $payment->registrationHasOne->domicile_status ? 'P2K' : 'LP2K' }}
-                            </span>
+                                    <span @class([
+                                        'badge',
+                                        'badge-light-danger' => $payment->registrationHasOne->domicile_status == 0,
+                                        'badge-light-primary' => $payment->registrationHasOne->domicile_status == 1,
+                                    ])>
+                                        {{ $payment->registrationHasOne->domicile_status ? 'P2K' : 'LP2K' }}
+                                    </span>
                                     {{ $payment->registrationHasOne->domicile.' - '.$payment->registrationHasOne->domicile_number }}
                                 </td>
+                                <td>{{ $payment->registrationHasOne->grade_of_diniyah }} - {{ $payment->registrationHasOne?->diniyah?->name }}</td>
                                 <td class="text-end">{{ $payment->amount }}</td>
                                 <td class="text-center">
                                     <a title="Print Invoice" class="btn btn-icon btn-active-light-primary w-30px h-30px" href="{{ route('print.payment', $payment->id) }}" target="_blank">
