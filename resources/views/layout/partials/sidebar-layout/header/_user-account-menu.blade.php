@@ -32,24 +32,17 @@
     <!--end::Menu separator-->
     <!--begin::Menu item-->
     <div class="menu-item px-5">
-        <a href="#" class="menu-link px-5">Profil Akun</a>
+        <a href="{{ route('account') }}" class="menu-link px-5">Profil Akun</a>
     </div>
-    <!--end::Menu item-->
-    <!--begin::Menu item-->
     <div class="menu-item px-5">
-        <a href="#" class="menu-link px-5">
-            <span class="menu-text">Pengaturan Akun</span>
-            <span class="menu-badge">
-                <span class="badge badge-light-danger badge-circle fw-bold fs-7">3</span>
-            </span>
-        </a>
+        <a href="{{ route('about') }}" class="menu-link px-5">Tentang</a>
     </div>
     <!--end::Menu item-->
     <!--begin::Menu separator-->
     <div class="separator my-2"></div>
     <!--end::Menu separator-->
     <!--begin::Menu item-->
-    <div class="menu-item px-5">
+    <div class="menu-item px-5 mt-2">
         <a class="button-ajax menu-link px-5" href="#" data-action="{{ route('logout') }}" data-method="post" data-csrf="{{ csrf_token() }}" data-reload="true">
             Keluar
         </a>

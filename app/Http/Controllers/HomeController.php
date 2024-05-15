@@ -2,19 +2,21 @@
 
 namespace App\Http\Controllers;
 
-use Carbon\Carbon;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Date;
+use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 {
-    public function index()
+    /**
+     * Handle the incoming request.
+     */
+    public function __invoke(Request $request)
     {
-        return view('pages/dashboards.index');
-    }
+        $students =
+        $data = [
+            'name' => Auth::user()->name
+        ];
 
-    public function about()
-    {
-        return view('pages/abouts.index');
+        return view('pages.home', compact('data'));
     }
 }

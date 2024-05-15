@@ -55,7 +55,7 @@
         <!--begin::Input group--->
         <div class="fv-row mb-8">
             <!--begin::Email-->
-            <input type="text" placeholder="Email" name="email" autocomplete="off" class="form-control bg-transparent" />
+            <input type="text" placeholder="Email/Username" name="email" autocomplete="off" class="form-control bg-transparent" />
             <!--end::Email-->
         </div>
 

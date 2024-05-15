@@ -427,6 +427,16 @@
 				<!--end:Menu content-->
 			</div>
 			<!--end:Menu item-->
+            <!--begin:Menu item-->
+            <div class="menu-item">
+                <!--begin:Menu link-->
+                <a class="menu-link {{ request()->routeIs('account') ? 'active' : '' }}" href="{{ route('account') }}">
+                    <span class="menu-icon">{!! getIcon('profile-circle', 'fs-2') !!}</span>
+                    <span class="fw-semibold">Profil Akun</span>
+                </a>
+                <!--end:Menu link-->
+            </div>
+            <!--end:Menu item-->
 			<!--begin:Menu item-->
             <div class="menu-item">
                 <!--begin:Menu link-->

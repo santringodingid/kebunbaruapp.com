@@ -153,6 +153,10 @@
             padding: 0.2rem;
         }
 
+        .text-start {
+            text-align: start;
+        }
+
         .text-center {
             text-align: center;
         }
@@ -226,8 +230,8 @@
                 <thead>
                 <tr>
                     <th style="font-weight: normal">NO</th>
-                    <th style="font-weight: normal">KETERANGAN</th>
-                    <th style="font-weight: normal">NOMINAL</th>
+                    <th style="font-weight: normal" class="text-start">KETERANGAN</th>
+                    <th style="font-weight: normal" class="text-end">NOMINAL</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -245,7 +249,7 @@
                             Pengurangan
                         @endif
                     </td>
-                    <td class="text-end">{{ $payment->reduction_amount }}</td>
+                    <td class="text-end">-{{ $payment->reduction_amount }}</td>
                 </tr>
                 <tr class="text-bold">
                     <td class="text-center">3</td>
@@ -344,8 +348,8 @@
                 <thead>
                 <tr>
                     <th style="font-weight: normal">NO</th>
-                    <th style="font-weight: normal">KETERANGAN</th>
-                    <th style="font-weight: normal">NOMINAL</th>
+                    <th style="font-weight: normal" class="text-start">KETERANGAN</th>
+                    <th style="font-weight: normal" class="text-end">NOMINAL</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -363,7 +367,7 @@
                             Pengurangan
                         @endif
                     </td>
-                    <td class="text-end">{{ $payment->reduction_amount }}</td>
+                    <td class="text-end">-{{ $payment->reduction_amount }}</td>
                 </tr>
                 <tr class="text-bold">
                     <td class="text-center">3</td>

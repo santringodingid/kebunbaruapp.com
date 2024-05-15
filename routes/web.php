@@ -9,10 +9,15 @@ Route::middleware('guest')->group(function (){
 });
 
 Route::middleware('auth')->group(function (){
-    Route::get('home', [\App\Http\Controllers\HomeController::class, 'index'])->name('home');
-    Route::get('about', [\App\Http\Controllers\HomeController::class, 'about'])->name('about');
-    Route::get('', [\App\Http\Controllers\HomeController::class, 'index'])->name('home');
+    Route::get('home', \App\Http\Controllers\HomeController::class)->name('home');
+    Route::get('', \App\Http\Controllers\HomeController::class)->name('home');
     Route::post('logout', [\App\Http\Controllers\AuthController::class, 'logout'])->name('logout');
+
+    //UTILITIES
+    Route::get('about', \App\Http\Controllers\Utilities\AboutController::class)->name('about');
+    Route::get('account', [\App\Http\Controllers\Utilities\AccountController::class, 'index'])->name('account');
+    Route::post('change-email', [\App\Http\Controllers\Utilities\AccountController::class, 'changeEmail'])->name('change-email');
+    Route::post('change-password', [\App\Http\Controllers\Utilities\AccountController::class, 'changePassword'])->name('change-password');
 
     Route::group(['middleware' => ['role:administrator']], function () {
         Route::name('setting-management.')->group(function (){
