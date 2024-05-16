@@ -3,7 +3,9 @@
 namespace App\Livewire\RegisterManagement\Student;
 
 use App\Models\RegisterManagement\Student;
+use App\Models\SettingManagement\Period;
 use Illuminate\Contracts\View\View;
+use Illuminate\Support\Facades\Auth;
 use Livewire\Attributes\On;
 use Livewire\Component;
 use Livewire\WithPagination;
@@ -11,7 +13,13 @@ use Livewire\WithPagination;
 class Index extends Component
 {
     public $search;
+    public $period;
     use WithPagination;
+
+    public function mount()
+    {
+        $this->period = Auth::user()->current_period;
+    }
     public function placeholder(): string
     {
         return <<<'HTML'
@@ -29,10 +37,11 @@ class Index extends Component
     {
         $students = Student::query()->when($this->search, function ($query, $search){
             $query->whereAny(['id', 'nik', 'name'], 'like', '%'.$search.'%');
-        })->with(['guardian', 'diniyah', 'formal', 'region'])->paginate(12);
+        })->where('period_id', '=', $this->period)->with(['guardian', 'diniyah', 'formal', 'region', 'period'])->paginate(12);
 
         return view('livewire.register-management.student.index', [
-            'students' => $students
+            'students' => $students,
+            'periods' => Period::orderBy('id', 'desc')->get()
         ]);
     }
 

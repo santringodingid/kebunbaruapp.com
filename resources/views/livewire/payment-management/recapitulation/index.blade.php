@@ -8,7 +8,6 @@
                         @for ($i = 1; $i <= 12; $i++)
                             <option value="{{ sprintf('%02d', $i) }}">{{ hijriMonth($i) }}</option>
                         @endfor
-
                     </select>
                 </div>
             </div>

@@ -1,9 +1,20 @@
 <div>
     <div class="row justify-content-between">
-        <div class="col-sm-5 mb-1">
-            <input type="text" wire:model.live.debounce="search" placeholder="Masukkan nama/ID/NIK..." class="form-control form-control-sm">
+        <div class="col-sm-8 mb-1">
+            <div class="row">
+                <div class="col-sm-5">
+                    <input type="text" wire:model.live.debounce="search" placeholder="Masukkan nama/ID/NIK..." class="form-control form-control-sm">
+                </div>
+                <div class="col-sm-2">
+                    <select wire:model.live="period" class="form-control form-control-sm">
+                        @foreach($periods as $period)
+                            <option value="{{ $period->id }}">{{ $period->diniyah }}</option>
+                        @endforeach
+                    </select>
+                </div>
+            </div>
         </div>
-        <div class="col-sm-6 mb-1">
+        <div class="col-sm-4 mb-1">
             <div class="row justify-content-end">
 {{--                <div class="col-sm-4 col-6 mb-5">--}}
 {{--                    <button class="btn btn-light-primary btn-sm w-100">Import PDF</button>--}}
@@ -37,7 +48,7 @@
                             <th>NIK</th>
                             <th>NAMA</th>
                             <th>ALAMAT</th>
-                            <th>HP/WA</th>
+                            <th>ANGKATAN</th>
                             <th class="text-center">OPSI</th>
                         </tr>
                         </thead>
@@ -48,7 +59,7 @@
                                 <td>{{ $student->nik }}</td>
                                 <td>{{ $student->name }}</td>
                                 <td>{{ $student->region->village.', '.$student->region->city }}</td>
-                                <td>{{ $student->kk }}</td>
+                                <td>{{ $student->period->diniyah }}</td>
                                 <td class="text-center">
                                     <button title="Edit data" class="btn btn-icon btn-active-light-primary w-30px h-30px" onclick="editStudent('{{ $student->id }}', '{{ $student->region_id }}')">
                                         {!! getIcon('setting-3','fs-3') !!}
