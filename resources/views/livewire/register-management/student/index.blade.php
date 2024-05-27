@@ -7,6 +7,7 @@
                 </div>
                 <div class="col-sm-2">
                     <select wire:model.live="period" class="form-control form-control-sm">
+                        <option value="">.:Semua Periode:.</option>
                         @foreach($periods as $period)
                             <option value="{{ $period->id }}">{{ $period->diniyah }}</option>
                         @endforeach

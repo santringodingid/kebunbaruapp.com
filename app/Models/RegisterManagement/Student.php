@@ -58,11 +58,6 @@ class Student extends Model
         return $this->hasOne(Period::class, 'id', 'period_id');
     }
 
-    public function domiciles(): BelongsTo
-    {
-        return $this->belongsTo(Domicile::class, 'student_id', 'id');
-    }
-
     protected function status(): Attribute
     {
         $statuses = ['Berhenti', 'Aktif', 'Tugas', 'Pengurus'];

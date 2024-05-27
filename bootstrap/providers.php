@@ -5,5 +5,6 @@ return [
     App\Providers\HelperServiceProvider::class,
     Spatie\Permission\PermissionServiceProvider::class,
     Maatwebsite\Excel\ExcelServiceProvider::class,
-    Barryvdh\DomPDF\ServiceProvider::class
+    Barryvdh\DomPDF\ServiceProvider::class,
+    Milon\Barcode\BarcodeServiceProvider::class
 ];
