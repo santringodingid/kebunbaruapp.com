@@ -18,7 +18,7 @@ class Index extends Component
 
     public function mount()
     {
-        $this->period = Auth::user()->current_period;
+        $this->period = '';
     }
     public function placeholder(): string
     {
@@ -37,7 +37,9 @@ class Index extends Component
     {
         $students = Student::query()->when($this->search, function ($query, $search){
             $query->whereAny(['id', 'nik', 'name'], 'like', '%'.$search.'%');
-        })->where('period_id', '=', $this->period)->with(['guardian', 'diniyah', 'formal', 'region', 'period'])->paginate(12);
+        })->when($this->period, function ($query){
+            $query->where('period_id', '=', $this->period);
+        })->with(['guardian', 'diniyah', 'formal', 'region', 'period'])->paginate(12);
 
         return view('livewire.register-management.student.index', [
             'students' => $students,

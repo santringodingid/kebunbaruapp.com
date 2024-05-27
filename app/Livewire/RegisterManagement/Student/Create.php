@@ -207,7 +207,7 @@ class Create extends Component
         }
 
         DB::transaction(function () {
-            $hijri = hijri();
+            $hijri = session('hijri');
             $period = Auth::user()->current_period;
             $explode = explode('-', $hijri);
             $prefix = Str::substr($explode[0], 2, 2).$explode[1].$explode[2];
