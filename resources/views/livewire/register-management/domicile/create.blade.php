@@ -18,7 +18,7 @@
                             <div class="mb-5 row">
                                 <label for="studentId" class="col-sm-4 col-form-label">ID Santri/Murid <span class="text-danger">*</span></label>
                                 <div class="col-sm-4">
-                                    <input type="text" wire:model="studentId" class="form-control text-uppercase @error('studentId') is-invalid @enderror mask-id" id="studentId">
+                                    <input type="text" wire:model="studentId" class="form-control @error('studentId') is-invalid @enderror mask-id" id="studentId">
                                     @error('studentId')
                                     <div class="invalid-feedback">
                                         {{ $message }}

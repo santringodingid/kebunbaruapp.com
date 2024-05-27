@@ -1,5 +1,7 @@
 <x-auth-layout>
-
+    @section('title')
+        Login
+    @endsection
     <!--begin::Form-->
     <form class="form w-100" method="post" novalidate="novalidate" id="kt_sign_in_form" data-kt-redirect-url="{{ route('home') }}" action="{{ route('login') }}">
         @csrf

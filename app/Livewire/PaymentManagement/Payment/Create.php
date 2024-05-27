@@ -332,136 +332,141 @@ class Create extends Component
     public function store(): void
     {
         DB::transaction(function (){
-            $id = IdGenerator::generate([
-                'table' => 'payments',
-                'length' => 14,
-                'prefix' => 'INV-'.date('Ymd'),
-                'reset_on_prefix_change' => true
-            ]);
-            //SET PAYMENT
-            Payment::create([
-                'id' => $id,
-                'registration_id' => $this->studentId,
-                'institution_id' => $this->institutionId,
-                'user_id' => Auth::user()->id,
-                'created_at_hijri' => hijri()
-            ]);
-
-            //CEK APAKAH ADA BIAYA PENDAFATARAN
-            if ($this->nominalRegistrationP2k > 0) {
-                PaymentDetail::create([
-                    'payment_id' => $id,
-                    'account_id' => $this->accountRegistrationP2k,
-                    'is_divisible' => 0,
-                    'nominal' => $this->nominalRegistrationP2k,
-                    'is_reducible' => 0,
+            if ($this->selectedOption != 0) {
+                $id = IdGenerator::generate([
+                    'table' => 'payments',
+                    'length' => 14,
+                    'prefix' => 'INV-'.date('Ymd'),
+                    'reset_on_prefix_change' => true
                 ]);
-            }
-
-            if ($this->nominalRegistrationLp2k > 0) {
-                PaymentDetail::create([
-                    'payment_id' => $id,
-                    'account_id' => $this->accountRegistrationLp2k,
-                    'is_divisible' => 0,
-                    'nominal' => $this->nominalRegistrationLp2k,
-                    'is_reducible' => 0
+                //SET PAYMENT
+                Payment::create([
+                    'id' => $id,
+                    'registration_id' => $this->studentId,
+                    'institution_id' => $this->institutionId,
+                    'user_id' => Auth::user()->id,
+                    'created_at_hijri' => hijri()
                 ]);
-            }
 
-            //JIKA BAYAR PENDAFTARAN SAJA
-            if ($this->selectedOption == 3) {
-                Payment::where('id', $id)->update([
-                    'fare' => 0,
-                    'registration' => $this->optionThree['payment_amount'],
-                    'payment_amount' => $this->optionThree['payment_amount'],
-                    'payment_notes' => $this->optionThree['payment_text'],
-                    'reduction_notes' => $this->optionThree['distribution_name'],
-                    'reduction_amount' => $this->optionThree['distribution_amount'],
-                    'amount' => $this->optionThree['amount'],
-                    'is_paid' => $this->optionThree['paid'],
-                ]);
-            } elseif ($this->selectedOption == 2) {
-                if ($this->nominalTahfidz > 0) {
+                //CEK APAKAH ADA BIAYA PENDAFATARAN
+                if ($this->nominalRegistrationP2k > 0) {
                     PaymentDetail::create([
                         'payment_id' => $id,
-                        'account_id' => $this->accountTahfidz,
-                        'is_divisible' => 1,
-                        'nominal' => $this->nominalTahfidz / 2,
+                        'account_id' => $this->accountRegistrationP2k,
+                        'is_divisible' => 0,
+                        'nominal' => $this->nominalRegistrationP2k,
+                        'is_reducible' => 0,
+                    ]);
+                }
+
+                if ($this->nominalRegistrationLp2k > 0) {
+                    PaymentDetail::create([
+                        'payment_id' => $id,
+                        'account_id' => $this->accountRegistrationLp2k,
+                        'is_divisible' => 0,
+                        'nominal' => $this->nominalRegistrationLp2k,
                         'is_reducible' => 0
                     ]);
                 }
-                $details = FareDetail::where('fare_id', $this->fareId)->get();
-                $detailData = [];
-                foreach ($details as $detail) {
-                    $detailData[] = [
-                        'payment_id' => $id,
-                        'account_id' => $detail->account_id,
-                        'is_divisible' => 1,
-                        'nominal' => $detail->getRawOriginal('nominal') / 2,
-                        'is_reducible' => 0
-                    ];
-                }
-                PaymentDetail::insert($detailData);
-                Payment::where('id', $id)->update([
-                    'fare' => $this->amountFare,
-                    'registration' => $this->nominalRegistrationP2k + $this->nominalRegistrationLp2k,
-                    'payment_amount' => $this->optionTwo['payment_amount'],
-                    'payment_notes' => $this->optionTwo['payment_text'],
-                    'reduction_notes' => $this->optionTwo['distribution_name'],
-                    'reduction_amount' => $this->optionTwo['distribution_amount'],
-                    'amount' => $this->optionTwo['amount'],
-                    'is_paid' => $this->optionTwo['paid'],
-                ]);
-            } elseif ($this->selectedOption == 1) {
-                if ($this->nominalTahfidz > 0) {
-                    PaymentDetail::create([
-                        'payment_id' => $id,
-                        'account_id' => $this->accountTahfidz,
-                        'is_divisible' => 1,
-                        'nominal' => $this->nominalTahfidz
+
+                //JIKA BAYAR PENDAFTARAN SAJA
+                if ($this->selectedOption == 3) {
+                    Payment::where('id', $id)->update([
+                        'fare' => 0,
+                        'registration' => $this->optionThree['payment_amount'],
+                        'payment_amount' => $this->optionThree['payment_amount'],
+                        'payment_notes' => $this->optionThree['payment_text'],
+                        'reduction_notes' => $this->optionThree['distribution_name'],
+                        'reduction_amount' => $this->optionThree['distribution_amount'],
+                        'amount' => $this->optionThree['amount'],
+                        'is_paid' => $this->optionThree['paid'],
                     ]);
+                } elseif ($this->selectedOption == 2) {
+                    if ($this->nominalTahfidz > 0) {
+                        PaymentDetail::create([
+                            'payment_id' => $id,
+                            'account_id' => $this->accountTahfidz,
+                            'is_divisible' => 1,
+                            'nominal' => $this->nominalTahfidz / 2,
+                            'is_reducible' => 0
+                        ]);
+                    }
+                    $details = FareDetail::where('fare_id', $this->fareId)->get();
+                    $detailData = [];
+                    foreach ($details as $detail) {
+                        $detailData[] = [
+                            'payment_id' => $id,
+                            'account_id' => $detail->account_id,
+                            'is_divisible' => 1,
+                            'nominal' => $detail->getRawOriginal('nominal') / 2,
+                            'is_reducible' => 0
+                        ];
+                    }
+                    PaymentDetail::insert($detailData);
+                    Payment::where('id', $id)->update([
+                        'fare' => $this->amountFare,
+                        'registration' => $this->nominalRegistrationP2k + $this->nominalRegistrationLp2k,
+                        'payment_amount' => $this->optionTwo['payment_amount'],
+                        'payment_notes' => $this->optionTwo['payment_text'],
+                        'reduction_notes' => $this->optionTwo['distribution_name'],
+                        'reduction_amount' => $this->optionTwo['distribution_amount'],
+                        'amount' => $this->optionTwo['amount'],
+                        'is_paid' => $this->optionTwo['paid'],
+                    ]);
+                } elseif ($this->selectedOption == 1) {
+                    if ($this->nominalTahfidz > 0) {
+                        PaymentDetail::create([
+                            'payment_id' => $id,
+                            'account_id' => $this->accountTahfidz,
+                            'is_divisible' => 1,
+                            'nominal' => $this->nominalTahfidz
+                        ]);
+                    }
+                    $details = FareDetail::where('fare_id', $this->fareId)->get();
+                    $detailData = [];
+                    foreach ($details as $detail) {
+                        $detailData[] = [
+                            'payment_id' => $id,
+                            'account_id' => $detail->account_id,
+                            'is_divisible' => 1,
+                            'nominal' => $detail->getRawOriginal('nominal'),
+                            'is_reducible' => 0
+                        ];
+                    }
+                    PaymentDetail::insert($detailData);
+                    Payment::where('id', $id)->update([
+                        'fare' => $this->amountFare,
+                        'registration' => $this->nominalRegistrationP2k + $this->nominalRegistrationLp2k,
+                        'payment_amount' => $this->optionOne['payment_amount'],
+                        'payment_notes' => $this->optionOne['payment_text'],
+                        'reduction_notes' => $this->optionOne['distribution_name'],
+                        'reduction_amount' => $this->optionOne['distribution_amount'],
+                        'amount' => $this->optionOne['amount'],
+                        'is_paid' => $this->optionOne['paid']
+                    ]);
+                }else{
+                    $this->dispatch('error', 'Pembayaran gagal. Opsi pembayaran tidak valid');
+                    return;
                 }
-                $details = FareDetail::where('fare_id', $this->fareId)->get();
-                $detailData = [];
-                foreach ($details as $detail) {
-                    $detailData[] = [
-                        'payment_id' => $id,
-                        'account_id' => $detail->account_id,
-                        'is_divisible' => 1,
-                        'nominal' => $detail->getRawOriginal('nominal'),
-                        'is_reducible' => 0
-                    ];
+
+                //GET REDUCTION
+                $distributions = DistributionDetail::query()->where('distribution_id', $this->distributionId)->get();
+                if ($distributions) {
+                    foreach ($distributions as $distribution) {
+                        PaymentDetail::where([
+                            ['payment_id', '=', $id],
+                            ['account_id', '=', $distribution->account_id],
+                        ])->update([
+                            'is_reducible' => 1,
+                        ]);
+                    }
                 }
-                PaymentDetail::insert($detailData);
-                Payment::where('id', $id)->update([
-                    'fare' => $this->amountFare,
-                    'registration' => $this->nominalRegistrationP2k + $this->nominalRegistrationLp2k,
-                    'payment_amount' => $this->optionOne['payment_amount'],
-                    'payment_notes' => $this->optionOne['payment_text'],
-                    'reduction_notes' => $this->optionOne['distribution_name'],
-                    'reduction_amount' => $this->optionOne['distribution_amount'],
-                    'amount' => $this->optionOne['amount'],
-                    'is_paid' => $this->optionOne['paid']
-                ]);
+
+                $this->setRecapitulation($id);
             }else{
-                $this->dispatch('error', 'Pembayaran gagal dibuat');
+                $this->dispatch('error', 'Pembayaran gagal. Opsi pembayaran tidak valid');
                 return;
             }
-
-            //GET REDUCTION
-            $distributions = DistributionDetail::query()->where('distribution_id', $this->distributionId)->get();
-            if ($distributions) {
-                foreach ($distributions as $distribution) {
-                    PaymentDetail::where([
-                        ['payment_id', '=', $id],
-                        ['account_id', '=', $distribution->account_id],
-                    ])->update([
-                        'is_reducible' => 1,
-                    ]);
-                }
-            }
-
-            $this->setRecapitulation($id);
 
             $this->resetElement();
             $this->dispatch('success-created', 'Satu pembayaran berhasil dibuat');

@@ -49,24 +49,24 @@
                                 <td>{{ \Illuminate\Support\Str::mask($status->student?->nik, '*', -12, 10) }}</td>
                                 <td>{{ $status->student?->name }}</td>
                                 <td>
-                            <span @class([
-                                'badge',
-                                'badge-light-primary' => $status->domicile_status == 1,
-                                'badge-light-danger' => $status->domicile_status == 0,
-                            ])>
-                                {{ $status->domicile_status ? 'P2K' : 'LP2K' }}
-                            </span>
-                                    {{ $status->domicile.' - '.$status->domicile_number }}
                                     <span @class([
-                                'badge',
-                                'badge-sm',
-                                'badge-circle',
-                                'badge-outline',
-                                'badge-danger' => !$status->is_new_domicile,
-                                'badge-success' => $status->is_new_domicile,
-                            ])>
-                                {{ $status->is_new_domicile ? 'B' : 'L' }}
-                            </span>
+                                        'badge',
+                                        'badge-light-primary' => $status->domicile_status == 1,
+                                        'badge-light-danger' => $status->domicile_status == 0,
+                                    ])>
+                                        {{ $status->domicile_status ? 'P2K' : 'LP2K' }}
+                                    </span>
+                                            {{ $status->domicile.' - '.$status->domicile_number }}
+                                            <span @class([
+                                        'badge',
+                                        'badge-sm',
+                                        'badge-circle',
+                                        'badge-outline',
+                                        'badge-danger' => !$status->is_new_domicile,
+                                        'badge-success' => $status->is_new_domicile,
+                                    ])>
+                                        {{ $status->is_new_domicile ? 'B' : 'L' }}
+                                    </span>
                                 </td>
                                 <td>
                                     {{ $status->grade_of_diniyah.' - '.$status->diniyah->name }}

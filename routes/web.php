@@ -51,6 +51,17 @@ Route::middleware('auth')->group(function (){
         });
     });
 
+    Route::group(['middleware' => ['role:staff-secretary']], function () {
+        Route::name('licensing-management.')->group(function (){
+            Route::get('/licensing-management/configuration', [\App\Http\Controllers\LicensingManagement\ConfigurationController::class, 'index'])->name('configuration');
+            Route::post('/licensing-management/configuration', [\App\Http\Controllers\LicensingManagement\ConfigurationController::class, 'store'])->name('configuration-store');
+            Route::get('/licensing-management/petition', [\App\Http\Controllers\LicensingManagement\PetitionController::class, 'index'])->name('petition');
+            Route::get('/licensing-management/license', [\App\Http\Controllers\LicensingManagement\LicenseController::class, 'index'])->name('license');
+            Route::get('/licensing-management/comeback', [\App\Http\Controllers\LicensingManagement\ComebackController::class, 'index'])->name('comeback');
+            Route::get('/licensing-management/recapitulation', [\App\Http\Controllers\LicensingManagement\RecapitulationController::class, 'index'])->name('recapitulation');
+        });
+    });
+
     Route::group(['middleware' => ['role:treasurer|staff-treasurer']], function () {
         Route::name('payment-management.')->group(function (){
             Route::get('/payment-management/account', [\App\Http\Controllers\PaymentManagement\AccountController::class, 'index'])->name('account')->middleware(['permission:create payment management']);
@@ -68,7 +79,6 @@ Route::middleware('auth')->group(function (){
             Route::get('/payment-management/distribution', [\App\Http\Controllers\PaymentManagement\DistributionController::class, 'index'])->name('distribution')->middleware(['permission:read payment management']);;
             Route::get('/payment-management/payment', [\App\Http\Controllers\PaymentManagement\PaymentController::class, 'index'])->name('payment')->middleware(['permission:read payment management']);;
             Route::get('/payment-management/recapitulation', [\App\Http\Controllers\PaymentManagement\RecapitulationController::class, 'index'])->name('recapitulation')->middleware(['permission:read payment management']);
-//            Route::get('/payment-management/config/{hijri}', [\App\Http\Controllers\PaymentManagement\RecapitulationController::class, 'config'])->name('recapitulation-config')->middleware(['permission:read payment management']);;
             Route::post('/payment-management/export', [\App\Http\Controllers\PaymentManagement\RecapitulationController::class, 'export'])->name('recapitulation-export')->middleware(['permission:read payment management']);;
         });
     });
@@ -76,5 +86,7 @@ Route::middleware('auth')->group(function (){
     Route::name('print.')->group(function (){
         Route::get('/print/student/{id?}', [\App\Http\Controllers\RegisterManagement\StudentController::class, 'print'])->name('student');
         Route::get('/print/payment/{id?}', [\App\Http\Controllers\PaymentManagement\PaymentController::class, 'print'])->name('payment');
+        Route::get('/print/petition/{id?}', [\App\Http\Controllers\LicensingManagement\PetitionController::class, 'print'])->name('petition');
+        Route::get('/print/license/{id?}', [\App\Http\Controllers\LicensingManagement\LicenseController::class, 'print'])->name('license');
     });
 });

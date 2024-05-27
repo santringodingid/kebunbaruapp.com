@@ -465,6 +465,18 @@ if (!function_exists('hijri')) {
     }
 }
 
+if (!function_exists('getHijri')) {
+    function getHijri($masehi)
+    {
+        $hijri = \App\Models\SettingManagement\Hijri::query()->where('masehi', $masehi)->first();
+        if ($hijri) {
+            return $hijri->hijri;
+        }
+
+        return '1445-01-01';
+    }
+}
+
 if (!function_exists('hijriToString')) {
     function hijriToString(string $hijri): string
     {
@@ -565,3 +577,32 @@ if (!function_exists('hijriMonth')){
         return $months[(int)$month];
     }
 };
+
+if (!function_exists('romawiMonth')){
+    function romawiMonth($month): string
+    {
+        $months = [
+            1 => 'I',
+            'II',
+            'III',
+            'IV',
+            'V',
+            'VI',
+            'VII',
+            'VIII',
+            'IX',
+            'X',
+            'XI',
+            'XII'
+        ];
+
+        return $months[(int)$month];
+    }
+};
+
+if (!function_exists('setAge')) {
+    function setAge($date): int
+    {
+        return Carbon::parse($date)->age;
+    }
+}

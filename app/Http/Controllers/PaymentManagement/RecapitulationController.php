@@ -3,14 +3,10 @@
 namespace App\Http\Controllers\PaymentManagement;
 
 use App\Http\Controllers\Controller;
-use App\Models\PaymentManagement\AccountDisbursement;
-use App\Models\PaymentManagement\Payment;
 use App\Models\PaymentManagement\Recapitulation;
 use App\Models\PaymentManagement\RecapitulationDetail;
 use Barryvdh\DomPDF\Facade\Pdf;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
 
 class RecapitulationController extends Controller
 {
@@ -19,63 +15,6 @@ class RecapitulationController extends Controller
     public function index()
     {
         return view('pages.payment-management.recapitulation');
-    }
-
-    public function config($hijri)
-    {
-        DB::transaction(function () use ($hijri) {
-            $period = Auth::user()->current_period;
-            $gender = session('gender_access');
-            //GET PAYMENT
-            $payments = Payment::with(['paymentDetails' => function ($query) {
-                $query->where('is_reducible', 0);
-            }])->where('user_id', Auth::user()->id)->whereRaw("substring(created_at_hijri, 6, 2) = $hijri")->get();
-
-            if ($payments) {
-                foreach ($payments as $payment) {
-                    foreach ($payment?->paymentDetails as $paymentDetail) {
-                        $account = $paymentDetail?->account_id;
-                        $disbursement = AccountDisbursement::where([
-                            ['account_id', '=', $account],
-                            ['gender', '=', $gender]
-                        ])->first();
-                        if ($disbursement) {
-                            $disbursementOfInstitution = $disbursement?->institution_id;
-                            if ($disbursementOfInstitution == '' || $disbursementOfInstitution == null) {
-                                $institutionId = $payment->institution_id;
-                            }else{
-                                $institutionId = $disbursementOfInstitution;
-                            }
-
-                            //CHECK INSTITUTION IN RECAPITULATION
-                            $recapitulation = Recapitulation::query()->where([
-                                ['period_id', '=', $period],
-                                ['institution_id', '=', $institutionId],
-                                ['period', '=', $hijri],
-                                ['gender', '=', $gender]
-                            ])->first();
-                            if (!$recapitulation) {
-                                $recapitulation = Recapitulation::query()->create([
-                                    'period_id' => $period,
-                                    'institution_id' => $institutionId,
-                                    'period' => $hijri,
-                                    'gender' => $gender
-                                ]);
-                            }
-
-                            RecapitulationDetail::query()->create([
-                                'recapitulation_id' => $recapitulation->id,
-                                'payment_id' => $payment->id,
-                                'account_id' => $account,
-                                'nominal' => $paymentDetail?->getRawOriginal('nominal')
-                            ]);
-                        }
-                    }
-                }
-            }
-        });
-
-        return redirect()->route('payment-management.recapitulation');
     }
 
     public function export()

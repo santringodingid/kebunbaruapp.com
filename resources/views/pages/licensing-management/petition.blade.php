@@ -1,0 +1,113 @@
+<x-default-layout>
+
+    @section('title')
+        Permohonan Izin
+    @endsection
+
+    @section('button')
+        <div class="d-flex align-items-center gap-2 gap-lg-3">
+            <div class="d-flex justify-content-end" data-kt-user-table-toolbar="base">
+                <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#modal-add-petition">
+                    <i class="ki-outline ki-plus-square fs-3"></i>
+                    Tambah permohonan
+                </button>
+            </div>
+        </div>
+    @endsection
+
+    <!--begin::Row-->
+    <div class="row gx-5 gx-xl-10">
+        <livewire:licensing-management.petition.index lazy />
+    </div>
+    <!--end::Row-->
+
+    <livewire:licensing-management.petition.create />
+
+    @push('scripts')
+        <script>
+            document.addEventListener('livewire:init', function () {
+                Livewire.on('success-created', function (message) {
+                    $('#modal-add-petition').modal('hide');
+                    Swal.fire({
+                        text: message,
+                        icon: "success",
+                        buttonsStyling: false,
+                        confirmButtonText: 'OK!',
+                        customClass: {
+                            confirmButton: "btn btn-primary"
+                        }
+                    });
+                });
+
+                Livewire.on('error-edit', function (message) {
+                    Swal.fire({
+                        text: message,
+                        icon: "error",
+                        buttonsStyling: false,
+                        confirmButtonText: 'OK!',
+                        customClass: {
+                            confirmButton: "btn btn-primary"
+                        }
+                    });
+                });
+            });
+
+            Inputmask({
+                "mask" : "99999999"
+            }).mask(".mask-id");
+
+            const reset = () => {
+                $('#modal-add-petition').modal('hide');
+                Livewire.dispatch('reset');
+            }
+
+            const submit = (status) => {
+                if (status) {
+                    Livewire.dispatch('submit');
+                    return false;
+                }
+
+                Swal.fire({
+                    title: "Yakin, nih?",
+                    text: "Pastikan semua bidang inputan sudah diisi valid",
+                    icon: "warning",
+                    showCancelButton: true,
+                    customClass: {
+                        confirmButton: "btn btn-primary",
+                        cancelButton: "btn btn-danger"
+                    },
+                    confirmButtonText: "Yakin, dong",
+                    cancelButtonText: "Nggak jadi"
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        Livewire.dispatch('submit');
+                    }
+                });
+            }
+
+            const destroy = id => {
+                Swal.fire({
+                    title: "Yakin, nih?",
+                    text: "Data akan dihapus permanen",
+                    icon: "warning",
+                    showCancelButton: true,
+                    customClass: {
+                        confirmButton: "btn btn-primary",
+                        cancelButton: "btn btn-danger"
+                    },
+                    confirmButtonText: "Yakin, dong",
+                    cancelButtonText: "Nggak jadi"
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        Livewire.dispatch('destroy', [id]);
+                    }
+                });
+            }
+
+            const edit = id => {
+                Livewire.dispatch('edit', [id]);
+                $('#modal-add-petition').modal('show')
+            }
+        </script>
+    @endpush
+</x-default-layout>
