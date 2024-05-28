@@ -15,11 +15,7 @@
         <div class="col-sm-6 mb-1">
             <div class="row justify-content-end">
                 <div class="col-sm-4 col-6 mb-5">
-                    <form action="{{ route('payment-management.recapitulation-export') }}" method="post" target="_blank">
-                        @csrf
-                        <input type="hidden" name="hijri" value="{{ $selectedHijri }}">
-                        <button type="submit" target="_blank" class="btn btn-light-primary btn-sm w-100">Ekspor PDF</button>
-                    </form>
+                    <a href="{{ route('licensing-management.recapitulation-export') }}" target="_blank" class="btn btn-light-primary btn-sm w-100">Ekspor Excel</a>
                 </div>
             </div>
         </div>

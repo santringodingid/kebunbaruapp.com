@@ -9,6 +9,7 @@ use Maatwebsite\Excel\Concerns\ShouldAutoSize;
 use Maatwebsite\Excel\Concerns\WithHeadings;
 use Maatwebsite\Excel\Concerns\WithMapping;
 use Maatwebsite\Excel\Concerns\WithStyles;
+use PhpOffice\PhpSpreadsheet\Shared\Date;
 use PhpOffice\PhpSpreadsheet\Style\Alignment;
 use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
 
@@ -27,7 +28,18 @@ class RegistrationExport implements FromQuery, WithHeadings, WithMapping, Should
     {
         return [
             $row->id,
+            "'".$row->student->nik,
+            "'".$row->student->kk,
             $row->student->name,
+            $row->student->place_of_birth,
+            Date::dateTimeToExcel($row->student->date_of_birth),
+            $row->student->father,
+            $row->student->mother,
+            $row->student->address,
+            $row->student->region->village,
+            $row->student->region->district,
+            $row->student->region->city,
+            $row->student->region->province,
             $row->student->status,
             $row->domicile_status ? 'P2K' : 'LP2K',
             $row->is_new_domicile ? 'Baru' : 'Lama',
@@ -38,11 +50,7 @@ class RegistrationExport implements FromQuery, WithHeadings, WithMapping, Should
             $row->is_new_diniyah ? 'Baru' : 'Lama',
             $row->grade_of_formal,
             $row->formal->name,
-            $row->is_new_formal ? 'Baru' : 'Lama',
-            $row->student->address,
-            $row->student->region->village,
-            $row->student->region->district,
-            $row->student->region->city,
+            $row->is_new_formal ? 'Baru' : 'Lama'
         ];
     }
 
@@ -50,7 +58,18 @@ class RegistrationExport implements FromQuery, WithHeadings, WithMapping, Should
     {
         return [
             'ID',
+            'NIK',
+            'KK',
             'NAMA',
+            'TEMPAT LAHIR',
+            'TANGGAL LAHIR',
+            'AYAH',
+            'IBU',
+            'ALAMAT',
+            'DESA',
+            'KECAMATAN',
+            'KABUPATEN',
+            'PROVINSI',
             'STATUS',
             'STATUS DOMISILI',
             'STATUS MASUK DOMISILI',
@@ -61,11 +80,7 @@ class RegistrationExport implements FromQuery, WithHeadings, WithMapping, Should
             'STATUS MASUK DINIYAH',
             'KELAS FORMAL',
             'TINGKAT FORMAL',
-            'STATUS MASUK FORMAL',
-            'ALAMAT',
-            'DESA',
-            'KECAMATAN',
-            'KABUPATEN'
+            'STATUS MASUK FORMAL'
         ];
     }
 

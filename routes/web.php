@@ -59,6 +59,7 @@ Route::middleware('auth')->group(function (){
             Route::get('/licensing-management/license', [\App\Http\Controllers\LicensingManagement\LicenseController::class, 'index'])->name('license');
             Route::get('/licensing-management/comeback', [\App\Http\Controllers\LicensingManagement\ComebackController::class, 'index'])->name('comeback');
             Route::get('/licensing-management/recapitulation', [\App\Http\Controllers\LicensingManagement\RecapitulationController::class, 'index'])->name('recapitulation');
+            Route::get('/licensing-management/recapitulation-export', [\App\Http\Controllers\LicensingManagement\RecapitulationController::class, 'export'])->name('recapitulation-export');
         });
     });
 

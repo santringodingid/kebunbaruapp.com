@@ -39,7 +39,6 @@
                 <div class="card-body">
                     <form id="form-add-configuration" action="{{ route('licensing-management.configuration-store') }}" method="post" autocomplete="off">
                         @csrf
-                        <input type="hidden" name="id" value="{{ $config?->id ?? 0 }}">
                         <div class="mb-6">
                             <label for="exampleFormControlInput1" class="form-label">Nama Keamanan</label>
                             <input type="text" name="kamtib" class="form-control text-uppercase @error('kamtib') is-invalid @enderror" autofocus value="{{ $config?->kamtib ?? '' }}" />
