@@ -25,20 +25,19 @@ class ConfigurationController extends Controller
             'chief' => 'required'
         ]);
 
-        $id = $request->id;
+        $configByGender = Configuration::query()->where('gender', session('gender_access'))->first();
+        $configByGender?->delete();
+
         $config = [
+            'gender' => session('gender_access'),
             'kamtib' => Str::upper($request->kamtib),
             'health' => Str::upper($request->health),
             'guardian' => Str::upper($request->guardian),
             'kabid' => Str::upper($request->kabid),
             'chief' => Str::upper($request->chief)
         ];
-        if ($id && $id != 0) {
-            Configuration::query()->where('id', $id)->update($config);
-            return redirect()->route('licensing-management.configuration')->with('success', 'Data tanda tangan berhasil diubah');
-        }
 
         Configuration::query()->create($config);
-        return redirect()->route('licensing-management.configuration')->with('error', 'Data tanda tangan berhasil ditambah');
+        return redirect()->route('licensing-management.configuration')->with('error', 'Data tanda tangan berhasil diperbarui');
     }
 }
