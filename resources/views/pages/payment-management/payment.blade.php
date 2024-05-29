@@ -73,6 +73,25 @@
                     }
                 });
             }
+
+            const destroy = id => {
+                Swal.fire({
+                    title: "Yakin, nih?",
+                    text: "Transaksi akan dihapus permanen",
+                    icon: "warning",
+                    showCancelButton: true,
+                    customClass: {
+                        confirmButton: "btn btn-primary",
+                        cancelButton: "btn btn-danger"
+                    },
+                    confirmButtonText: "Yakin, dong",
+                    cancelButtonText: "Nggak jadi"
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        Livewire.dispatch('destroy', [id]);
+                    }
+                });
+            }
         </script>
     @endpush
 </x-default-layout>

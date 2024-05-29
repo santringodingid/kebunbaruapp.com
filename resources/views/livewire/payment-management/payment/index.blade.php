@@ -54,6 +54,11 @@
                                     <a title="Print Invoice" class="btn btn-icon btn-active-light-primary w-30px h-30px" href="{{ route('print.payment', $payment->id) }}" target="_blank">
                                         {!! getIcon('printer','fs-3') !!}
                                     </a>
+                                    @if(!$payment->is_recapped)
+                                        <button title="Hapus transaksi" class="btn btn-icon btn-active-light-danger w-30px h-30px" onclick="destroy('{{ $payment->id }}')">
+                                            {!! getIcon('trash','fs-3 text-danger') !!}
+                                        </button>
+                                    @endif
                                 </td>
                             </tr>
                         @empty
