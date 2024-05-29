@@ -42,4 +42,11 @@ class Index extends Component
             $this->resetPage();
         }
     }
+
+    #[On('destroy')]
+    public function destroy($id): void
+    {
+        Payment::find($id)->delete();
+        $this->dispatch('success-created', 'Transaksi berhasil dihapus');
+    }
 }
