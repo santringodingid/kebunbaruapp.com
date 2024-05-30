@@ -29,7 +29,7 @@
                 </td>
             </tr>
         @empty
-            <tr><td>Tidak ada data</td></tr>
+            <tr><td>Tidak ada data untuk ditampilkan</td></tr>
         @endforelse
         </tbody>
     </table>
