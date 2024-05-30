@@ -212,7 +212,7 @@
                 <tr>
                     <td>Kelas</td>
                     <td>
-                        {{ $payment->registrationHasOne->grade_of_diniyah }} - {{ $payment->institution->name }}
+                        {{ $payment->registrationHasOne->grade_of_diniyah }} - {{ $payment->institution->shortname }}
                     </td>
                 </tr>
                 <tr>

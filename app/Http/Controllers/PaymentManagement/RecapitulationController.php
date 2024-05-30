@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\PaymentManagement;
 
+use App\Exports\GradePaymentExport;
 use App\Http\Controllers\Controller;
 use App\Models\PaymentManagement\Recapitulation;
 use App\Models\PaymentManagement\RecapitulationDetail;
@@ -63,5 +64,18 @@ class RecapitulationController extends Controller
         ]);
 
         return $pdf->download('rekapitulasi-tanggal-'.session('hijri').'.pdf');
+    }
+
+    public function grade()
+    {
+        return view('pages.payment-management.grade');
+    }
+
+    public function gradeExport()
+    {
+        $grade = \request()->post('grade');
+        $institution = \request()->post('institution');
+
+        return (new GradePaymentExport($grade, $institution))->download('rekapitulasi-pembayaran-per-kelas.xlsx');
     }
 }
