@@ -248,85 +248,6 @@
             <div data-kt-menu-trigger="click" class="menu-item menu-accordion {{ request()->routeIs('licensing-management.*') ? 'here show' : '' }}">
                 <!--begin:Menu link-->
                 <span class="menu-link">
-					<span class="menu-icon">{!! getIcon('some-files', 'fs-2') !!}</span>
-					<span class="fw-semibold menu-title">Administrasi</span>
-					<span class="menu-arrow"></span>
-				</span>
-                <!--end:Menu link-->
-                <!--begin:Menu sub-->
-                <div class="menu-sub menu-sub-accordion">
-                    @can('create register management')
-                        <!--begin:Menu item-->
-                        <div class="menu-item">
-                            <!--begin:Menu link-->
-                            <a class="menu-link {{ request()->routeIs(['licensing-management.configuration', 'licensing-management.configuration.*']) ? 'active' : '' }}" href="{{ route('licensing-management.configuration') }}">
-							<span class="menu-bullet">
-								<span class="bullet bullet-dot"></span>
-							</span>
-                                <span class="menu-title">Pengaturan</span>
-                            </a>
-                            <!--end:Menu link-->
-                        </div>
-                        <!--end:Menu item-->
-                        <!--begin:Menu item-->
-                        <div class="menu-item">
-                            <!--begin:Menu link-->
-                            <a class="menu-link {{ request()->routeIs(['licensing-management.petition', 'licensing-management.petition.*']) ? 'active' : '' }}" href="{{ route('licensing-management.petition') }}">
-							<span class="menu-bullet">
-								<span class="bullet bullet-dot"></span>
-							</span>
-                                <span class="menu-title">Permohonan</span>
-                            </a>
-                            <!--end:Menu link-->
-                        </div>
-                        <!--end:Menu item-->
-                        <!--begin:Menu item-->
-                        <div class="menu-item">
-                            <!--begin:Menu link-->
-                            <a class="menu-link {{ request()->routeIs(['licensing-management.license', 'licensing-management.license.*']) ? 'active' : '' }}" href="{{ route('licensing-management.license') }}">
-							<span class="menu-bullet">
-								<span class="bullet bullet-dot"></span>
-							</span>
-                                <span class="menu-title">Surat Izin</span>
-                            </a>
-                            <!--end:Menu link-->
-                        </div>
-                        <!--end:Menu item-->
-                        <!--begin:Menu item-->
-                        <div class="menu-item">
-                            <!--begin:Menu link-->
-                            <a class="menu-link {{ request()->routeIs(['licensing-management.comeback', 'licensing-management.comeback.*']) ? 'active' : '' }}" href="{{ route('licensing-management.comeback') }}">
-							<span class="menu-bullet">
-								<span class="bullet bullet-dot"></span>
-							</span>
-                                <span class="menu-title">Kembali</span>
-                            </a>
-                            <!--end:Menu link-->
-                        </div>
-                        <!--end:Menu item-->
-                        <!--begin:Menu item-->
-                        <div class="menu-item">
-                            <!--begin:Menu link-->
-                            <a class="menu-link {{ request()->routeIs(['licensing-management.recapitulation', 'licensing-management.recapitulation.*']) ? 'active' : '' }}" href="{{ route('licensing-management.recapitulation') }}">
-							<span class="menu-bullet">
-								<span class="bullet bullet-dot"></span>
-							</span>
-                                <span class="menu-title">Rekapitulasi</span>
-                            </a>
-                            <!--end:Menu link-->
-                        </div>
-                        <!--end:Menu item-->
-                    @endcan
-                </div>
-                <!--end:Menu sub-->
-            </div>
-            @endhasrole
-            <!--end:Menu item-->
-            <!--begin:Menu item-->
-            @hasrole('staff-secretary')
-            <div data-kt-menu-trigger="click" class="menu-item menu-accordion {{ request()->routeIs('licensing-management.*') ? 'here show' : '' }}">
-                <!--begin:Menu link-->
-                <span class="menu-link">
 					<span class="menu-icon">{!! getIcon('tablet-ok', 'fs-2') !!}</span>
 					<span class="fw-semibold menu-title">Perizinan</span>
 					<span class="menu-arrow"></span>
@@ -566,6 +487,16 @@
                             <span class="bullet bullet-dot"></span>
                         </span>
                             <span class="menu-title">Rekapitulasi</span>
+                        </a>
+                        <!--end:Menu link-->
+                    </div>
+                    <div class="menu-item">
+                        <!--begin:Menu link-->
+                        <a class="menu-link {{ request()->routeIs(['payment-management.grade', 'payment-management.grade.*']) ? 'active' : '' }}" href="{{ route('payment-management.grade') }}">
+                    <span class="menu-bullet">
+                        <span class="bullet bullet-dot"></span>
+                    </span>
+                            <span class="menu-title">Rekapitulasi Kelas</span>
                         </a>
                         <!--end:Menu link-->
                     </div>

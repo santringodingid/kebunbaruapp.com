@@ -80,7 +80,9 @@ Route::middleware('auth')->group(function (){
             Route::get('/payment-management/distribution', [\App\Http\Controllers\PaymentManagement\DistributionController::class, 'index'])->name('distribution')->middleware(['permission:read payment management']);;
             Route::get('/payment-management/payment', [\App\Http\Controllers\PaymentManagement\PaymentController::class, 'index'])->name('payment')->middleware(['permission:read payment management']);;
             Route::get('/payment-management/recapitulation', [\App\Http\Controllers\PaymentManagement\RecapitulationController::class, 'index'])->name('recapitulation')->middleware(['permission:read payment management']);
-            Route::post('/payment-management/export', [\App\Http\Controllers\PaymentManagement\RecapitulationController::class, 'export'])->name('recapitulation-export')->middleware(['permission:read payment management']);;
+            Route::post('/payment-management/export', [\App\Http\Controllers\PaymentManagement\RecapitulationController::class, 'export'])->name('recapitulation-export')->middleware(['permission:read payment management']);
+            Route::get('/payment-management/grade', [\App\Http\Controllers\PaymentManagement\RecapitulationController::class, 'grade'])->name('grade')->middleware(['permission:read payment management']);
+            Route::post('/payment-management/grade-export', [\App\Http\Controllers\PaymentManagement\RecapitulationController::class, 'gradeExport'])->name('grade-export')->middleware(['permission:read payment management']);;
         });
     });
 
