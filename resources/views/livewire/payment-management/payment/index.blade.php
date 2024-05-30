@@ -48,7 +48,7 @@
                                     </span>
                                     {{ $payment->registrationHasOne->domicile.' - '.$payment->registrationHasOne->domicile_number }}
                                 </td>
-                                <td>{{ $payment->registrationHasOne->grade_of_diniyah }} - {{ $payment->registrationHasOne?->diniyah?->name }}</td>
+                                <td>{{ $payment->registrationHasOne->grade_of_diniyah }} - {{ $payment->registrationHasOne?->diniyah?->shortname }}</td>
                                 <td class="text-end">{{ $payment->amount }}</td>
                                 <td class="text-center">
                                     <a title="Print Invoice" class="btn btn-icon btn-active-light-primary w-30px h-30px" href="{{ route('print.payment', $payment->id) }}" target="_blank">
