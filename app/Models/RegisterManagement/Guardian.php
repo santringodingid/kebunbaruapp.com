@@ -3,7 +3,9 @@
 namespace App\Models\RegisterManagement;
 
 use App\Models\Region;
+use App\Models\Scopes\GenderScope;
 use Haruncpi\LaravelIdGenerator\IdGenerator;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -39,5 +41,18 @@ class Guardian extends Model
     public function students(): HasMany
     {
         return $this->hasMany(Student::class, 'guardian_id', 'id');
+    }
+
+    public function allStudent(): HasMany
+    {
+        return $this->hasMany(Student::class, 'guardian_id', 'id')->withoutGlobalScope(GenderScope::class);
+    }
+
+    protected function gender(): Attribute
+    {
+        $statuses = ['Perempuan', 'Laki-laki'];
+        return Attribute::make(
+            get: fn ($value) => $statuses[$value],
+        );
     }
 }

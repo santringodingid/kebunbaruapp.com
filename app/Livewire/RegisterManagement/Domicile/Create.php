@@ -68,12 +68,12 @@ class Create extends Component
             $this->diniyah = $registration->grade_of_diniyah.' - '.$registration->diniyah->name;
             $this->formal = $registration->grade_of_formal.' - '.$registration->formal->name;
             $this->address = $registration->student->region->village.', '.$registration->student->region->city;
-            $this->domicileStatus = $registration->domicile_status;
+            $this->domicileStatus = $registration->getRawOriginal('domicile_status');
             $this->domicile = $registration->domicile;
             $this->domicileNumber = $registration->domicile_number;
             $this->isNew = $registration->is_new_domicile;
 
-            $this->domicileStatusOld = $registration->domicile_status;
+            $this->domicileStatusOld = $registration->getRawOriginal('domicile_status');
             $this->domicileOld = $registration->domicile;
             $this->domicileNumberOld = $registration->domicile_number;
             $this->isNewOld = $registration->is_new_domicile;

@@ -85,7 +85,7 @@ class Create extends Component
         $this->name = $license->petition->student->name;
         $this->studentId = $license->petition->student->id;
         $this->address = $license->petition->student->region->village.', '.$license->petition->student->region->city;
-        $domicile = $license->petition->registration->domicile_status ? 'P2K' : 'LP2K';
+        $domicile = $license->petition->registration->domicile_status;
         $this->domicile = $domicile.', '.$license->petition->registration->domicile.' - '.$license->petition->registration->domicile_number;
         $this->diniyah = $license->petition->registration->grade_of_diniyah.' - '.$license->petition->registration->diniyah->shortname;
         $this->formal = $license->petition->registration->grade_of_formal.' - '.$license->petition->registration->formal->shortname;

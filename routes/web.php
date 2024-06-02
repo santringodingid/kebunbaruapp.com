@@ -63,6 +63,15 @@ Route::middleware('auth')->group(function (){
         });
     });
 
+    Route::group(['middleware' => ['role:staff-secretary']], function () {
+        Route::name('administration-management.')->group(function (){
+            Route::get('/administration-management/guardian', [\App\Http\Controllers\AdministrationManagement\ImageController::class, 'index'])->name('guardian');
+            Route::get('/administration-management/student', [\App\Http\Controllers\AdministrationManagement\ImageController::class, 'student'])->name('student');
+            Route::get('/administration-management/signature', [\App\Http\Controllers\AdministrationManagement\ImageController::class, 'signature'])->name('signature');
+            Route::get('/administration-management/card-guardian', [\App\Http\Controllers\AdministrationManagement\GuardianCardController::class, 'index'])->name('guardian-card');
+        });
+    });
+
     Route::group(['middleware' => ['role:treasurer|staff-treasurer']], function () {
         Route::name('payment-management.')->group(function (){
             Route::get('/payment-management/account', [\App\Http\Controllers\PaymentManagement\AccountController::class, 'index'])->name('account')->middleware(['permission:create payment management']);
