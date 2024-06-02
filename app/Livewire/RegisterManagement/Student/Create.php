@@ -362,11 +362,11 @@ class Create extends Component
         $this->kk = $student->kk;
         $this->nik = $student->nik;
         $this->name = $student->name;
-        $this->gender = $student->gender;
+        $this->gender = $student->getRawOriginal('gender');
         $this->placeOfBirth = $student->place_of_birth;
         $this->dateOfBirth = date('d-m-Y', strtotime($student->date_of_birth));
         $this->lastEducation = $student->last_education;
-        $this->domicileStatus = $student->domicile_status;
+        $this->domicileStatus = $student->getRawOriginal('domicile_status');
         $this->domicile = $student->domicile;
         $this->domicileNumber = $student->domicile_number;
         $this->gradeOfDiniyah = $student->grade_of_diniyah;

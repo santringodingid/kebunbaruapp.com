@@ -90,7 +90,7 @@ class Create extends Component
         $this->mode = false;
         $this->name = $registration->student->name;
         $this->address = $registration->student->region->village.', '.$registration->student->region->city;
-        $domicile = $registration->domicile_status ? 'P2K' : 'LP2K';
+        $domicile = $registration->domicile_status;
         $this->domicile = $domicile.', '.$registration->domicile.' - '.$registration->domicile_number;
         $this->diniyah = $registration->grade_of_diniyah.' - '.$registration->diniyah->name;
         $this->formal = $registration->grade_of_formal.' - '.$registration->formal->name;
@@ -205,7 +205,7 @@ class Create extends Component
         $this->studentId = $petition->registration_id;
         $this->name = $petition->student->name;
         $this->address = $petition->student->region->village.', '.$petition->student->region->city;
-        $domicile = $petition->registration->domicile_status ? 'P2K' : 'LP2K';
+        $domicile = $petition->registration->domicile_status;
         $this->domicile = $domicile.', '.$petition->registration->domicile.' - '.$petition->registration->domicile_number;
         $this->diniyah = $petition->registration->grade_of_diniyah.' - '.$petition->registration->diniyah->name;
         $this->formal = $petition->registration->grade_of_formal.' - '.$petition->registration->formal->name;

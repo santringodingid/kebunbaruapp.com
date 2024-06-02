@@ -211,7 +211,7 @@ class Create extends Component
 
         $this->nik = $guardian->nik;
         $this->name = $guardian->name;
-        $this->gender = $guardian->gender;
+        $this->gender = $guardian->getRawOriginal('gender');
         $this->phone = $guardian->phone;
         $this->waNumber = $guardian->wa_number;
         $this->address = $guardian->address;

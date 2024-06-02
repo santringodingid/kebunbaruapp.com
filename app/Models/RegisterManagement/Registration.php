@@ -3,6 +3,7 @@
 namespace App\Models\RegisterManagement;
 
 use App\Models\SettingManagement\Institution;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasOne;
@@ -34,5 +35,13 @@ class Registration extends Model
     public function formal(): HasOne
     {
         return $this->hasOne(Institution::class, 'id', 'institution_formal_id');
+    }
+
+    protected function domicileStatus(): Attribute
+    {
+        $statuses = ['LP2K', 'P2K'];
+        return Attribute::make(
+            get: fn ($value) => $statuses[$value],
+        );
     }
 }

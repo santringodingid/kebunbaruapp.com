@@ -41,10 +41,10 @@
                                 <td>
                                     <span @class([
                                         'badge',
-                                        'badge-light-danger' => $payment->registrationHasOne->domicile_status == 0,
-                                        'badge-light-primary' => $payment->registrationHasOne->domicile_status == 1,
+                                        'badge-light-danger' => $payment->registrationHasOne->getRawOriginal('domicile_status') == 0,
+                                        'badge-light-primary' => $payment->registrationHasOne->getRawOriginal('domicile_status') == 1,
                                     ])>
-                                        {{ $payment->registrationHasOne->domicile_status ? 'P2K' : 'LP2K' }}
+                                        {{ $payment->registrationHasOne->domicile_status }}
                                     </span>
                                     {{ $payment->registrationHasOne->domicile.' - '.$payment->registrationHasOne->domicile_number }}
                                 </td>

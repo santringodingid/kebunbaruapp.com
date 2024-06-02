@@ -38,7 +38,7 @@
                                 <td>{{ $domicile->id }}</td>
                                 <td>{{ \Illuminate\Support\Str::mask($domicile->student?->nik, '*', -12, 10) }}</td>
                                 <td>{{ $domicile->student?->name }}</td>
-                                <td>{{ $domicile->domicile_status ? 'P2K' : 'LP2K' }}</td>
+                                <td>{{ $domicile->domicile_status }}</td>
                                 <td>{{ $domicile->domicile }} - {{ $domicile->domicile_number }}</td>
                                 <td class="text-center">
                                     @if($domicile->is_new_domicile)

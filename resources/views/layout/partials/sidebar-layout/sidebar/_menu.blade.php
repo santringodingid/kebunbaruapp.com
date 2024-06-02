@@ -245,6 +245,69 @@
             <!--end:Menu item-->
             <!--begin:Menu item-->
             @hasrole('staff-secretary')
+            <div data-kt-menu-trigger="click" class="menu-item menu-accordion {{ request()->routeIs('administration-management.*') ? 'here show' : '' }}">
+                <!--begin:Menu link-->
+                <span class="menu-link">
+					<span class="menu-icon">{!! getIcon('some-files', 'fs-2') !!}</span>
+					<span class="fw-semibold menu-title">Administrasi</span>
+					<span class="menu-arrow"></span>
+				</span>
+                <!--end:Menu link-->
+                <!--begin:Menu sub-->
+                <div class="menu-sub menu-sub-accordion">
+                    @can('create register management')
+                        <!--begin:Menu item-->
+                        <div class="menu-item">
+                            <!--begin:Menu link-->
+                            <a class="menu-link {{ request()->routeIs(['administration-management.guardian', 'administration-management.guardian.*']) ? 'active' : '' }}" href="{{ route('administration-management.guardian') }}">
+							<span class="menu-bullet">
+								<span class="bullet bullet-dot"></span>
+							</span>
+                                <span class="menu-title">Foto Wali</span>
+                            </a>
+                            <!--end:Menu link-->
+                        </div>
+                        <!--end:Menu item-->
+                        <!--begin:Menu item-->
+                        <div class="menu-item">
+                            <!--begin:Menu link-->
+                            <a class="menu-link {{ request()->routeIs(['administration-management.student', 'administration-management.student.*']) ? 'active' : '' }}" href="{{ route('administration-management.student') }}">
+							<span class="menu-bullet">
+								<span class="bullet bullet-dot"></span>
+							</span>
+                                <span class="menu-title">Foto Santri</span>
+                            </a>
+                            <!--end:Menu link-->
+                        </div>
+                        <!--end:Menu item-->
+                        <!--begin:Menu item-->
+                        <div class="menu-item">
+                            <!--begin:Menu link-->
+                            <a class="menu-link {{ request()->routeIs(['administration-management.signature', 'administration-management.signature.*']) ? 'active' : '' }}" href="{{ route('administration-management.signature') }}">
+							<span class="menu-bullet">
+								<span class="bullet bullet-dot"></span>
+							</span>
+                                <span class="menu-title">Tanda Tangan</span>
+                            </a>
+                            <!--end:Menu link-->
+                        </div>
+                        <!--end:Menu item-->
+                        <!--begin:Menu item-->
+                        <div class="menu-item">
+                            <!--begin:Menu link-->
+                            <a class="menu-link {{ request()->routeIs(['administration-management.guardian-card', 'administration-management.guardian-card.*']) ? 'active' : '' }}" href="{{ route('administration-management.guardian-card') }}">
+							<span class="menu-bullet">
+								<span class="bullet bullet-dot"></span>
+							</span>
+                                <span class="menu-title">Kartu Wali</span>
+                            </a>
+                            <!--end:Menu link-->
+                        </div>
+                        <!--end:Menu item-->
+                    @endcan
+                </div>
+                <!--end:Menu sub-->
+            </div>
             <div data-kt-menu-trigger="click" class="menu-item menu-accordion {{ request()->routeIs('licensing-management.*') ? 'here show' : '' }}">
                 <!--begin:Menu link-->
                 <span class="menu-link">

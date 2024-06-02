@@ -66,6 +66,22 @@ class Student extends Model
         );
     }
 
+    protected function gender(): Attribute
+    {
+        $statuses = ['Perempuan', 'Laki-laki', 'Tugas'];
+        return Attribute::make(
+            get: fn ($value) => $statuses[$value],
+        );
+    }
+
+    protected function domicileStatus(): Attribute
+    {
+        $statuses = ['LP2K', 'P2K'];
+        return Attribute::make(
+            get: fn ($value) => $statuses[$value],
+        );
+    }
+
     protected function casts(): array
     {
         return [
