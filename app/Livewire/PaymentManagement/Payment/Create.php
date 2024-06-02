@@ -293,12 +293,12 @@ class Create extends Component
 
                 $this->optionTwo = [
                     'status' => true,
-                    'payment_amount' => ($fare->getRawOriginal('amount') + $this->tahfidz) - $payment->getRawOriginal('amount'),
+                    'payment_amount' => ($fare->getRawOriginal('amount') + $this->tahfidz) / 2,
                     'payment_text' => 'Biaya Tahunan'.$this->textTahfidz.' 50% (Tahap 2)',
                     'distribution_amount' => $this->distributionAmount / 2,
                     'distribution_name' => $this->distributionName,
                     'distribution' => $this->distributionId,
-                    'amount' => (($fare->getRawOriginal('amount') + $this->tahfidz) - $payment->getRawOriginal('amount')) - ($this->distributionAmount / 2),
+                    'amount' => (($fare->getRawOriginal('amount') + $this->tahfidz) / 2) - ($this->distributionAmount / 2),
                     'payment' => $payment->id,
                     'paid' => 1
                 ];
