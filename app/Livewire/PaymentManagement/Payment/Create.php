@@ -113,7 +113,7 @@ class Create extends Component
         $gradeDiniyah = $registration->grade_of_diniyah;
         $institutionDiniyah = $registration->institution_diniyah_id;
         $isNewDiniyah = $registration->is_new_diniyah;
-        $domicileStatus = $registration->domicile_status;
+        $domicileStatus = $registration->getRawOriginal('domicile_status');
         if ($domicileStatus) {
             $isNewDomicile = $registration->is_new_domicile;
         }else{
