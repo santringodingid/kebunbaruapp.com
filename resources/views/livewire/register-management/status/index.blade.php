@@ -38,7 +38,7 @@
                                 <td>{{ $status->id }}</td>
                                 <td>{{ \Illuminate\Support\Str::mask($status->student?->nik, '*', -12, 10) }}</td>
                                 <td>{{ $status->student?->name }}</td>
-                                <td>{{ $status->domicile_status ? 'P2K' : 'LP2K' }}</td>
+                                <td>{{ $status->domicile_status }}</td>
                                 <td>{{ $status->domicile.' - '.$status->domicile_number }}</td>
                                 <td class="text-center">
                             <span @class([

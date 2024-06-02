@@ -44,10 +44,10 @@
                                 <td>
                                     <span @class([
                                         'badge',
-                                        'badge-light-primary' => $petition->registration?->domicile_status == 1,
-                                        'badge-light-danger' => $petition->registration?->domicile_status == 0,
+                                        'badge-light-primary' => $petition->registration?->getRawOriginal('domicile_status') == 1,
+                                        'badge-light-danger' => $petition->registration?->getRawOriginal('domicile_status') == 0,
                                     ])>
-                                        {{ $petition->registration?->domicile_status ? 'P2K' : 'LP2K' }}
+                                        {{ $petition->registration?->domicile_status }}
                                     </span>
                                     {{ $petition->registration?->domicile }} - {{ $petition->registration?->domicile_number }}
                                 </td>

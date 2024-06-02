@@ -35,7 +35,7 @@
                         <div class="row mb-2">
                             <label class="col-lg-4 text-muted">Jenis Kelamin</label>
                             <div class="col-lg-8">
-                                <span class="fs-6 text-gray-800">{{ $guardian?->gender ? 'Perempuan' : 'Laki-laki' }}</span>
+                                <span class="fs-6 text-gray-800">{{ $guardian?->gender }}</span>
                             </div>
                         </div>
                         <div class="row mb-2">
@@ -96,14 +96,14 @@
                             <div class="row mb-2">
                                 <label class="col-lg-4 text-muted">Jenis Kelamin</label>
                                 <div class="col-lg-8">
-                                    <span class="fs-6 text-gray-800">{{ $student?->gender ? 'Perempuan' : 'Laki-laki' }}</span>
+                                    <span class="fs-6 text-gray-800">{{ $student?->gender }}</span>
                                 </div>
                             </div>
                             <div class="row mb-2">
                                 <label class="col-lg-4 text-muted">Domisili</label>
                                 <div class="col-lg-8">
                                     <span class="fs-6 text-gray-800">
-                                        <b>{{ $student?->domicile_status ? 'LP2K' : 'P2K' }}</b>,  {{ $student?->domicile }} - {{ $student?->domicile_number }}
+                                        <b>{{ $student?->domicile_status }}</b>,  {{ $student?->domicile }} - {{ $student?->domicile_number }}
                                     </span>
                                 </div>
                             </div>
