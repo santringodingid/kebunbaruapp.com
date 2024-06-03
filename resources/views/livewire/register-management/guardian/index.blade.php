@@ -6,9 +6,6 @@
         <div class="col-sm-6 mb-1">
             <div class="row justify-content-end">
                 <div class="col-sm-4 col-6 mb-5">
-                    <a href="{{ route('register-management.guardian-set') }}" class="btn btn-light-primary btn-sm w-100">Set Image</a>
-                </div>
-                <div class="col-sm-4 col-6 mb-5">
                     <a href="{{ route('register-management.guardian-export') }}" target="_blank" class="btn btn-light-primary btn-sm w-100">Ekspor Excel</a>
                 </div>
             </div>
