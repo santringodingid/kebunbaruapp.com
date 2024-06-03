@@ -172,7 +172,9 @@ class Create extends Component
                 $this->dispatch('success_store', '');
                 $this->dispatch('success-swal-updated', $this->guardianId);
             } else {
-                $data['id'] = IdGenerator::generate(['table' => 'guardians', 'length' => 8, 'prefix' => 1391]);
+                $id = IdGenerator::generate(['table' => 'guardians', 'length' => 8, 'prefix' => 1391]);
+                $data['id'] = $id;
+                $data['image'] = 'avatars/guardians/'.$id.'.jpg';
                 Guardian::query()->create($data);
 
                 $this->dispatch('success_store', '');
