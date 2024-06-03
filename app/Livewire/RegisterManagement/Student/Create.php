@@ -262,6 +262,8 @@ class Create extends Component
                 $data['id'] = $id;
                 $data['registration_number'] = $reg;
                 $data['committee'] = (session()->get('gender_access') == 0) ? 'MUH. SHOBIRIN' : 'SITI ROHMAH';
+                $data['image_of_profile'] = 'avatars/students/'.$id.'.jpg';
+                $data['image_of_signature'] = 'images/signatures/'.$id.'.png';
                 $data['created_at_hijri'] = $hijri;
                 $data['status'] = 1;
                 Student::query()->create($data);
