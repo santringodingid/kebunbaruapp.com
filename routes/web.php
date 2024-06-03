@@ -39,7 +39,6 @@ Route::middleware('auth')->group(function (){
     Route::group(['middleware' => ['role:staff-secretary|staff-treasurer']], function () {
         Route::name('register-management.')->group(function (){
             Route::get('/register-management/guardian', [\App\Http\Controllers\RegisterManagement\GuardianController::class, 'index'])->name('guardian');
-            Route::get('/register-management/guardian-set', [\App\Http\Controllers\RegisterManagement\GuardianController::class, 'setImage'])->name('guardian-set');
             Route::get('/register-management/guardian-export', [\App\Http\Controllers\RegisterManagement\GuardianController::class, 'export'])->name('guardian-export');
             Route::get('/register-management/student', [\App\Http\Controllers\RegisterManagement\StudentController::class, 'index'])->name('student');
             Route::get('/register-management/student-export', [\App\Http\Controllers\RegisterManagement\StudentController::class, 'export'])->name('student-export');
