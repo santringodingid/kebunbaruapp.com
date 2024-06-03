@@ -30,8 +30,12 @@
                 <div class="modal-footer">
                     <button type="submit" class="btn btn-primary">
                         <span class="indicator-label" wire:loading.remove>
-                                Simpan
-                            </span>
+                            Simpan
+                        </span>
+                        <span class="indicator-progress" wire:loading wire:target="photos">
+                            Foto sedang diupload...
+                            <span class="spinner-border spinner-border-sm align-middle ms-2"></span>
+                        </span>
                         <span class="indicator-progress" wire:loading>
                             Sedang dikirim...
                             <span class="spinner-border spinner-border-sm align-middle ms-2"></span>

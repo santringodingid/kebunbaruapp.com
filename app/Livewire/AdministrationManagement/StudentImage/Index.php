@@ -27,8 +27,15 @@ class Index extends Component
     public function render()
     {
         $students = Student::when($this->search, function ($query, $search){
-            $query->where('name', 'like', '%'.$search.'%');
+            $query->where(['id', 'name'], 'like', '%'.$search.'%');
         })->paginate(12);
         return view('livewire.administration-management.student-image.index', compact('students'));
+    }
+
+    public function updating($key): void
+    {
+        if ($key === 'search') {
+            $this->resetPage();
+        }
     }
 }

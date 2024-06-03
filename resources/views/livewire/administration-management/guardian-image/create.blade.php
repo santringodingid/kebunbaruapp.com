@@ -13,25 +13,28 @@
             <form wire:submit="submit" enctype="multipart/form-data">
                 <div class="modal-body">
                     <div class="row">
-                        <label for="photos" class="col-sm-6 col-form-label">
+                        <label for="uploadFile" class="col-sm-6 col-form-label">
                             Foto (Harus berekstensi <span class="text-danger">.jpg</span> dan maksimal ukuran <span class="text-danger">1 Mb</span>)
                         </label>
                         <div class="col-sm-6">
-                            <input type="file" wire:model="photos" class="form-control @error('photos.*') is-invalid @enderror" required multiple id="photos">
+                            <input type="file" wire:model="photos" class="form-control @error('photos.*') is-invalid @enderror" required multiple id="uploadFile">
                             @error('photos.*')
                             <div class="invalid-feedback">
                                 {{ $message }}
                             </div>
                             @enderror
                         </div>
-                        <div wire:loading wire:target="photos">Uploading...</div>
                     </div>
                 </div>
                 <div class="modal-footer">
                     <button type="submit" class="btn btn-primary">
                         <span class="indicator-label" wire:loading.remove>
-                                Simpan
-                            </span>
+                            Simpan
+                        </span>
+                        <span class="indicator-progress" wire:loading wire:target="photos">
+                            Foto sedang diupload...
+                            <span class="spinner-border spinner-border-sm align-middle ms-2"></span>
+                        </span>
                         <span class="indicator-progress" wire:loading>
                             Sedang dikirim...
                             <span class="spinner-border spinner-border-sm align-middle ms-2"></span>
