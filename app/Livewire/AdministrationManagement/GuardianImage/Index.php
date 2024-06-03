@@ -26,8 +26,15 @@ class Index extends Component
     public function render()
     {
         $guardians = Guardian::when($this->search, function ($query, $search){
-            $query->where('name', 'like', '%'.$search.'%');
+            $query->whereAny(['id', 'name'], 'like', '%'.$search.'%');
         })->paginate(12);
         return view('livewire.administration-management.guardian-image.index', compact('guardians'));
+    }
+
+    public function updating($key): void
+    {
+        if ($key === 'search') {
+            $this->resetPage();
+        }
     }
 }
