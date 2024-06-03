@@ -20,26 +20,4 @@ class GuardianController extends Controller
     {
         return (new GuardianExport())->download('data-wali-'.session()->get('hijri').'.xlsx');
     }
-
-    public function setImage()
-    {
-        $guardians = Guardian::where('image', NULL)->get();
-        if($guardians->count() > 0){
-            foreach($guardians as $guardian){
-                $guardian->image = 'avatars/guardians/'.$guardian->id.'.jpg';
-                $guardian->save();
-            }
-        }
-
-        $students = Student::where('image_of_profile', NULL)->get();
-        if($students->count() > 0){
-            foreach($students as $student){
-                $student->image_of_profile = 'avatars/students/'.$student->id.'.jpg';
-                $student->image_of_signature = 'images/signatures/'.$student->id.'.png';
-                $student->save();
-            }
-        }
-
-        return redirect()->route('register-management.guardian');
-    }
 }
