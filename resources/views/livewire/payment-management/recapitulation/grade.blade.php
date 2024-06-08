@@ -1,11 +1,11 @@
 <div>
     <div class="row justify-content-between">
-        <div class="col-sm-8 mb-5">
-            <div class="row">
-                <div class="col-sm-4">
-                    <input type="text" wire:model.live.debounce="search" placeholder="Masukkan nama/ID..." class="form-control form-control-sm">
+        <div class="col-10 col-sm-10 mb-5">
+            <div class="row g-2">
+                <div class="col-5 col-sm-4">
+                    <input type="text" wire:model.live.debounce="search" placeholder="Cari nama/ID..." class="form-control form-control-sm">
                 </div>
-                <div class="col-2">
+                <div class="col-3 col-sm-2">
                     <select wire:model.live="grade" class="form-control form-control-sm">
                         <option value="">.:Semua Kelas:.</option>
                         @for ($i = 1; $i < 7; $i++)
@@ -18,7 +18,7 @@
                         <option value="Lulus">Lulus</option>
                     </select>
                 </div>
-                <div class="col-3">
+                <div class="col-4 col-sm-3">
                     <select wire:model.live="institution" class="form-control form-control-sm">
                         <option value="">.:Semua Tingkat:.</option>
                         @if($diniyahs)
@@ -30,17 +30,16 @@
                 </div>
             </div>
         </div>
-        <div class="col-sm-4 mb-1">
-            <div class="row justify-content-end">
-                <div class="col-sm-6 col-6 mb-5">
-                    <form action="{{ route('payment-management.grade-export') }}" method="post" target="_blank">
-                        @csrf
-                        <input type="hidden" name="grade" value="{{ $selectedGrade }}">
-                        <input type="hidden" name="institution" value="{{ $selectedInstitution }}">
-                        <button type="submit" target="_blank" class="btn btn-light-primary btn-sm w-100">Ekspor Excel</button>
-                    </form>
-                </div>
-            </div>
+        <div class="col-2 col-sm-2 mb-1">
+            <form action="{{ route('payment-management.grade-export') }}" method="post" target="_blank">
+                @csrf
+                <input type="hidden" name="grade" value="{{ $selectedGrade }}">
+                <input type="hidden" name="institution" value="{{ $selectedInstitution }}">
+                <button type="submit" target="_blank" class="btn btn-light-primary btn-sm w-100">
+                    <i class="ki-outline ki-file-down fs-3"></i>
+                    <span class="d-none d-sm-inline">Ekspor Excel</span>
+                </button>
+            </form>
         </div>
     </div>
     <div class="col-12 mb-5 mb-xl-10" wire:loading.delay>

@@ -3,7 +3,7 @@
         Beranda
     @endsection
         <div class="row mt-5">
-            <div class="col-12 col-sm-7">
+            <div class="col-12 col-sm-7 mb-5 mb-sm-0">
                 <div class="card border-transparent py-20 px-8" data-bs-theme="light" style="background-color: #1C325E;">
                     <!--begin::Body-->
                     <div class="card-body d-flex ps-xl-15">
