@@ -268,11 +268,14 @@
         </div>
     </div>
     <div class="row">
-            <div class="col-7">
-            <div>
-                <b>Catatan :</b> <br>
-                Kuitansi ini adalah bukti pembayaran yang SAH. <br>
-                Mohon simpan dengan baik.
+        <div class="col-7">
+            <div style="display: flex">
+                <div>
+                    {!! DNS2D::getBarcodeHTML($payment->id, 'QRCODE', 5, 5) !!}
+                </div>
+                <div style="margin-left: 20px; padding-top: 30px">
+                    Kuitansi ini adalah bukti pembayaran yang <b>SAH</b>. Mohon simpan dengan baik.
+                </div>
             </div>
         </div>
 
@@ -330,7 +333,7 @@
                 <tr>
                     <td>Kelas</td>
                     <td>
-                        {{ $payment->registrationHasOne->grade_of_diniyah }} - {{ $payment->institution->name }}
+                        {{ $payment->registrationHasOne->grade_of_diniyah }} - {{ $payment->institution->shortname }}
                     </td>
                 </tr>
                 <tr>
@@ -387,10 +390,13 @@
     </div>
     <div class="row">
         <div class="col-7">
-            <div>
-                <b>Catatan :</b> <br>
-                Kuitansi ini adalah bukti pembayaran yang SAH. <br>
-                Mohon simpan dengan baik.
+            <div style="display: flex">
+                <div>
+                    {!! DNS2D::getBarcodeHTML($payment->id, 'QRCODE', 5, 5) !!}
+                </div>
+                <div style="margin-left: 20px; padding-top: 30px">
+                    Kuitansi ini adalah bukti pembayaran yang <b>SAH</b>. Mohon simpan dengan baik.
+                </div>
             </div>
         </div>
 
