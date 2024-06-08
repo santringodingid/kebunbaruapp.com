@@ -1,6 +1,6 @@
 <div>
     <div class="row justify-content-between mb-4">
-        <div class="col-10 col-sm-8 mb-1">
+        <div class="col-10 mb-1">
             <div class="row justify-content-start g-2">
                 <div class="col-4 col-sm-2">
                     <select wire:model.live.debounce="grade" class="form-control form-control-sm">
@@ -25,7 +25,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-2 col-sm-4 mb-1">
+        <div class="col-2 mb-1">
             <a href="{{ route('payment-management.fare-export') }}" target="_blank" class="btn btn-light-primary btn-sm w-100">
                 <i class="ki-outline ki-file-down fs-3"></i>
                 <span class="d-none d-sm-inline">Ekspor Excel</span>
