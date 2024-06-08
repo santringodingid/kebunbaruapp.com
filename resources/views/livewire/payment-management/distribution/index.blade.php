@@ -41,8 +41,8 @@
                                 <td>
                                     <span @class([
                                         'badge',
-                                        'badge-light-danger' => $distribution->registration->domicile_status == 0,
-                                        'badge-light-primary' => $distribution->registration->domicile_status == 1,
+                                        'badge-light-danger' => $distribution->registration->getRawOriginal('domicile_status') == 0,
+                                        'badge-light-primary' => $distribution->registration->getRawOriginal('domicile_status') == 1,
                                     ])>
                                         {{ $distribution->registration->domicile_status ? 'P2K' : 'LP2K' }}
                                     </span>
