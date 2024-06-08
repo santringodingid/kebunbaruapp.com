@@ -26,8 +26,8 @@ class Index extends Component
     public function render()
     {
         $students = Student::when($this->search, function ($query, $search){
-            $query->where(['id', 'name'], 'like', '%'.$search.'%');
-        })->paginate(12);
+            $query->whereAny(['id', 'name'], 'like', '%'.$search.'%');
+        })->paginate(18);
         return view('livewire.administration-management.signature.index', compact('students'));
     }
 

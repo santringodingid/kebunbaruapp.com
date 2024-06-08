@@ -17,8 +17,8 @@
                             Foto (Harus berekstensi <span class="text-danger">.jpg</span> dan maksimal ukuran <span class="text-danger">1 Mb</span>)
                         </label>
                         <div class="col-sm-6">
-                            <input type="file" wire:model="photos" class="form-control @error('photos.*') is-invalid @enderror" required multiple id="uploadFile">
-                            @error('photos.*')
+                            <input type="file" wire:model="photo" class="form-control @error('photo') is-invalid @enderror" required id="uploadFile">
+                            @error('photo')
                             <div class="invalid-feedback">
                                 {{ $message }}
                             </div>
