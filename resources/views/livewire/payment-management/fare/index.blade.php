@@ -1,8 +1,8 @@
 <div>
-    <div class="row justify-content-between">
-        <div class="col-sm-8 mb-1">
-            <div class="row justify-content-start">
-                <div class="col-sm-2">
+    <div class="row justify-content-between mb-4">
+        <div class="col-10 col-sm-8 mb-1">
+            <div class="row justify-content-start g-2">
+                <div class="col-4 col-sm-2">
                     <select wire:model.live.debounce="grade" class="form-control form-control-sm">
                         <option value="">.:Kelas:.</option>
                         @for ($i = 1; $i < 7; $i++)
@@ -15,7 +15,7 @@
                         <option value="Lulus">Lulus</option>
                     </select>
                 </div>
-                <div class="col-sm-3">
+                <div class="col-8 col-sm-3">
                     <select wire:model.live.debounce="institution" class="form-control form-control-sm">
                         <option value="">.:Tingkat:.</option>
                         @foreach($diniyahs as $diniyah)
@@ -25,12 +25,11 @@
                 </div>
             </div>
         </div>
-        <div class="col-sm-4 mb-1">
-            <div class="row justify-content-end">
-                <div class="col-sm-4 col-6 mb-5">
-                    <a href="{{ route('payment-management.fare-export') }}" target="_blank" class="btn btn-light-primary btn-sm w-100">Ekspor Excel</a>
-                </div>
-            </div>
+        <div class="col-2 col-sm-4 mb-1">
+            <a href="{{ route('payment-management.fare-export') }}" target="_blank" class="btn btn-light-primary btn-sm w-100">
+                <i class="ki-outline ki-file-down fs-3"></i>
+                <span class="d-none d-sm-inline">Ekspor Excel</span>
+            </a>
         </div>
     </div>
     <div class="col-12 mb-5 mb-xl-10" wire:loading.delay>

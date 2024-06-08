@@ -75,12 +75,11 @@ class Create extends Component
         $this->diniyah = $registration->grade_of_diniyah.' - '.$registration->diniyah->name;
         $this->formal = $registration->grade_of_formal.' - '.$registration->formal->name;
         $this->address = $registration->student->region->village.', '.$registration->student->region->city;
-        $status = $registration->domicile_status ? 'P2K' : 'LP2K';
-        $this->domicile = $status.', '.$registration->domicile.' - '.$registration->domicile_number;
+        $this->domicile = $registration->domicile_status.', '.$registration->domicile.' - '.$registration->domicile_number;
 
         $this->diniyahId = $registration->institution_diniyah_id;
         $this->grade = $registration->grade_of_diniyah;
-        $this->domicileStatus = $registration->domicile_status;
+        $this->domicileStatus = $registration->getRawOriginal('domicile_status');
 
         $this->dispatch('success', 'Data berhasil ditemukan');
     }
@@ -159,5 +158,12 @@ class Create extends Component
     {
         $this->reset();
         $this->mode = true;
+    }
+
+    #[On('destroy')]
+    public function destroy($id)
+    {
+        Distribution::query()->find($id)->delete();
+        $this->dispatch('success-created', 'Satu distribusi berhasil dihapus');
     }
 }
