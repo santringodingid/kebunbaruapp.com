@@ -27,7 +27,7 @@ class Index extends Component
     {
         $guardians = Guardian::when($this->search, function ($query, $search){
             $query->whereAny(['id', 'name'], 'like', '%'.$search.'%');
-        })->paginate(12);
+        })->paginate(18);
         return view('livewire.administration-management.guardian-image.index', compact('guardians'));
     }
 

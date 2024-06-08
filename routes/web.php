@@ -68,6 +68,7 @@ Route::middleware('auth')->group(function (){
             Route::get('/administration-management/guardian', [\App\Http\Controllers\AdministrationManagement\ImageController::class, 'index'])->name('guardian');
             Route::get('/administration-management/student', [\App\Http\Controllers\AdministrationManagement\ImageController::class, 'student'])->name('student');
             Route::get('/administration-management/signature', [\App\Http\Controllers\AdministrationManagement\ImageController::class, 'signature'])->name('signature');
+            Route::get('/administration-management/set-signature', [\App\Http\Controllers\AdministrationManagement\ImageController::class, 'setSignature'])->name('set-signature');
             Route::get('/administration-management/card-guardian', [\App\Http\Controllers\AdministrationManagement\GuardianCardController::class, 'index'])->name('guardian-card');
         });
     });
