@@ -1,12 +1,15 @@
 <div>
     <div class="row justify-content-between">
-        <div class="col-sm-5 mb-1">
+        <div class="col-sm-5 col-10 mb-1">
             <input type="text" wire:model.live.debounce="search" placeholder="Masukkan ID/NIK/Nama..." class="form-control form-control-sm">
         </div>
-        <div class="col-sm-6 mb-1">
+        <div class="col-2 col-sm-6 mb-1">
             <div class="row justify-content-end">
-                <div class="col-sm-4 col-6 mb-5">
-                    <a href="{{ route('register-management.guardian-export') }}" target="_blank" class="btn btn-light-primary btn-sm w-100">Ekspor Excel</a>
+                <div class="col-sm-4 col-12 mb-5">
+                    <a href="{{ route('register-management.guardian-export') }}" target="_blank" class="btn btn-light-primary btn-sm w-100 w-sm-0">
+                        <i class="ki-outline ki-file-down fs-3"></i>
+                        <span class="d-none d-sm-inline">Ekspor Excel</span>
+                    </a>
                 </div>
             </div>
         </div>

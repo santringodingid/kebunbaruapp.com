@@ -3,13 +3,6 @@
         <div class="col-sm-4 mb-5">
             <input type="text" wire:model.live.debounce="search" placeholder="Masukkan nama/ID..." class="form-control form-control-sm">
         </div>
-        <div class="col-sm-6 mb-1">
-            <div class="row justify-content-end">
-                <div class="col-sm-4 col-6 mb-5">
-                    <a href="{{ route('administration-management.set-signature') }}" class="btn btn-light-primary btn-sm w-100">Set Image</a>
-                </div>
-            </div>
-        </div>
     </div>
     <div class="col-12 mb-5 mb-xl-10" wire:loading.delay>
         <div class="card">
