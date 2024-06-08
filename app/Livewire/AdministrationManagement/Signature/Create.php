@@ -10,20 +10,18 @@ use Livewire\WithFileUploads;
 class Create extends Component
 {
     use WithFileUploads;
-    public $photos = [];
+    public $photo;
 
     public function submit()
     {
         $this->validate([
-            'photos.*' => 'mimes:png|max:1024'
+            'photo' => 'mimes:png|max:1024'
         ]);
 
-        foreach ($this->photos as $photo) {
-            $name = $photo->getClientOriginalName();
-            $photo->storeAs('public/avatars/students', $name);
-        }
+        $name = $this->photo->getClientOriginalName();
+        $this->photo->storeAs('public/avatars/signatures', $name);
 
-        $this->photos = null;
+        $this->photo = '';
         $this->reset();
         $this->dispatch('success-created', 'Foto santri berhasil diupload');
     }
@@ -36,7 +34,7 @@ class Create extends Component
     #[On('reset')]
     public function resetElement()
     {
-        $this->photos = null;
+        $this->photo = '';
         $this->reset();
     }
 }

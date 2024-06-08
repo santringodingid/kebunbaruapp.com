@@ -32,19 +32,21 @@
                         </thead>
                         <tbody>
                         @forelse($guardianCards as $gc)
-                            <tr wire:key="{{ $gc->id }}" class="align-middle">
-                                <td>{{ $gc->id }}</td>
-                                <td>{{ $gc->guardian->name }}</td>
+                            <tr wire:key="{{ $gc?->id }}" class="align-middle">
+                                <td>{{ $gc?->id }}</td>
+                                <td>{{ $gc?->guardian?->name }}</td>
                                 <td>
                                     <ul>
-                                        @forelse($gc->guardian->allStudent as $s)
-                                            <li>{{ $s->name }}</li>
-                                        @empty
+                                        @if($gc?->guardian?->allStudent)
+                                            @foreach($gc?->guardian?->allStudent as $s)
+                                                <li>{{ $s?->name }}</li>
+                                            @endforeach
+                                        @else
                                             <li class="text-danger">Tidak ada data</li>
-                                        @endforelse
+                                        @endif
                                     </ul>
                                 </td>
-                                <td>{{ $gc->created_at->isoFormat('dddd, DD MMMM YYYY HH:mm') }}</td>
+                                <td>{{ $gc?->created_at->isoFormat('dddd, DD MMMM YYYY HH:mm') }}</td>
                                 <td class="text-center">
                                     <button disabled class="btn btn-icon btn-active-light-primary w-30px h-30px">
                                         {!! getIcon('archive-tick','text-success fs-3') !!}
