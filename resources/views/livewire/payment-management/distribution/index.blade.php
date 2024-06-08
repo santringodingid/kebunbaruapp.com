@@ -34,7 +34,7 @@
                         </thead>
                         <tbody>
                         @forelse($distributions as $distribution)
-                            <tr wire:key="{{ $distribution->id }}">
+                            <tr wire:key="{{ $distribution->id }}" class="align-middle">
                                 <td>{{ $loop->index + 1 }}</td>
                                 <td>{{ $distribution->registration_id }}</td>
                                 <td>{{ $distribution?->student->name }}</td>
@@ -51,7 +51,9 @@
                                 <td>{{ $distribution?->reduction?->name }}</td>
                                 <td class="text-end">{{ $distribution?->amount }}</td>
                                 <td class="text-center">
-                                    Edit
+                                    <button title="Hapus distribusi" class="btn btn-icon btn-active-light-danger w-30px h-30px" onclick="destroy('{{ $distribution?->id }}')">
+                                        {!! getIcon('trash','fs-3 text-danger') !!}
+                                    </button>
                                 </td>
                             </tr>
                         @empty

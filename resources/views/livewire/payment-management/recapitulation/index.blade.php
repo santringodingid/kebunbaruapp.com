@@ -1,8 +1,8 @@
 <div>
     <div class="row justify-content-between">
-        <div class="col-sm-6 mb-5">
+        <div class="col-10 col-sm-6 mb-5">
             <div class="row">
-                <div class="col-4">
+                <div class="col-6 col-sm-4">
                     <select wire:model.live="hijri" class="form-control form-control-sm">
                         <option value="">.:Bulan:.</option>
                         @for ($i = 1; $i <= 12; $i++)
@@ -12,16 +12,15 @@
                 </div>
             </div>
         </div>
-        <div class="col-sm-6 mb-1">
-            <div class="row justify-content-end">
-                <div class="col-sm-4 col-6 mb-5">
-                    <form action="{{ route('payment-management.recapitulation-export') }}" method="post" target="_blank">
-                        @csrf
-                        <input type="hidden" name="hijri" value="{{ $selectedHijri }}">
-                        <button type="submit" target="_blank" class="btn btn-light-primary btn-sm w-100">Ekspor PDF</button>
-                    </form>
-                </div>
-            </div>
+        <div class="col-2 col-sm-6 mb-1">
+            <form action="{{ route('payment-management.recapitulation-export') }}" method="post" target="_blank">
+                @csrf
+                <input type="hidden" name="hijri" value="{{ $selectedHijri }}">
+                <button type="submit" target="_blank" class="btn btn-light-primary btn-sm w-100">
+                    <i class="ki-outline ki-file-down fs-3"></i>
+                    <span class="d-none d-sm-inline">Ekspor Excel</span>
+                </button>
+            </form>
         </div>
     </div>
     <div class="col-12 mb-5 mb-xl-10" wire:loading.delay>
