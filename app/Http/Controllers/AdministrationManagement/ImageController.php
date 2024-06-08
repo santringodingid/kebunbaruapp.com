@@ -23,17 +23,4 @@ class ImageController extends Controller
     {
         return view('pages.administration-management.signature');
     }
-
-    public function setSignature()
-    {
-        $students = Student::withoutGlobalScope(GenderScope::class)->get();
-        if($students) {
-            foreach ($students as $student) {
-                $student->image_of_signature = 'avatars/signatures/'.$student->id.'.png';
-                $student->save();
-            }
-        }
-
-        return redirect()->route('administration-management.signature');
-    }
 }
