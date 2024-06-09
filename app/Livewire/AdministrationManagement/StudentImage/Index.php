@@ -28,7 +28,7 @@ class Index extends Component
     {
         $students = Student::when($this->search, function ($query, $search){
             $query->whereAny(['id', 'name'], 'like', '%'.$search.'%');
-        })->paginate(18);
+        })->paginate(12);
         return view('livewire.administration-management.student-image.index', compact('students'));
     }
 
