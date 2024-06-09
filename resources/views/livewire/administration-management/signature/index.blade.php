@@ -25,7 +25,7 @@
     </div>
     <div class="row gx-5 gx-xl-6" wire:loading.remove>
         @foreach($students as $student)
-            <div class="col-4 col-sm-6 col-xxl-2 mb-6">
+            <div class="col-4 col-sm-2 mb-6">
                 <!--begin::Card widget 14-->
                 <div class="card card-flush h-xl-100">
                     <!--begin::Body-->
