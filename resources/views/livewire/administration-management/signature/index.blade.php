@@ -52,7 +52,7 @@
             </div>
         @endforeach
     </div>
-    <div class="row mt-5">
+    <div class="row mt-5" wire:loading.remove>
         <div class="col-12">
             {{ $students->links() }}
         </div>

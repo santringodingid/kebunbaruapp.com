@@ -26,15 +26,4 @@ class StudentController extends Controller
     {
         return (new StudentExport())->download('data-santri-'.session()->get('hijri').'.xlsx');
     }
-
-    public function set()
-    {
-        $students = Student::withoutGlobalScope(GenderScope::class)->get();
-        foreach ($students as $student) {
-            $student->image_of_profile = 'avatars/students/'.$student->id.'.jpg';
-            $student->save();
-        }
-
-        return redirect()->route('register-management.student');
-    }
 }
