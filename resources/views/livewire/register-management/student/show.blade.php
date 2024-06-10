@@ -15,8 +15,12 @@
                     <div class="col-sm-6">
                         <h5 class="mb-5">Identitas Diri Santri/Murid</h5>
                         <div class="row">
-                            <div class="col-sm-3 mb-5 mb-sm-0">
-                                <img src="{{ asset('storage/'.$student?->image_of_profile) }}" alt="Student Image" class="w-100">
+                            <div class="col-sm-3 mb-5 mb-sm-0 text-center">
+                                @if(file_exists('storage/'.$student?->image_of_profile))
+                                    <img src="{{ asset('storage/'.$student?->image_of_profile) }}" alt="IMAGE OF {{ $student?->name }}" class="w-100 rounded">
+                                @else
+                                    <img src="{{ asset('storage/assets/spinner.gif') }}" alt="Loading image" class="w-10 rounded py-5 py-sm-20 my-4" loading="lazy">
+                                @endif
                             </div>
                             <div class="col-sm-9">
                                 <div class="row mb-2">
@@ -137,10 +141,12 @@
                     <div class="col-sm-6">
                         <h5 class="mb-5">Identitas Wali</h5>
                         <div class="row">
-                            <div class="col-sm-3">
-                                <div class="col-sm-3 mb-5 mb-sm-0">
-                                    <img src="{{ asset('storage/'.$student?->guardian?->image) }}" alt="Guardian Image" class="w-100">
-                                </div>
+                            <div class="col-sm-3 text-center">
+                                @if(file_exists('storage/'.$student?->guardian?->image))
+                                    <img src="{{ asset('storage/'.$student?->guardian?->image) }}" alt="IMAGE OF {{ $student?->guardian?->name }}" class="w-100 rounded">
+                                @else
+                                    <img src="{{ asset('storage/assets/spinner.gif') }}" alt="LOADING IMAGE" class="w-10 rounded py-5 py-sm-20 my-4" loading="lazy">
+                                @endif
                             </div>
                             <div class="col-sm-9">
                                 <div class="row mb-2">

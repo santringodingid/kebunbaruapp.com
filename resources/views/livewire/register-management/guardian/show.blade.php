@@ -107,7 +107,9 @@
                                     </span>
                                 </div>
                             </div>
-                            <div class="separator separator-dashed mb-3"></div>
+                            @if(!$loop->last)
+                                <div class="separator separator-dashed mb-3"></div>
+                            @endif
                         @empty
                             <div class="row mb-2">
                                 <span class="text-danger talign-center">Tidak ada muwalli</span>

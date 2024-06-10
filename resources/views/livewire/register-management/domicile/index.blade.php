@@ -1,7 +1,23 @@
 <div>
-    <div class="row justify-content-between">
-        <div class="col-sm-5 mb-5">
+    <div class="row g-2">
+        <div class="col-6 col-sm-4 mb-5">
             <input type="text" wire:model.live.debounce="search" placeholder="Masukkan nama/ID/NIK..." class="form-control form-control-sm">
+        </div>
+        <div class="col-3 col-sm-2 mb-5">
+            <select wire:model.live="domicile" class="form-control form-control-sm">
+                <option value="">.:Semua Domisili:.</option>
+                @foreach($domicileList as $domicile)
+                    <option value="{{ $domicile->name }}">{{ $domicile->name }}</option>
+                @endforeach
+                <option value="Rumah Orang Tua">Rumah Orang Tua</option>
+            </select>
+        </div>
+        <div class="col-3 col-sm-2 mb-5">
+            <select wire:model.live="status" class="form-control form-control-sm">
+                <option value="">.:Semua Status:.</option>
+                <option value="1">Baru</option>
+                <option value="0">Lama</option>
+            </select>
         </div>
     </div>
     <div class="col-12 mb-5 mb-xl-10" wire:loading.delay>
