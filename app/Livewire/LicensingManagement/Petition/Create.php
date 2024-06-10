@@ -67,7 +67,7 @@ class Create extends Component
             return;
         }
 
-        if (!$registration->domicile_status) {
+        if (!$registration->getRawOriginal('domicile_status')) {
             $this->dispatch('error', 'Perizinan hanya untuk domisili P2K');
             return;
         }

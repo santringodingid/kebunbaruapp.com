@@ -1,7 +1,14 @@
 <div>
-    <div class="row justify-content-between">
-        <div class="col-sm-5 mb-5">
+    <div class="row g-2">
+        <div class="col-4 col-sm-3 mb-5">
             <input type="text" wire:model.live.debounce="search" placeholder="Masukkan nama/ID" class="form-control form-control-sm">
+        </div>
+        <div class="col-3 col-sm-2 mb-5">
+            <select wire:model.live="isLate" class="form-control form-control-sm">
+                <option value="">.:Semua Status:.</option>
+                <option value="0">Disiplin</option>
+                <option value="1">Indisipliner</option>
+            </select>
         </div>
     </div>
     <div class="col-12 mb-5 mb-xl-10" wire:loading.delay>
@@ -27,8 +34,8 @@
                             <th>NAMA</th>
                             <th>DOMISILI</th>
                             <th>ALASAN</th>
-                            <th>BERLAKU S.D.</th>
-                            <th class="text-center">STATUS KEMBALI</th>
+                            <th>TGL. KEMBALI</th>
+                            <th class="text-center">STATUS</th>
                             <th class="text-center">OPSI</th>
                         </tr>
                         </thead>
@@ -42,21 +49,29 @@
                                     <small class="fs-9 text-muted">{{ $license->petition?->registration_id }}</small>
                                 </td>
                                 <td>
-                                    <span @class([
-                                        'badge',
-                                        'badge-light-primary' => $license->petition?->registration?->getRawOriginal('domicile_status') == 1,
-                                        'badge-light-danger' => $license->petition?->registration?->getRawOriginal('domicile_status') == 0,
-                                    ])>
-                                        {{ $license->petition?->registration?->domicile_status }}
-                                    </span>
                                     {{ $license->petition?->registration?->domicile }} - {{ $license->petition?->registration?->domicile_number }}
                                 </td>
-                                <td>{{ $license->petition?->reason }} — {{ $license->petition?->note }}</td>
-                                <td>{{ $license->end_at->isoFormat('dddd, DD MMMM YYYY HH:mm') }}</td>
+                                <td>
+                                    {{ $license->petition?->reason }}
+                                    <br>
+                                    <span class="text-muted">
+                                        ({{ $license->petition?->note }})
+                                    </span>
+                                </td>
+                                <td>
+                                    @if($license?->finish_at)
+                                        {{ $license?->finish_at?->isoFormat('dddd') }}
+                                        <br>
+                                        <span class="text-muted">
+                                            {{ $license?->finish_at?->isoFormat('DD MMMM YYYY HH:mm') }}
+                                        </span>
+                                    @else
+                                        ––
+                                    @endif
+                                </td>
                                 <td class="text-center">
-                                    {{ $license?->finish_at?->isoFormat('dddd, DD MMMM YYYY HH:mm') ?? '' }}
-                                    @if($license->finish_at)
-                                    <span @class([
+                                    @if($license?->finish_at)
+                                        <span @class([
                                         'badge',
                                         'badge-light-success' => $license->getRawOriginal('is_late') == 0,
                                         'badge-light-danger' => $license->getRawOriginal('is_late') == 1,
@@ -64,7 +79,7 @@
                                         {{ $license->is_late  }}
                                     </span>
                                     @else
-                                        Belum kembali
+                                        Pending
                                     @endif
                                 </td>
                                 <td class="text-center">
@@ -90,7 +105,7 @@
                             </tr>
                         @empty
                             <tr>
-                                <td colspan="6" class="text-center text-danger">
+                                <td colspan="7" class="text-center text-danger">
                                     Tidak ada data untuk ditampilkan
                                 </td>
                             </tr>
