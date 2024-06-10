@@ -16,6 +16,7 @@ class Create extends Component
     //true check mode | false save mode
     public $mode;
     public $studentId;
+    public $image;
     public $name;
     public $address;
     public $domicile;
@@ -41,6 +42,7 @@ class Create extends Component
         $this->name = null;
         $this->address = null;
         $this->domicile = null;
+        $this->image = '';
     }
 
     #[On('submit')]
@@ -65,11 +67,12 @@ class Create extends Component
 
             $this->name = $registration->student->name;
             $this->address = $registration->student->region->village.', '.$registration->student->region->city;
-            $this->domicile = $registration->student->domicile_status ? 'P2K' : 'LP2K'.', '.$registration->student->domicile.' - '.$registration->student->domicile_number;
+            $this->domicile = $registration->student->domicile_status.', '.$registration->student->domicile.' - '.$registration->student->domicile_number;
 
             $this->grade = $registration->grade_of_formal;
             $this->institution = $registration->institution_formal_id;
             $this->isNew = $registration->is_new_formal;
+            $this->image = $registration?->student?->image_of_profile;
 
             $this->gradeOld = $registration->grade_of_formal;
             $this->institutionOld = $registration->institution_formal_id;
@@ -110,7 +113,6 @@ class Create extends Component
                 'is_new_formal' => $this->isNew,
             ]);
 
-            $this->mode = true;
             $this->resetElement();
             $this->dispatch('success-created', 'Success');
         });
@@ -130,8 +132,10 @@ class Create extends Component
     #[On('reset')]
     public function resetElement(): void
     {
-        $this->reset();
         $this->mode = true;
+        $this->image = '';
+
+        $this->reset();
     }
 
     #[On('add')]

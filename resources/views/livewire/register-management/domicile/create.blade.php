@@ -14,60 +14,26 @@
                 <div class="modal-body">
                     <input type="hidden" name="mode" wire:model="mode">
                     <div class="row">
-                        <div class="col-sm-6">
-                            <div class="mb-5 row">
+                        <div class="col-sm-6 row">
+                            <div class="col-12 row">
                                 <label for="studentId" class="col-sm-4 col-form-label">ID Santri/Murid <span class="text-danger">*</span></label>
                                 <div class="col-sm-4">
-                                    <input type="text" wire:model="studentId" class="form-control @error('studentId') is-invalid @enderror mask-id" id="studentId">
-                                    @error('studentId')
-                                    <div class="invalid-feedback">
-                                        {{ $message }}
-                                    </div>
-                                    @enderror
+                                    <input type="text" wire:model="studentId" class="form-control mask-id" id="studentId">
                                 </div>
                             </div>
-                            <div class="mb-5 row">
-                                <label for="name" class="col-sm-4 col-form-label">Nama</label>
-                                <div class="col-sm-8">
-                                    <input type="text" wire:model="name" disabled class="form-control text-uppercase @error('name') is-invalid @enderror" id="name">
-                                    @error('name')
-                                    <div class="invalid-feedback">
-                                        {{ $message }}
-                                    </div>
-                                    @enderror
+                            <div class="col-12 row">
+                                <div class="col-4 text-center">
+                                    @if(file_exists('storage/'.$image))
+                                        <img src="{{ asset('storage/'.$image) }}" alt="" class="w-100 rounded">
+                                    @else
+                                        <img src="{{ asset('storage/assets/spinner.gif') }}" alt="" class="w-10 rounded py-5 py-sm-20 my-4" loading="lazy">
+                                    @endif
                                 </div>
-                            </div>
-                            <div class="mb-5 row">
-                                <label for="address" class="col-sm-4 col-form-label">Alamat</label>
-                                <div class="col-sm-8">
-                                    <textarea type="text" wire:model="address" disabled class="form-control @error('address') is-invalid @enderror" id="address"></textarea>
-                                    @error('address')
-                                    <div class="invalid-feedback">
-                                        {{ $message }}
-                                    </div>
-                                    @enderror
-                                </div>
-                            </div>
-                            <div class="mb-5 row">
-                                <label for="diniyah" class="col-sm-4 col-form-label">Diniyah</label>
-                                <div class="col-sm-8">
-                                    <input type="text" wire:model="diniyah" disabled class="form-control @error('diniyah') is-invalid @enderror" id="diniyah">
-                                    @error('diniyah')
-                                    <div class="invalid-feedback">
-                                        {{ $message }}
-                                    </div>
-                                    @enderror
-                                </div>
-                            </div>
-                            <div class="mb-5 row">
-                                <label for="formal" class="col-sm-4 col-form-label">Formal</label>
-                                <div class="col-sm-8">
-                                    <input type="text" wire:model="formal" disabled class="form-control @error('formal') is-invalid @enderror" id="formal">
-                                    @error('formal')
-                                    <div class="invalid-feedback">
-                                        {{ $message }}
-                                    </div>
-                                    @enderror
+                                <div class="col-8">
+                                    <input type="text" wire:model="name" disabled class="form-control text-uppercase mb-5">
+                                    <textarea type="text" wire:model="address" disabled class="form-control mb-5"></textarea>
+                                    <input type="text" wire:model="diniyah" disabled class="form-control mb-5">
+                                    <input type="text" wire:model="formal" disabled class="form-control">
                                 </div>
                             </div>
                         </div>
@@ -125,7 +91,7 @@
                                     </select>
                                 </div>
                                 <div class="col-sm-6">
-                                    <select wire:model="domicile" class="form-control @error('domicile') is-invalid @enderror" id="domicile">
+                                    <select wire:model="domicile" class="form-control @error('domicile') is-invalid @enderror" id="domicile" wire:ignore>
                                         <option value="">.:Pilih Domisili:.</option>
                                         @if($domiciles)
                                             @foreach($domiciles as $domicile)
