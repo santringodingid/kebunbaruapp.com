@@ -16,6 +16,7 @@ class Create extends Component
     //true check mode | false save mode
     public $mode;
     public $studentId;
+    public $image;
     public $name;
     public $diniyah;
     public $formal;
@@ -42,6 +43,7 @@ class Create extends Component
         $this->studentId = null;
         $this->name = null;
         $this->address = null;
+        $this->image = '';
     }
 
     #[On('submit')]
@@ -72,6 +74,7 @@ class Create extends Component
             $this->domicile = $registration->domicile;
             $this->domicileNumber = $registration->domicile_number;
             $this->isNew = $registration->is_new_domicile;
+            $this->image = $registration?->student?->image_of_profile;
 
             $this->domicileStatusOld = $registration->getRawOriginal('domicile_status');
             $this->domicileOld = $registration->domicile;
@@ -124,7 +127,6 @@ class Create extends Component
                 'is_new_domicile' => $this->isNew,
             ]);
 
-            $this->mode = true;
             $this->resetElement();
             $this->dispatch('success-created', 'Success');
         });
@@ -144,8 +146,8 @@ class Create extends Component
     #[On('reset')]
     public function resetElement(): void
     {
-        $this->reset();
         $this->mode = true;
+        $this->reset();
     }
 
     #[On('add')]
