@@ -72,7 +72,7 @@ class Create extends Component
             return;
         }
 
-        if ($registration->student->getRawOriginal('status') != 1) {
+        if ($registration->student->getRawOriginal('status') != 1 || $registration->student->getRawOriginal('status') != 3) {
             $this->dispatch('error', 'Status santri tidak aktif');
             return;
         }
