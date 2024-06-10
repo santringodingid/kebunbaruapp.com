@@ -1,7 +1,16 @@
 <div>
-    <div class="row justify-content-between">
-        <div class="col-sm-5 mb-5">
+    <div class="row g-2">
+        <div class="col-4 col-sm-3 mb-5">
             <input type="text" wire:model.live.debounce="search" placeholder="Masukkan nama/ID" class="form-control form-control-sm">
+        </div>
+        <div class="col-3 col-sm-2 mb-5">
+            <select wire:model.live="status" class="form-control form-control-sm">
+                <option value="">.:Semua Status:.</option>
+                <option value="0">Kadaluarsa</option>
+                <option value="1">Pending</option>
+                <option value="2">Ongoing</option>
+                <option value="3">Selesai</option>
+            </select>
         </div>
     </div>
     <div class="col-12 mb-5 mb-xl-10" wire:loading.delay>
@@ -42,18 +51,19 @@
                                     <small class="text-muted fs-9">{{ $petition->registration_id }}</small>
                                 </td>
                                 <td>
-                                    <span @class([
-                                        'badge',
-                                        'badge-light-primary' => $petition->registration?->getRawOriginal('domicile_status') == 1,
-                                        'badge-light-danger' => $petition->registration?->getRawOriginal('domicile_status') == 0,
-                                    ])>
-                                        {{ $petition->registration?->domicile_status }}
-                                    </span>
                                     {{ $petition->registration?->domicile }} - {{ $petition->registration?->domicile_number }}
                                 </td>
-                                <td>{{ $petition->reason }} — {{ $petition->note }}</td>
                                 <td>
-                                    {{ $petition->expired_at->isoFormat('dddd, DD MMMM YYYY HH:mm') }}
+                                    {{ $petition->reason }}
+                                    <br>
+                                    <span class="text-muted">({{ $petition->note }})</span>
+                                </td>
+                                <td>
+                                    {{ $petition->expired_at->isoFormat('dddd') }}
+                                    <br>
+                                    <span class="text-muted fs-8">
+                                        {{ $petition->expired_at->isoFormat('DD MMMM YYYY HH:mm') }}
+                                    </span>
                                 </td>
                                 <td class="text-center">
                                     <span @class([
@@ -90,7 +100,7 @@
                             </tr>
                         @empty
                             <tr>
-                                <td colspan="6" class="text-center text-danger">
+                                <td colspan="7" class="text-center text-danger">
                                     Tidak ada data untuk ditampilkan
                                 </td>
                             </tr>
