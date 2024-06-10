@@ -31,7 +31,7 @@ class License extends Model
 
     protected function isLate(): Attribute
     {
-        $statuses = ['Disiplin', 'Terlambat'];
+        $statuses = ['Disiplin', 'Indisipliner'];
         return Attribute::make(
             get: fn ($value) => $statuses[$value],
         );

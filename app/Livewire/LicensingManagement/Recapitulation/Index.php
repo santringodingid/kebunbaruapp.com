@@ -3,6 +3,7 @@
 namespace App\Livewire\LicensingManagement\Recapitulation;
 
 use App\Models\LicensingManagement\Recapitulation;
+use Illuminate\Database\Eloquent\Builder;
 use Livewire\Attributes\On;
 use Livewire\Component;
 use Livewire\WithPagination;
@@ -10,9 +11,11 @@ use Livewire\WithPagination;
 class Index extends Component
 {
     public $search = null;
+    public $status;
     public $gender = 2;
     public $hijri;
     public $selectedHijri;
+    public $selectedStatus;
 
     use WithPagination;
 
@@ -28,6 +31,11 @@ class Index extends Component
     public function updatedHijri()
     {
         $this->selectedHijri = $this->hijri;
+    }
+
+    public function updatedStatus()
+    {
+        $this->selectedStatus = $this->status;
     }
     public function placeholder(): string
     {
@@ -53,15 +61,15 @@ class Index extends Component
             $query->where('gender', $this->gender);
         })->when($this->hijri, function ($query){
             $query->where('period', $this->hijri);
+        })->when($this->status != '', function (Builder $query) {
+            $query->where('status', $this->status);
         })->orderBy('id', 'desc')->paginate(12);
 
         return view('livewire.licensing-management.recapitulation.index', compact('licenses'));
     }
 
-    public function updating($key): void
+    public function search()
     {
-        if ($key === 'search') {
-            $this->resetPage();
-        }
+        $this->resetPage();
     }
 }

@@ -6,6 +6,7 @@ use App\Models\LicensingManagement\License;
 use App\Models\LicensingManagement\Petition;
 use App\Models\LicensingManagement\Recapitulation;
 use Illuminate\Contracts\View\View;
+use Illuminate\Database\Eloquent\Builder;
 use Livewire\Attributes\On;
 use Livewire\Component;
 use Livewire\WithPagination;
@@ -13,6 +14,7 @@ use Livewire\WithPagination;
 class Index extends Component
 {
     public $search = null;
+    public $status;
     use WithPagination;
     public function placeholder(): string
     {
@@ -35,16 +37,16 @@ class Index extends Component
                     $query->whereAny(['name', 'id'], 'like', "%$search%");
                 });
             })->withWhereHas('registration');
+        })->when($this->status != '', function (Builder $query) {
+            $query->where('status', $this->status);
         })->orderBy('start_at', 'desc')->paginate(12);
 
         return view('livewire.licensing-management.license.index', compact('licenses'));
     }
 
-    public function updating($key): void
+    public function search()
     {
-        if ($key === 'search') {
-            $this->resetPage();
-        }
+        $this->resetPage();
     }
 
     #[On('activate')]
