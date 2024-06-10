@@ -1,7 +1,22 @@
 <div>
-    <div class="row justify-content-between">
-        <div class="col-sm-5 mb-5">
+    <div class="row g-2">
+        <div class="col-6 col-sm-3 mb-5">
             <input type="text" wire:model.live.debounce="search" placeholder="Masukkan nama/ID/NIK..." class="form-control form-control-sm">
+        </div>
+        <div class="col-4 col-sm-2">
+            <select wire:model.live="institution" class="form-control form-control-sm">
+                <option value="">.:Semua Tingkat:.</option>
+                @foreach($institutions as $institution)
+                    <option value="{{ $institution->id }}">{{ $institution->shortname }}</option>
+                @endforeach
+            </select>
+        </div>
+        <div class="col-2 col-sm-2 mb-5">
+            <select wire:model.live="status" class="form-control form-control-sm">
+                <option value="">.:Semua Status:.</option>
+                <option value="1">Baru</option>
+                <option value="0">Lama</option>
+            </select>
         </div>
     </div>
     <div class="col-12 mb-5 mb-xl-10" wire:loading.delay>
@@ -39,7 +54,7 @@
                                 <td>{{ \Illuminate\Support\Str::mask($diniyah->student?->nik, '*', -12, 10) }}</td>
                                 <td>{{ $diniyah->student?->name }}</td>
                                 <td>{{ $diniyah->grade_of_diniyah }}</td>
-                                <td>{{ $diniyah->diniyah->name }}</td>
+                                <td>{{ $diniyah->diniyah->shortname }}</td>
                                 <td class="text-center">
                                     @if($diniyah->is_new_diniyah)
                                         <span class="badge badge-light-primary">Baru</span>

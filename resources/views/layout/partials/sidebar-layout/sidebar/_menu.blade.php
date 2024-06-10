@@ -207,7 +207,7 @@
 							<span class="menu-bullet">
 								<span class="bullet bullet-dot"></span>
 							</span>
-                            <span class="menu-title">Registrasi Formal</span>
+                            <span class="menu-title">Registrasi Ammiyah</span>
                         </a>
                         <!--end:Menu link-->
                     </div>

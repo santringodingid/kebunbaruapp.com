@@ -1,17 +1,47 @@
 <div>
-    <div class="row justify-content-between">
-        <div class="col-10 col-sm-5 mb-1">
+    <div class="row g-2">
+        <div class="col-7 col-sm-3">
             <input type="text" wire:model.live.debounce="search" placeholder="Masukkan nama/ID/NIK" class="form-control form-control-sm">
         </div>
-        <div class="col-2 col-sm-6 mb-1">
-            <div class="row justify-content-end">
-                <div class="col-sm-4 col-12 mb-5">
-                    <a target="_blank" href="{{ route('register-management.registration-export') }}" class="btn btn-light-primary btn-sm w-100">
-                        <i class="ki-outline ki-file-down fs-3"></i>
-                        <span class="d-none d-sm-inline">Ekspor Excel</span>
-                    </a>
-                </div>
-            </div>
+        <div class="col-5 col-sm-2">
+            <select wire:model.live="domicile" class="form-control form-control-sm">
+                <option value="">.:Semua Domisili:.</option>
+                @foreach($domiciles as $domicile)
+                    <option value="{{ $domicile->name }}">{{ $domicile->name }}</option>
+                @endforeach
+                <option value="Rumah Orang Tua">Rumah Orang Tua</option>
+            </select>
+        </div>
+        <div class="col-4 col-sm-2">
+            <select wire:model.live="diniyah" class="form-control form-control-sm">
+                <option value="">.:Tingkat Diniyah:.</option>
+                @foreach($diniyahs as $diniyah)
+                    <option value="{{ $diniyah->id }}">{{ $diniyah->shortname }}</option>
+                @endforeach
+            </select>
+        </div>
+        <div class="col-4 col-sm-2">
+            <select wire:model.live="ammiyah" class="form-control form-control-sm">
+                <option value="">.:Tingkat Ammiyah:.</option>
+                @foreach($ammiyahs as $ammiyah)
+                    <option value="{{ $ammiyah->id }}">{{ $ammiyah->shortname }}</option>
+                @endforeach
+            </select>
+        </div>
+        <div class="col-2 col-sm-1 mb-5">
+            <select wire:model.live="status" class="form-control form-control-sm">
+                <option value="">.:Status:.</option>
+                <option value="0">Berhenti</option>
+                <option value="1">Aktif</option>
+                <option value="2">Tugas</option>
+                <option value="3">Pengurus</option>
+            </select>
+        </div>
+        <div class="col-2 col-sm-2 mb-1">
+            <a target="_blank" href="{{ route('register-management.registration-export') }}" class="btn btn-light-primary btn-sm w-100">
+                <i class="ki-outline ki-file-down fs-3"></i>
+                <span class="d-none d-sm-inline">Ekspor Excel</span>
+            </a>
         </div>
     </div>
     <div class="col-12 mb-5 mb-xl-10" wire:loading.delay>
@@ -38,7 +68,7 @@
                             <th>NAMA</th>
                             <th>DOMISILI</th>
                             <th>DINIYAH</th>
-                            <th>FORMAL</th>
+                            <th>AMMIYAH</th>
                             <th>STATUS</th>
                         </tr>
                         </thead>

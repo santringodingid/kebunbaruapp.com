@@ -1,7 +1,16 @@
 <div>
-    <div class="row justify-content-between">
-        <div class="col-sm-5 mb-5">
+    <div class="row g-2">
+        <div class="col-8 col-sm-4 mb-5">
             <input type="text" wire:model.live.debounce="search" placeholder="Masukkan nama/ID/NIK..." class="form-control form-control-sm">
+        </div>
+        <div class="col-4 col-sm-2 mb-5">
+            <select wire:model.live="status" class="form-control form-control-sm">
+                <option value="">.:Semua Status:.</option>
+                <option value="0">Berhenti</option>
+                <option value="1">Aktif</option>
+                <option value="2">Tugas</option>
+                <option value="3">Pengurus</option>
+            </select>
         </div>
     </div>
     <div class="col-12 mb-5 mb-xl-10" wire:loading.delay>
