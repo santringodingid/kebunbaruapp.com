@@ -13,7 +13,7 @@
                         @endforeach
                     </select>
                 </div>
-                <div class="col-3 col-sm-2">
+                <div class="col-3 col-sm-3">
                     <select wire:model.live="domicile" class="form-control form-control-sm">
                         <option value="">.:Semua Domisili:.</option>
                         @foreach($domiciles as $domicile)
@@ -23,12 +23,6 @@
                     </select>
                 </div>
             </div>
-        </div>
-        <div class="col-2 mb-1">
-            <a href="{{ route('register-management.student-set') }}" class="btn btn-light-primary btn-sm w-100">
-                <i class="ki-outline ki-file-down fs-3"></i>
-                <span class="d-none d-sm-inline">Set Image</span>
-            </a>
         </div>
         <div class="col-2 mb-1">
             <a href="{{ route('register-management.student-export') }}" target="_blank" class="btn btn-light-primary btn-sm w-100">
