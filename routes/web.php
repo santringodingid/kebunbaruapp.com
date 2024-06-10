@@ -42,6 +42,7 @@ Route::middleware('auth')->group(function (){
             Route::get('/register-management/guardian-export', [\App\Http\Controllers\RegisterManagement\GuardianController::class, 'export'])->name('guardian-export');
             Route::get('/register-management/student', [\App\Http\Controllers\RegisterManagement\StudentController::class, 'index'])->name('student');
             Route::get('/register-management/student-export', [\App\Http\Controllers\RegisterManagement\StudentController::class, 'export'])->name('student-export');
+            Route::get('/register-management/student-set', [\App\Http\Controllers\RegisterManagement\StudentController::class, 'set'])->name('student-set');
             Route::get('/register-management/domicile', [\App\Http\Controllers\RegisterManagement\DomicileController::class, 'index'])->name('domicile');
             Route::get('/register-management/diniyah', [\App\Http\Controllers\RegisterManagement\DiniyahController::class, 'index'])->name('diniyah');
             Route::get('/register-management/formal', [\App\Http\Controllers\RegisterManagement\FormalController::class, 'index'])->name('formal');

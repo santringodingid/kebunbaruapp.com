@@ -4,6 +4,7 @@ namespace App\Livewire\RegisterManagement\Status;
 
 use App\Models\RegisterManagement\Registration;
 use Illuminate\Contracts\View\View;
+use Illuminate\Database\Eloquent\Builder;
 use Livewire\Attributes\On;
 use Livewire\Component;
 use Livewire\WithPagination;
@@ -11,6 +12,7 @@ use Livewire\WithPagination;
 class Index extends Component
 {
     public $search = null;
+    public $status;
     use WithPagination;
     public function placeholder(): string
     {
@@ -30,6 +32,8 @@ class Index extends Component
         $statuses = Registration::query()->withWhereHas('student', function ($query) {
             $query->when($this->search, function ($query, $search){
                 $query->whereAny(['id', 'nik', 'name'], 'like', '%'.$search.'%');
+            })->when($this->status != '', function (Builder $builder){
+                $builder->where('status', $this->status);
             });
         })->orderBy('updated_at', 'desc')->paginate(12);
 
@@ -40,7 +44,7 @@ class Index extends Component
 
     public function updating($key): void
     {
-        if ($key === 'search') {
+        if ($key === 'search' || $key === 'status') {
             $this->resetPage();
         }
     }

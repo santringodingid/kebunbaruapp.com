@@ -1,11 +1,11 @@
 <div>
     <div class="row justify-content-between mb-5">
-        <div class="col-10 mb-1">
+        <div class="col-8 mb-1">
             <div class="row g-2">
-                <div class="col-8 col-sm-5">
+                <div class="col-6 col-sm-4">
                     <input type="text" wire:model.live.debounce="search" placeholder="Masukkan nama/ID/NIK..." class="form-control form-control-sm">
                 </div>
-                <div class="col-4 col-sm-3">
+                <div class="col-3 col-sm-2">
                     <select wire:model.live="period" class="form-control form-control-sm">
                         <option value="">.:Semua Periode:.</option>
                         @foreach($periods as $period)
@@ -13,7 +13,22 @@
                         @endforeach
                     </select>
                 </div>
+                <div class="col-3 col-sm-2">
+                    <select wire:model.live="domicile" class="form-control form-control-sm">
+                        <option value="">.:Semua Domisili:.</option>
+                        @foreach($domiciles as $domicile)
+                            <option value="{{ $domicile->name }}">{{ $domicile->name }}</option>
+                        @endforeach
+                        <option value="Rumah Orang Tua">Rumah Orang Tua</option>
+                    </select>
+                </div>
             </div>
+        </div>
+        <div class="col-2 mb-1">
+            <a href="{{ route('register-management.student-set') }}" class="btn btn-light-primary btn-sm w-100">
+                <i class="ki-outline ki-file-down fs-3"></i>
+                <span class="d-none d-sm-inline">Set Image</span>
+            </a>
         </div>
         <div class="col-2 mb-1">
             <a href="{{ route('register-management.student-export') }}" target="_blank" class="btn btn-light-primary btn-sm w-100">

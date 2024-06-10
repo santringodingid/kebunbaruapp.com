@@ -5,6 +5,7 @@ namespace App\Http\Controllers\RegisterManagement;
 use App\Exports\StudentExport;
 use App\Http\Controllers\Controller;
 use App\Models\RegisterManagement\Student;
+use App\Models\Scopes\GenderScope;
 use Illuminate\Http\Request;
 
 class StudentController extends Controller
@@ -24,5 +25,16 @@ class StudentController extends Controller
     public function export()
     {
         return (new StudentExport())->download('data-santri-'.session()->get('hijri').'.xlsx');
+    }
+
+    public function set()
+    {
+        $students = Student::withoutGlobalScope(GenderScope::class)->get();
+        foreach ($students as $student) {
+            $student->image_of_profile = 'avatars/students/'.$student->id.'.jpg';
+            $student->save();
+        }
+
+        return redirect()->route('register-management.student');
     }
 }
