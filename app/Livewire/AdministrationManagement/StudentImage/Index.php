@@ -23,6 +23,7 @@ class Index extends Component
         </div>
         HTML;
     }
+
     #[On('success-created')]
     public function render()
     {

@@ -19,6 +19,10 @@ class Create extends Component
         ]);
 
         $name = $this->photo->getClientOriginalName();
+        $oldFile = 'public/avatars/guardians/'.$name;
+        if (Storage::exists($oldFile)) {
+            Storage::delete($oldFile);
+        }
         $this->photo->storeAs('public/avatars/guardians', $name);
 
         $this->photo = '';

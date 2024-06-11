@@ -12,6 +12,11 @@ class Create extends Component
     use WithFileUploads;
     public $photo;
 
+    public function mount()
+    {
+        $this->photo = '';
+    }
+
     public function submit()
     {
         $this->validate([
@@ -19,6 +24,10 @@ class Create extends Component
         ]);
 
         $name = $this->photo->getClientOriginalName();
+        $oldFile = 'public/avatars/students/'.$name;
+        if (Storage::exists($oldFile)) {
+            Storage::delete($oldFile);
+        }
         $this->photo->storeAs('public/avatars/students', $name);
 
         $this->photo = '';
