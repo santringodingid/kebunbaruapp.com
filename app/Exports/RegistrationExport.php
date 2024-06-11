@@ -6,14 +6,16 @@ use App\Models\RegisterManagement\Registration;
 use Maatwebsite\Excel\Concerns\Exportable;
 use Maatwebsite\Excel\Concerns\FromQuery;
 use Maatwebsite\Excel\Concerns\ShouldAutoSize;
+use Maatwebsite\Excel\Concerns\WithColumnFormatting;
 use Maatwebsite\Excel\Concerns\WithHeadings;
 use Maatwebsite\Excel\Concerns\WithMapping;
 use Maatwebsite\Excel\Concerns\WithStyles;
 use PhpOffice\PhpSpreadsheet\Shared\Date;
 use PhpOffice\PhpSpreadsheet\Style\Alignment;
+use PhpOffice\PhpSpreadsheet\Style\NumberFormat;
 use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
 
-class RegistrationExport implements FromQuery, WithHeadings, WithMapping, ShouldAutoSize, WithStyles
+class RegistrationExport implements FromQuery, WithHeadings, WithMapping, ShouldAutoSize, WithStyles, WithColumnFormatting
 {
     use Exportable;
 
@@ -51,6 +53,13 @@ class RegistrationExport implements FromQuery, WithHeadings, WithMapping, Should
             $row->grade_of_formal,
             $row->formal->name,
             $row->is_new_formal ? 'Baru' : 'Lama'
+        ];
+    }
+
+    public function columnFormats(): array
+    {
+        return [
+            'F' => NumberFormat::FORMAT_DATE_DDMMYYYY,
         ];
     }
 
