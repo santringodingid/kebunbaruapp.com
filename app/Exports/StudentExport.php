@@ -61,7 +61,7 @@ class StudentExport implements FromQuery, WithHeadings, WithMapping, ShouldAutoS
     public function columnFormats(): array
     {
         return [
-            'H' => NumberFormat::FORMAT_DATE_DDMMYYYY,
+            'I' => NumberFormat::FORMAT_DATE_DDMMYYYY,
         ];
     }
 
