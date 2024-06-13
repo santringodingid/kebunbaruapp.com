@@ -61,7 +61,7 @@ class Index extends Component
             $query->where('gender', $this->gender);
         })->when($this->hijri != '', function ($query){
             $query->where('period', $this->hijri);
-        })->orderBy('institution_id', 'asc')->groupBy('institution_id')->get();
+        })->orderBy('institution_id', 'asc')->get();
         if ($recapitulations) {
             foreach ($recapitulations as $recapitulation) {
                 $details = RecapitulationDetail::query()->where('recapitulation_id', $recapitulation->id)
