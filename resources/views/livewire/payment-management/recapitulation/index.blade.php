@@ -12,13 +12,13 @@
                 </div>
             </div>
         </div>
-        <div class="col-2 col-sm-6 mb-1">
+        <div class="col-2 mb-1">
             <form action="{{ route('payment-management.recapitulation-export') }}" method="post" target="_blank">
                 @csrf
                 <input type="hidden" name="hijri" value="{{ $selectedHijri }}">
                 <button type="submit" target="_blank" class="btn btn-light-primary btn-sm w-100">
                     <i class="ki-outline ki-file-down fs-3"></i>
-                    <span class="d-none d-sm-inline">Ekspor Excel</span>
+                    <span class="d-none d-sm-inline">Ekspor PDF</span>
                 </button>
             </form>
         </div>
