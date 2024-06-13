@@ -574,7 +574,7 @@ if (!function_exists('hijriMonth')){
             'Dzul Hijjah'
         ];
 
-        return $months[(int)$month];
+        return $months[(int)$month] ?? 'SELURUH';
     }
 };
 
