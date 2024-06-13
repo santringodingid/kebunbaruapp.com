@@ -39,7 +39,7 @@ class RecapitulationController extends Controller
             $query->where('gender', $this->gender);
         })->when($hijri, function ($query, $hijri){
             $query->where('period', $hijri);
-        })->orderBy('institution_id', 'asc')->get();
+        })->orderBy('institution_id', 'asc')->groupBy('institution_id')->get();
         if ($recapitulations) {
             foreach ($recapitulations as $recapitulation) {
                 $details = RecapitulationDetail::query()->where('recapitulation_id', $recapitulation->id)
