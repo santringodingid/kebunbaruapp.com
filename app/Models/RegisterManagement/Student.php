@@ -68,7 +68,7 @@ class Student extends Model
 
     protected function gender(): Attribute
     {
-        $statuses = ['Perempuan', 'Laki-laki', 'Tugas'];
+        $statuses = ['Laki-laki', 'Perempuan'];
         return Attribute::make(
             get: fn ($value) => $statuses[$value],
         );

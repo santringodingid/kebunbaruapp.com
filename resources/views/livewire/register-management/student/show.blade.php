@@ -112,21 +112,9 @@
                                     </div>
                                 </div>
                                 <div class="row mb-2">
-                                    <label class="col-lg-4 text-muted">NIK Ayah</label>
-                                    <div class="col-lg-8">
-                                        <span class="fs-6 text-gray-800">{{ $student?->father_nik }}</span>
-                                    </div>
-                                </div>
-                                <div class="row mb-2">
                                     <label class="col-lg-4 text-muted">Nama Ayah</label>
                                     <div class="col-lg-8">
                                         <span class="fs-6 fw-bold text-gray-800">{{ $student?->father }}</span>
-                                    </div>
-                                </div>
-                                <div class="row mb-2">
-                                    <label class="col-lg-4 text-muted">NIK Ibu</label>
-                                    <div class="col-lg-8">
-                                        <span class="fs-6 text-gray-800">{{ $student?->mother_nik }}</span>
                                     </div>
                                 </div>
                                 <div class="row mb-5">

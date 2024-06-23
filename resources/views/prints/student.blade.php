@@ -103,7 +103,7 @@
                 <td>Jenis Kelamin</td>
                 <td style="text-align:center">:</td>
                 <td>
-                    {{ $student->gender ? 'Perempuan' : 'Laki-laki' }}
+                    {{ $student->gender }}
                 </td>
             </tr>
             <tr>
@@ -145,7 +145,7 @@
                 <td>Status Domisili</td>
                 <td style="text-align:center">:</td>
                 <td>
-                    {{ $student->domicile_status ? 'LP2K (Non Asrama)' : 'P2K (Asrama)' }}
+                    {{ $student->getRawOriginal('domicile_status') ? 'P2K (Asrama)' : 'LP2K (Non-Asrama)' }}
                 </td>
             </tr>
             <tr>
@@ -159,14 +159,14 @@
                 <td>Rencana Diniyah</td>
                 <td style="text-align:center">:</td>
                 <td>
-                    {{ $student->grade_of_diniyah }} - {{ $student->diniyah->name }}
+                    {{ $student->grade_of_diniyah }} - {{ $student->diniyah->shortname }}
                 </td>
             </tr>
             <tr>
                 <td>Rencana Ammiyah</td>
                 <td style="text-align:center">:</td>
                 <td>
-                    {{ $student->grade_of_formal }} - {{ $student->formal->name }}
+                    {{ $student->grade_of_formal }} - {{ $student->formal->shortname }}
                 </td>
             </tr>
             <tr>
@@ -208,7 +208,7 @@
                 </td>
             </tr>
             <tr>
-                <td>Nomor HP</td>
+                <td>Nomor WA</td>
                 <td style="text-align:center">:</td>
                 <td>
                     {{ $student->guardian->wa_number }}
